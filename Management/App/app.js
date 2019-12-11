@@ -7,6 +7,9 @@ import locale from 'element-ui/lib/locale/lang/en'
 import BlockUIService from './Shared/BlockUIService.js';
 import Layout from './Components/Layout/Layout.vue';
 import Home from './Components/Home/Home.vue';
+import Courses from './Components/Courses/Courses.vue';
+import Packages from './Components/Packages/Packages.vue';
+import Customers from './Components/Customers/Customers.vue';
 /*import Students from './Components/Students/Students.vue';
 import Companies from './Components/Companies/Companies.vue';
 import Packages from './Components/Packages/Packages.vue';
@@ -46,7 +49,11 @@ const router = new VueRouter({
     base: __dirname,
     linkActiveClass: 'active',
     routes: [
-        { path: '/', component: Home }, 
+        { path: '/', component: Home },
+        { path: '/Courses', component: Courses },
+        { path: '/home', component: Home },
+        { path: '/Packages', component: Packages },
+        { path: '/Customers', component: Customers },
         ]
 
 });

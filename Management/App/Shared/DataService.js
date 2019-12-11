@@ -117,10 +117,25 @@ export default {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
         return axios.post(baseUrl + `/admin/Packages/Edit`, Package);
     },
-    GetPackages(pageNo, pageSize, superPakcageId) {
+
+
+
+    //Remove All APIs
+    GetPackges(pageNo, pageSize, searchType, id) {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
-        return axios.get(baseUrl + `/Admin/Packages/GetPackages?pageno=${pageNo}&pagesize=${pageSize}&SuperPackageId=${superPakcageId}`);
+        return axios.get(baseUrl + `/Admin/Packeges/GetPackges?pageNo=${pageNo}&pagesize=${pageSize}&searchType=${searchType}&id=${id}`);
     },
+
+    GetCustomers() {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.get(baseUrl + `/Admin/Packeges/GetCustomers`);
+    },
+
+    GetCodes() {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.get(baseUrl + `/Admin/Packeges/GetCodes`);
+    },
+
 
 
 }

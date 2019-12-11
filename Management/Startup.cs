@@ -20,6 +20,7 @@ using System.IO;
 //using Managegment.Models;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Authorization;
+using Management.Models1;
 
 namespace Managegment
 {
@@ -34,7 +35,7 @@ namespace Managegment
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Models.CMSContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CMS")));
+            services.AddDbContext<VASContext>(options => options.UseSqlServer(Configuration.GetConnectionString("VAS"), builder => builder.UseRowNumberForPaging()));
             //services.AddDbContext<Models.AppointmentsContext>(options => options.UseMySQL(Configuration.GetConnectionString("Appointment")));
 
 
