@@ -1,4 +1,6 @@
 ﻿import moment from 'moment';
+import addCustomers from './AddCustomers/AddCustomers.vue';
+import customersSteps from './CustomersSteps/CustomersSteps.vue';
 export default {
     name: 'Customers',    
     created() {
@@ -35,7 +37,7 @@ export default {
 
         ];
 
-        this.getCustomers();
+        this.getCustomers(1,0);
         this.getCodes();
         
 
@@ -48,7 +50,8 @@ export default {
         //welcome
     },
     components: {
-        
+        'add-coustomers': addCustomers,
+        'customersSteps': customersSteps,
     },
     filters: {
         moment: function (date) {
@@ -73,11 +76,13 @@ export default {
             codes: [],
             CodeSelectd: [],
 
+            selectedCustmor:[],
+
 
             CourseEdit:[],
             SuperPackageParent: this.$parent.SuperPackageParent,
             pageNo: 1,
-            pageSize: 5,
+            pageSize: 10,
             pages: 0,  
             Courses: [],
             state:0,
@@ -88,13 +93,18 @@ export default {
 
         
 
-        getCustomers() {
+        getCustomers(pageNo,id) {
+            this.pageNo = pageNo;
+            if (this.pageNo === undefined) {
+                this.pageNo = 1;
+            }
             
             this.$blockUI.Start();
-            this.$http.GetCustomers()//this.$parent.SuperPackageParent.superPackageId
+            this.$http.GetCustomersInfo(this.pageNo, this.pageSize,id)//this.$parent.SuperPackageParent.superPackageId
                 .then(response => {
                     this.$blockUI.Stop();
                     this.custmors = response.data.custmor;
+                    this.pages = response.data.count;
                 })
                 .catch((err) => {
                     this.$blockUI.Stop();
@@ -120,6 +130,14 @@ export default {
 
         },
 
+        addCustomur() {
+            this.state = 1;
+        },
+
+        viewCustmor(item) {
+            this.selectedCustmor = item;
+            this.state = 2;
+        },
         
 
         

@@ -136,6 +136,16 @@ export default {
         return axios.get(baseUrl + `/Admin/Packeges/GetCodes`);
     },
 
+    AddCustomor(customersInfo) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.post(baseUrl + `/Admin/Customer/Add`, customersInfo);//change path
+    },
+
+    GetCustomersInfo(pageNo, pageSize,id) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.get(baseUrl + `/Admin/Customer/GetCustomers?pageNo=${pageNo}&pagesize=${pageSize}&id=${id}`);
+    },
+
 
 
 }
