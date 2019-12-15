@@ -64,7 +64,6 @@ namespace Management.Controllers
             }
         }
 
-
         [HttpPost("Add")]
         public IActionResult AddCustomor([FromBody] CustomersObj customer)
         {
@@ -160,6 +159,193 @@ namespace Management.Controllers
                 db.SaveChanges();
 
                 return Ok("لقد قمت بتسـجيل بيانات الخدمة بنــجاح");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPost("EditCustomorInfo")]
+        public IActionResult EditCustomorInfo([FromBody] CustomersObj customersInfo)
+        {
+            try
+            {
+
+                if (customersInfo == null)
+                {
+                    return BadRequest("حذث خطأ في ارسال البيانات الرجاء إعادة الادخال");
+                }
+
+                var userId = this.help.GetCurrentUser(HttpContext);
+
+                //if (userId <= 0)
+                //{
+                //    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
+                //}
+
+
+                var Cutomers = new Cutomers();
+
+                
+
+
+                Cutomers = (from p in db.Cutomers where p.CustomerId == customersInfo.custmorId select p).SingleOrDefault();
+
+                if (Cutomers == null)
+                {
+                    return BadRequest("لم يتم العتور علي العميل");
+                }
+
+                Cutomers.FullName = customersInfo.name;
+                Cutomers.Phone = customersInfo.phone;
+                Cutomers.BirthDate = customersInfo.date;
+                Cutomers.CompanyName = customersInfo.companyName;
+                Cutomers.Email = customersInfo.email;
+                //Cutomers.Status = 0;
+                //Cutomers.CreatedBy = 0;//user dontforget
+                //Cutomers.CreatedOn = DateTime.Now;
+                db.Cutomers.Update(Cutomers);
+
+                db.SaveChanges();
+
+                return Ok("تمت عملية التعديل بنجاح");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet("getPakegeByState")]
+        public IActionResult GetPackges(int pageNo, int pageSize,long custmorId, int state)
+        {
+            try
+            {
+                //state
+                //1 active
+                //2 not active code
+                //3 stoped
+                //9 delete
+
+                IQueryable<ShoortNumber> PackegesInfo = from p in db.ShoortNumber where p.CustomerId== custmorId && p.State==state select p;
+
+                
+                
+
+                var PackegesCount = (from p in PackegesInfo
+                                     select p).Count();
+
+                var PackegesInfos = (from p in PackegesInfo
+                                     orderby p.CreatedOn descending
+                                     select new
+                                     {
+                                         UsagePercentage =(100 * p.UsageSms) / p.Smscount,
+                                         Service = p.Service,
+                                         Code = p.Code,
+                                         From = p.From,
+                                         To = p.To,
+                                         Amount = p.Amount,
+                                         SMSCount = p.Smscount,
+                                         UsageSMS = p.UsageSms,
+                                         RemindSMS=p.Smscount-p.UsageSms,
+                                         Id = p.Id,
+                                     }).Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();
+
+                return Ok(new { Packeges = PackegesInfos, count = PackegesCount });
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet("GetHistoryPackges")]
+        public IActionResult GetHistoryPackges(int pageNo, int pageSize, long custmorId)
+        {
+            try
+            {
+
+                IQueryable<ShoortNumberActions> PackegesInfo = from p in db.ShoortNumberActions where p.ShoortNumber.CustomerId == custmorId select p;
+
+
+
+
+
+                var PackegesCount = (from p in PackegesInfo
+                                     select p).Count();
+
+                var PackegesInfos = (from p in PackegesInfo
+                                     orderby p.CreatecdOn descending
+                                     select new
+                                     {
+                                         code=p.ShoortNumber.Code,
+                                         ActionDescription = p.ActionDescription,
+                                         Amount = p.Amount,
+                                         SMSCount = p.Smscount,
+                                         From = p.From,
+                                         To = p.To,
+                                         CreatedBy = p.CreatedBy,
+                                         CreatecdOn = p.CreatecdOn,
+                                         Id=p.ShoortNumberId,
+
+                                     }).Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();
+
+                return Ok(new { Packeges = PackegesInfos, count = PackegesCount });
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPost("stopServeice")]
+        public IActionResult stopServeice(long id,string disc)
+        {
+            try
+            {
+
+                if (id == 0)
+                {
+                    return BadRequest("حذث خطأ في ارسال البيانات الرجاء إعادة المحاولة");
+                }
+
+                var userId = this.help.GetCurrentUser(HttpContext);
+
+                //if (userId <= 0)
+                //{
+                //    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
+                //}
+
+
+                var packge = new ShoortNumber();
+
+
+
+
+                packge = (from p in db.ShoortNumber where p.Id == id select p).SingleOrDefault();
+
+                if (packge == null)
+                {
+                    return BadRequest("لم يتم العتور علي الباقة الرجاء إعادة المحاولة");
+                }
+
+                packge.State = 3;
+                db.ShoortNumber.Update(packge);
+
+                var Action = new ShoortNumberActions();
+                Action.ShoortNumberId = id;
+                Action.ActionType = 3;
+                Action.ActionDescription = disc;
+                Action.Amount = 0;
+                Action.Smscount = 0;
+                Action.CreatedBy = userId;
+                Action.CreatecdOn = DateTime.Now;
+                db.ShoortNumberActions.Update(Action);
+
+                db.SaveChanges();
+
+                return Ok("تمت عملية إيقاف الخدمة بنجاح");
             }
             catch (Exception e)
             {

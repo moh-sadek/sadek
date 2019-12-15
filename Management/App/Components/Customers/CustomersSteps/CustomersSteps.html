@@ -12,6 +12,12 @@
                     <div class="card-header text-center">
                         <h3 class="card-title">
                             متابعة حركات العملاء والتقارير الخاصة بهم
+                            <div class="pull-right" style="margin-left: 7px;">
+                                <el-button class="btn btn-primary btn-round btn-icon" title="رجوع"  @click.prevent="cansel()">
+                                    <i class="nc-icon nc-minimal-left " style="padding-right: 3px;"></i>
+                                </el-button>
+                            </div>
+                            
                         </h3>
                         <h5 class="description">متابعة حركات العملاء والتقارير الخاصة بهم </h5>
                         <div class="wizard-navigation">
@@ -47,7 +53,7 @@
                             <!--Pesnal Info-->
                             <div class="tab-pane show active" id="about">
                                 <el-form :model="customersInfo" ref="customersInfo">
-                                    <h5 class="info-text"> Let's start with the basic information (with validation)</h5>
+                                    <h5 class="info-text"> </h5>
                                     <div class="row justify-content-center">
                                         <div class="col-sm-2">
                                             <div class="picture-container">
@@ -58,7 +64,6 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-7">
-
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label>إسم العميل</label>
@@ -174,7 +179,7 @@
                                     <!--Tab bane // Active -- Not Active -- History-->
                                     <div class="col-lg-10" style="margin-bottom:70px">
                                         <div class="row">
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3">
                                                 <div class="choice" data-toggle="wizard-checkbox">
 
                                                     <div class="icon">
@@ -184,11 +189,11 @@
                                                             <i class="nc-icon nc-ruler-pencil" v-if="currentState==1" />
                                                         </a>
                                                     </div>
-                                                    <h6 style="color: lightskyblue" v-if="currentState==1">Active</h6>
+                                                    <h6 style="color: powderblue" v-if="currentState==1">Active</h6>
                                                     <h6 v-if="currentState!=1">Active</h6>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3">
                                                 <div class="choice" data-toggle="wizard-checkbox">
                                                     <input type="checkbox" name="jobb" value="Code">
                                                     <div class="icon">
@@ -197,11 +202,24 @@
                                                             <i class="nc-icon nc-laptop" v-if="currentState==2"></i>
                                                         </a>
                                                     </div>
-                                                    <h6 style="color: lightskyblue" v-if="currentState==2">Not Active</h6>
+                                                    <h6 style="color: powderblue" v-if="currentState==2">Not Active</h6>
                                                     <h6 v-if="currentState!=2">Not Active</h6>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3">
+                                                <div class="choice" data-toggle="wizard-checkbox">
+                                                    <input type="checkbox" name="jobb" value="Code">
+                                                    <div class="icon">
+                                                        <a href="#about" @click.prevent="changeCurrentState(4)">
+                                                            <i class="nc-icon nc-laptop" style="color:black" v-if="currentState!=4"></i>
+                                                            <i class="nc-icon nc-laptop" v-if="currentState==4"></i>
+                                                        </a>
+                                                    </div>
+                                                    <h6 style="color: powderblue" v-if="currentState==4">Stopped</h6>
+                                                    <h6 v-if="currentState!=4">Stopped</h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
                                                 <div class="choice" data-toggle="wizard-checkbox">
                                                     <input type="checkbox" name="jobb" value="Develop">
                                                     <div class="icon">
@@ -210,7 +228,7 @@
                                                             <i class="nc-icon nc-atom" v-if="currentState==3"></i>
                                                         </a>
                                                     </div>
-                                                    <h6 style="color: lightskyblue" v-if="currentState==3">History</h6>
+                                                    <h6 style="color: powderblue" v-if="currentState==3">History</h6>
                                                     <h6 v-if="currentState!=3">History</h6>
                                                 </div>
                                             </div>
@@ -220,226 +238,152 @@
 
                                     <!--Active-->
                                     <div class="col-md-10" v-if="currentState==1">
-                                        <div class="card ">
-                                            <div class="card-header " style="margin-right:5%">
-                                                <h5 class="card-title">
-                                                    1616
+                                        <div class="table-responsive" style="overflow: hidden;">
+                                            <table class="table">
+                                                <thead class="text-primary">
+                                                    <tr>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="item in activePackges">
+                                                        <td>
+                                                            <div class="card ">
+                                                                <div class="card-header " style="margin-right:5%">
+                                                                    <h5 class="card-title">
+                                                                        {{item.code}}
 
-                                                    <el-button class="btn btn-success btn-round btn-icon btn"
-                                                               style="float: left;margin-left:12px"
-                                                               @click.prevent="showReloadDialog"
-                                                               title="تجديد الباقة">
-                                                        <i class="nc-icon nc-refresh-69" style="padding: 2px;"></i>
-                                                    </el-button>
-                                                    <el-button class="btn btn-danger btn-round btn-icon btn"
-                                                               style="float: left;margin-left:5px"
-                                                               @click.prevent="showStopSMSDialog"
-                                                               title="إيقاف الخدمة">
-                                                        <i class="nc-icon nc-button-pause" style="padding: 2px;"></i>
-                                                    </el-button>
-                                                    <el-button class="btn btn-warning btn-round btn-icon btn"
-                                                               style="float: left;margin-left:5px"
-                                                               @click.prevent="showSMSInfo"
-                                                               title="عرض الرسائل">
-                                                        <i class="nc-icon nc-alert-circle-i" style="padding: 2px;"></i>
-                                                    </el-button>
+                                                                        <el-button class="btn btn-success btn-round btn-icon btn"
+                                                                                   style="float: left;margin-left:12px"
+                                                                                   @click.prevent="showReloadDialog"
+                                                                                   title="تجديد الباقة">
+                                                                            <i class="nc-icon nc-refresh-69" style="padding: 2px;"></i>
+                                                                        </el-button>
+                                                                        <el-button class="btn btn-danger btn-round btn-icon btn"
+                                                                                   style="float: left;margin-left:5px"
+                                                                                   @click.prevent="showStopSMSDialog(item)"
+                                                                                   title="إيقاف الخدمة">
+                                                                            <i class="nc-icon nc-button-pause" style="padding: 2px;"></i>
+                                                                        </el-button>
+                                                                        <el-button class="btn btn-warning btn-round btn-icon btn"
+                                                                                   style="float: left;margin-left:5px"
+                                                                                   @click.prevent="showSMSInfo"
+                                                                                   title="عرض الرسائل">
+                                                                            <i class="nc-icon nc-alert-circle-i" style="padding: 2px;"></i>
+                                                                        </el-button>
 
 
-                                                </h5>
+                                                                    </h5>
 
 
-                                                <p class="card-category">إسم الخدمة</p>
-                                                <hr />
-                                            </div>
-                                            <div class="card-body ">
-                                                <div class="row">
-                                                    <div class="col-md-4">
+                                                                    <p class="card-category">{{item.service}}</p>
+                                                                    <hr />
+                                                                </div>
+                                                                <div class="card-body ">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
 
-                                                        <el-progress type="circle" :percentage="50"></el-progress>
-                                                    </div>
-                                                    <div class="col-md-8">
+                                                                            <el-progress type="circle" :percentage="item.usagePercentage"></el-progress>
+                                                                        </div>
+                                                                        <div class="col-md-8">
 
-                                                        <div class="row"
-                                                             style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:lightslategrey">
-                                                            <div class="col-md-7">
-                                                                <div>
-                                                                    <h6>
-                                                                        قيمة الإشتراك
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        القيمة المدفوعة
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        إجمـــالــي عــدد الرســائــل
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        الرسائل المستخدمة
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        الرسائل المتبقية
-                                                                    </h6>
+                                                                            <div class="row"
+                                                                                 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:lightslategrey">
+                                                                                <div class="col-md-7">
+                                                                                    <div>
+                                                                                        <h6>
+                                                                                            قيمة الإشتراك
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            القيمة المدفوعة
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            إجمـــالــي عــدد الرســائــل
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            الرسائل المستخدمة
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            الرسائل المتبقية
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <div>
+                                                                                        <h6>
+                                                                                            {{item.amount}} دينار
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            {{item.amount}} دينار
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            {{item.smsCount}} رسالــة
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            {{item.usageSMS}} رسالــة
+                                                                                        </h6>
+
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            {{item.remindSMS}} رسالــة
+                                                                                        </h6>
+
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-footer ">
+                                                                    <div class="legend">
+                                                                        <i class="fa fa-circle text-info"></i> Active
+                                                                    </div>
+                                                                    <hr>
+                                                                    <div class="row" style="padding-right:20px">
+                                                                        <div class="stats">
+                                                                            تاريخ الإشتراك
+                                                                            <br />
+                                                                            <i class="fa fa-calendar"></i> {{item.from | moment}}
+                                                                            <br />
+                                                                        </div>
+                                                                        <div class="stats" style="/* FONT-WEIGHT: 500; */float: left;display: block;left: 20px;position: absolute;">
+                                                                            صلاحية الباقة
+                                                                            <br> <i class="fa fa-calendar"></i> {{item.to | moment}}
+                                                                            <br>
+                                                                        </div>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-4">
-                                                                <div>
-                                                                    <h6>
-                                                                        100 دينار
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        50 دينار
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        52 رسالــة
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        52 رسالــة
-                                                                    </h6>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
 
-                                                                    <h6 style="margin-top:15px">
-                                                                        52 رسالــة
-                                                                    </h6>
-
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="card-footer ">
-                                                <div class="legend">
-                                                    <i class="fa fa-circle text-info"></i> Active
-                                                </div>
-                                                <hr>
-                                                <div class="row" style="padding-right:20px">
-                                                    <div class="stats">
-                                                        تاريخ الإشتراك
-                                                        <br />
-                                                        <i class="fa fa-calendar"></i> 01/01/2019
-                                                        <br />
-                                                    </div>
-                                                    <div class="stats" style="/* FONT-WEIGHT: 500; */float: left;display: block;left: 20px;position: absolute;">
-                                                        صلاحية الباقة
-                                                        <br> <i class="fa fa-calendar"></i> 01/01/2019
-                                                        <br>
-                                                    </div>
-                                                </div>
-
-                                            </div>
                                         </div>
                                         <br />
                                         <hr />
-                                        <br />
-
-                                        <div class="card ">
-                                            <div class="card-header " style="margin-right:5%">
-                                                <h5 class="card-title">
-                                                    1616
-
-                                                    <button class="btn btn-success btn-round btn-icon btn"
-                                                            style="float: left;margin-left:12px">
-                                                        <i class="nc-icon nc-refresh-69" style="padding: 2px;"></i>
-                                                    </button>
-                                                    <el-button class="btn btn-danger btn-round btn-icon btn"
-                                                               style="float: left;margin-left:5px"
-                                                               @click.prevent="showStopSMSDialog"
-                                                               title="إيقاف الخدمة">
-                                                        <i class="nc-icon nc-button-pause" style="padding: 2px;"></i>
-                                                    </el-button>
-                                                    <el-button class="btn btn-warning btn-round btn-icon btn"
-                                                               style="float: left;margin-left:5px"
-                                                               @click.prevent="showSMSInfo"
-                                                               title="عرض الرسائل">
-                                                        <i class="nc-icon nc-alert-circle-i" style="padding: 2px;"></i>
-                                                    </el-button>
-
-
-                                                </h5>
-
-
-                                                <p class="card-category">إسم الخدمة</p>
-                                                <hr />
+                                        <div class="row" dir="ltr">
+                                            <div class="col-sm-12 col-md-5">
+                                                <div class="disabled-sorting text-right" id="datatable_info" role="status" aria-live="polite">Showing {{ActivePageNo}} to {{ActivePageSize}} of {{ActivePages}} entries</div>
                                             </div>
-                                            <div class="card-body ">
-                                                <div class="row">
-                                                    <div class="col-md-4">
 
-                                                        <el-progress type="circle" :percentage="50"></el-progress>
-                                                    </div>
-                                                    <div class="col-md-8">
+                                            <div style="text-align: center; ">
 
-                                                        <div class="row"
-                                                             style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:lightslategrey">
-                                                            <div class="col-md-7">
-                                                                <div>
-                                                                    <h6>
-                                                                        قيمة الإشتراك
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        القيمة المدفوعة
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        إجمـــالــي عــدد الرســائــل
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        الرسائل المستخدمة
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        الرسائل المتبقية
-                                                                    </h6>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <div>
-                                                                    <h6>
-                                                                        100 دينار
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        50 دينار
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        52 رسالــة
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        52 رسالــة
-                                                                    </h6>
-
-                                                                    <h6 style="margin-top:15px">
-                                                                        52 رسالــة
-                                                                    </h6>
-
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="card-footer ">
-                                                <div class="legend">
-                                                    <i class="fa fa-circle text-info"></i> Active
-                                                </div>
-                                                <hr>
-                                                <div class="row" style="padding-right:20px">
-                                                    <div class="stats">
-                                                        تاريخ الإشتراك
-                                                        <br />
-                                                        <i class="fa fa-calendar"></i> 01/01/2019
-                                                        <br />
-                                                    </div>
-                                                    <div class="stats" style="/* FONT-WEIGHT: 500; */float: left;display: block;left: 20px;position: absolute;">
-                                                        صلاحية الباقة
-                                                        <br> <i class="fa fa-calendar"></i> 01/01/2019
-                                                        <br>
-                                                    </div>
-                                                </div>
+                                                <el-pagination background
+                                                               layout="prev, pager, next"
+                                                               :current-page="ActivePageNo"
+                                                               :page-size="ActivePageSize"
+                                                               :total="ActivePages"
+                                                               @current-change="getCustomers($event)">
+                                                </el-pagination>
 
                                             </div>
+
                                         </div>
+
+
                                     </div>
 
                                     <!--SMS Info -->
@@ -631,7 +575,8 @@
                                                             <h5> سبب الإيقاف</h5>
                                                             <el-input type="textarea"
                                                                       :rows="4"
-                                                                      placeholder=" الرجاء إدخال سبب الإيقاف">
+                                                                      placeholder=" الرجاء إدخال سبب الإيقاف"
+                                                                      v-model="stopResone">
                                                             </el-input>
                                                         </div>
                                                     </div>
@@ -645,7 +590,7 @@
 
                                                             <el-input type="textarea"
                                                                       :rows="4"
-                                                                      placeholder="لقد تم إيقاف الخدمة الخاصة بكم الرجاء مراجعة إدارة الخدمات بشركة المدار  ">
+                                                                      v-model="SMSstopResone">
                                                             </el-input>
                                                         </div>
                                                     </div>
@@ -653,122 +598,315 @@
                                                 <p>في حال لم تقم بتعديل نص الرسالة سيتم إرسال الرسالة للتوضيح</p>
                                             </div>
                                             <div class="modal-footer justify-content-center">
-                                                <button type="button" class="btn btn-info btn-round" data-dismiss="modal">إيقاف الخدمة</button>
-                                                <button type="button" class="btn btn-info btn-round" data-dismiss="modal">إلغاء العملية</button>
+                                                <el-button class="btn btn-danger" @click="canselStoped()">
+                                                    إلغاء العملية
+                                                </el-button>
+                                                <el-button class="btn btn-twitter" @click="stopServeice">
+                                                    إيقاف الخدمة
+                                                </el-button>
+
+
                                             </div>
                                         </div>
                                     </el-dialog>
 
                                     <!--Not Active-->
                                     <div class="col-md-10" v-if="currentState==2">
-                                        <div class="card ">
-                                            <div class="card-header " style="margin-right:5%">
-                                                <h5 class="card-title">
-                                                    1616
+                                        <div class="table-responsive" style="overflow: hidden;">
+                                            <table class="table">
+                                                <thead class="text-primary">
+                                                    <tr>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="item in notactivePackges">
+                                                        <td>
+                                                            <div class="card ">
+                                                                <div class="card-header " style="margin-right:5%">
+                                                                    <h5 class="card-title">
+                                                                        {{item.code}}
 
-                                                    <el-button class="btn btn-success btn-round btn-icon btn"
-                                                               style="float: left;margin-left:12px"
-                                                               @click.prevent="showReloadDialog"
-                                                               title="تجديد الباقة">
-                                                        <i class="nc-icon nc-refresh-69" style="padding: 2px;"></i>
-                                                    </el-button>
-                                                    <el-button class="btn btn-danger btn-round btn-icon btn"
-                                                               style="float: left;margin-left:5px"
-                                                               @click.prevent="showStopSMSDialog"
-                                                               title="إيقاف الخدمة">
-                                                        <i class="nc-icon nc-button-pause" style="padding: 2px;"></i>
-                                                    </el-button>
-                                                    <el-button class="btn btn-warning btn-round btn-icon btn"
-                                                               style="float: left;margin-left:5px"
-                                                               @click.prevent="showSMSInfo"
-                                                               title="عرض الرسائل">
-                                                        <i class="nc-icon nc-alert-circle-i" style="padding: 2px;"></i>
-                                                    </el-button>
+                                                                        <el-button class="btn btn-success btn-round btn-icon btn"
+                                                                                   style="float: left;margin-left:12px"
+                                                                                   @click.prevent="showReloadDialog"
+                                                                                   title="تجديد الباقة">
+                                                                            <i class="nc-icon nc-refresh-69" style="padding: 2px;"></i>
+                                                                        </el-button>
+                                                                        <el-button class="btn btn-danger btn-round btn-icon btn"
+                                                                                   style="float: left;margin-left:5px"
+                                                                                   @click.prevent="showStopSMSDialog"
+                                                                                   title="إيقاف الخدمة">
+                                                                            <i class="nc-icon nc-button-pause" style="padding: 2px;"></i>
+                                                                        </el-button>
+                                                                        <el-button class="btn btn-warning btn-round btn-icon btn"
+                                                                                   style="float: left;margin-left:5px"
+                                                                                   @click.prevent="showSMSInfo"
+                                                                                   title="عرض الرسائل">
+                                                                            <i class="nc-icon nc-alert-circle-i" style="padding: 2px;"></i>
+                                                                        </el-button>
 
 
-                                                </h5>
+                                                                    </h5>
 
 
-                                                <p class="card-category">إسم الخدمة</p>
-                                                <hr />
-                                            </div>
-                                            <div class="card-body ">
-                                                <div class="row">
-                                                    <div class="col-md-4">
+                                                                    <p class="card-category">{{item.service}}</p>
+                                                                    <hr />
+                                                                </div>
+                                                                <div class="card-body ">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
 
-                                                        <el-progress type="circle" :percentage="50"></el-progress>
-                                                    </div>
-                                                    <div class="col-md-8">
+                                                                            <el-progress type="circle" :percentage="item.usagePercentage" color="#f56c6c" status="exception"></el-progress>
+                                                                        </div>
+                                                                        <div class="col-md-8">
 
-                                                        <div class="row"
-                                                             style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:lightslategrey">
-                                                            <div class="col-md-7">
-                                                                <div>
-                                                                    <h6>
-                                                                        قيمة الإشتراك
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        القيمة المدفوعة
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        إجمـــالــي عــدد الرســائــل
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        الرسائل المستخدمة
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        الرسائل المتبقية
-                                                                    </h6>
+                                                                            <div class="row"
+                                                                                 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:lightslategrey">
+                                                                                <div class="col-md-7">
+                                                                                    <div>
+                                                                                        <h6>
+                                                                                            قيمة الإشتراك
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            القيمة المدفوعة
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            إجمـــالــي عــدد الرســائــل
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            الرسائل المستخدمة
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            الرسائل المتبقية
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <div>
+                                                                                        <h6>
+                                                                                            {{item.amount}} دينار
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            {{item.amount}} دينار
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            {{item.smsCount}} رسالــة
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            {{item.usageSMS}} رسالــة
+                                                                                        </h6>
+
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            {{item.remindSMS}} رسالــة
+                                                                                        </h6>
+
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-footer ">
+                                                                    <div class="legend">
+                                                                        <i class="fa fa-circle text-danger"></i> Not Active
+                                                                    </div>
+                                                                    <hr>
+                                                                    <div class="row" style="padding-right:20px">
+                                                                        <div class="stats">
+                                                                            تاريخ الإشتراك
+                                                                            <br />
+                                                                            <i class="fa fa-calendar"></i> {{item.from | moment}}
+                                                                            <br />
+                                                                        </div>
+                                                                        <div class="stats" style="/* FONT-WEIGHT: 500; */float: left;display: block;left: 20px;position: absolute;">
+                                                                            صلاحية الباقة
+                                                                            <br> <i class="fa fa-calendar"></i> {{item.to | moment}}
+                                                                            <br>
+                                                                        </div>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-4">
-                                                                <div>
-                                                                    <h6>
-                                                                        100 دينار
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        50 دينار
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        52 رسالــة
-                                                                    </h6>
-                                                                    <h6 style="margin-top:15px">
-                                                                        52 رسالــة
-                                                                    </h6>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
 
-                                                                    <h6 style="margin-top:15px">
-                                                                        52 رسالــة
-                                                                    </h6>
+                                        </div>
+                                        <br />
+                                        <hr />
+                                        <div class="row" dir="ltr">
+                                            <div class="col-sm-12 col-md-5">
+                                                <div class="disabled-sorting text-right" id="datatable_info" role="status" aria-live="polite">Showing {{notActivePageNo}} to {{notActivePageSize}} of {{notActivePages}} entries</div>
+                                            </div>
+
+                                            <div style="text-align: center; ">
+
+                                                <el-pagination background
+                                                               layout="prev, pager, next"
+                                                               :current-page="notActivePageNo"
+                                                               :page-size="notActivePageSize"
+                                                               :total="notActivePages"
+                                                               @current-change="getCustomers($event)">
+                                                </el-pagination>
+
+                                            </div>
+
+                                        </div>
+                                        <br />
+                                        <hr />
+                                        <br />
+                                    </div>
+
+                                    <!--Stopped-->
+                                    <div class="col-md-10" v-if="currentState==4">
+                                        {{stoppedPackges}}
+                                        <div class="table-responsive" style="overflow: hidden;">
+                                            <table class="table">
+                                                <thead class="text-primary">
+                                                    <tr>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="item in stoppedPackges">
+                                                        <td>
+                                                            <div class="card ">
+                                                                <div class="card-header " style="margin-right:5%">
+                                                                    <h5 class="card-title">
+                                                                        {{item.code}}
+
+                                                                        <el-button class="btn btn-success btn-round btn-icon btn"
+                                                                                   style="float: left;margin-left:12px"
+                                                                                   @click.prevent="showReloadDialog"
+                                                                                   title="تجديد الباقة">
+                                                                            <i class="nc-icon nc-refresh-69" style="padding: 2px;"></i>
+                                                                        </el-button>
+                                                                        <el-button class="btn btn-danger btn-round btn-icon btn"
+                                                                                   style="float: left;margin-left:5px"
+                                                                                   @click.prevent="showStopSMSDialog"
+                                                                                   title="إيقاف الخدمة">
+                                                                            <i class="nc-icon nc-button-pause" style="padding: 2px;"></i>
+                                                                        </el-button>
+                                                                        <el-button class="btn btn-warning btn-round btn-icon btn"
+                                                                                   style="float: left;margin-left:5px"
+                                                                                   @click.prevent="showSMSInfo"
+                                                                                   title="عرض الرسائل">
+                                                                            <i class="nc-icon nc-alert-circle-i" style="padding: 2px;"></i>
+                                                                        </el-button>
+
+
+                                                                    </h5>
+
+
+                                                                    <p class="card-category">{{item.service}}</p>
+                                                                    <hr />
+                                                                </div>
+                                                                <div class="card-body ">
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+
+                                                                            <el-progress type="circle" :percentage="item.usagePercentage" color="#f56c6c" status="exception"></el-progress>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+
+                                                                            <div class="row"
+                                                                                 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:lightslategrey">
+                                                                                <div class="col-md-7">
+                                                                                    <div>
+                                                                                        <h6>
+                                                                                            قيمة الإشتراك
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            القيمة المدفوعة
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            إجمـــالــي عــدد الرســائــل
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            الرسائل المستخدمة
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            الرسائل المتبقية
+                                                                                        </h6>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-4">
+                                                                                    <div>
+                                                                                        <h6>
+                                                                                            {{item.amount}} دينار
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            {{item.amount}} دينار
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            {{item.smsCount}} رسالــة
+                                                                                        </h6>
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            {{item.usageSMS}} رسالــة
+                                                                                        </h6>
+
+                                                                                        <h6 style="margin-top:15px">
+                                                                                            {{item.remindSMS}} رسالــة
+                                                                                        </h6>
+
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-footer ">
+                                                                    <div class="legend">
+                                                                        <i class="fa fa-circle text-danger"></i> Not Active
+                                                                    </div>
+                                                                    <hr>
+                                                                    <div class="row" style="padding-right:20px">
+                                                                        <div class="stats">
+                                                                            تاريخ الإشتراك
+                                                                            <br />
+                                                                            <i class="fa fa-calendar"></i> {{item.from | moment}}
+                                                                            <br />
+                                                                        </div>
+                                                                        <div class="stats" style="/* FONT-WEIGHT: 500; */float: left;display: block;left: 20px;position: absolute;">
+                                                                            صلاحية الباقة
+                                                                            <br> <i class="fa fa-calendar"></i> {{item.to | moment}}
+                                                                            <br>
+                                                                        </div>
+                                                                    </div>
 
                                                                 </div>
                                                             </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
 
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
+                                        </div>
+                                        <br />
+                                        <hr />
+                                        <div class="row" dir="ltr">
+                                            <div class="col-sm-12 col-md-5">
+                                                <div class="disabled-sorting text-right" id="datatable_info" role="status" aria-live="polite">Showing {{stoppedPageNo}} to {{stoppedPageSize}} of {{stoppedPages}} entries</div>
                                             </div>
-                                            <div class="card-footer ">
-                                                <div class="legend">
-                                                    <i class="fa fa-circle text-info"></i> Active
-                                                </div>
-                                                <hr>
-                                                <div class="row" style="padding-right:20px">
-                                                    <div class="stats">
-                                                        تاريخ الإشتراك
-                                                        <br />
-                                                        <i class="fa fa-calendar"></i> 01/01/2019
-                                                        <br />
-                                                    </div>
-                                                    <div class="stats" style="/* FONT-WEIGHT: 500; */float: left;display: block;left: 20px;position: absolute;">
-                                                        صلاحية الباقة
-                                                        <br> <i class="fa fa-calendar"></i> 01/01/2019
-                                                        <br>
-                                                    </div>
-                                                </div>
+
+                                            <div style="text-align: center; ">
+
+                                                <el-pagination background
+                                                               layout="prev, pager, next"
+                                                               :current-page="stoppedPageNo"
+                                                               :page-size="stoppedPageSize"
+                                                               :total="stoppedPages"
+                                                               @current-change="getCustomers($event)">
+                                                </el-pagination>
 
                                             </div>
+
                                         </div>
                                         <br />
                                         <hr />
@@ -780,7 +918,10 @@
                                     <div class="table-responsive" style="padding:10px;overflow: hidden;" v-if="currentState==3">
                                         <table class="table">
                                             <thead class="">
-                                                <tr>
+                                                <tr style="text-align:center" class="text-primary">
+                                                    <th>
+                                                        #
+                                                    </th>
                                                     <th>
                                                         رقم الخدمة
                                                     </th>
@@ -808,39 +949,60 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
+                                                <tr v-for="item,index in historyPackges" style="text-align:center">
                                                     <td>
-                                                        1010
+                                                        {{index+1 }}
                                                     </td>
                                                     <td>
-                                                        شحن باقة
+                                                        {{item.code }}
                                                     </td>
                                                     <td>
-                                                        100
+                                                        {{item.actionDescription }}
                                                     </td>
                                                     <td>
-                                                        500
+                                                        {{item.amount }}
                                                     </td>
                                                     <td>
-                                                        01/01/2019
+                                                        {{item.smsCount }}
                                                     </td>
                                                     <td>
-                                                        01/05/2019
+                                                        {{item.from }}
                                                     </td>
                                                     <td>
-                                                        Ahmed
+                                                        {{item.to }}
                                                     </td>
                                                     <td>
-                                                        01/01/2019 <br />01:01:01
+                                                        {{item.createdBy}}
+                                                    </td>
+                                                    <td>
+                                                        {{item.createcdOn | moment}}
                                                     </td>
 
                                                 </tr>
                                             </tbody>
 
                                         </table>
+
                                         <hr />
                                         <br />
+                                        <div class="row" dir="ltr">
+                                            <div class="col-sm-12 col-md-5">
+                                                <div class="disabled-sorting text-right" id="datatable_info" role="status" aria-live="polite">Showing {{historyPageNo}} to {{historyPageSize}} of {{historyPages}} entries</div>
+                                            </div>
 
+                                            <div style="text-align: center; ">
+
+                                                <el-pagination background
+                                                               layout="prev, pager, next"
+                                                               :current-page="historyPageNo"
+                                                               :page-size="historyPageSize"
+                                                               :total="historyPages"
+                                                               @current-change="getHistoryPackges($event)">
+                                                </el-pagination>
+
+                                            </div>
+
+                                        </div>
                                     </div>
 
                                 </div>
@@ -955,16 +1117,17 @@
                         <div class="pull-right">
 
 
-                            <el-button class="btn btn-next btn-fill btn-rose btn-wd" type="primary" @click="allowEdit" v-if="EditInfo==0 && currentPage==0">تعديل البيانات</el-button>
-                            <el-button class="btn btn-next btn-fill btn-rose btn-wd" type="primary" @click="allowEdit" v-if="EditInfo==1 && currentPage==0">حفظ التعديل</el-button>
-                            <el-button class="btn btn-next btn-fill btn-rose btn-wd" type="primary" @click="submitForm('serviceInfo')" v-if="currentPage==2">إضافة الباقة</el-button>
+                            <el-button class="btn btn-next btn-fill btn-rose btn-wd" style="font-size:14px"  type="primary" @click="allowEdit" v-if="EditInfo==0 && currentPage==0">تعديل البيانات</el-button>
+                            <el-button class="btn btn-next btn-fill btn-rose btn-wd" type="primary" @click="submitForm('customersInfo')" v-if="EditInfo==1 && currentPage==0"
+                                       style="font-size:14px" >حفظ التعديل</el-button>
+                            <el-button  style="font-size:14px" class="btn btn-next btn-fill btn-rose btn-wd" type="primary" @click="submitForm('serviceInfo')" v-if="currentPage==2">إضافة الباقة</el-button>
                         </div>
 
                         <div class="pull-left">
-                            <el-button class="btn btn-danger" type="danger" @click="canselEdit()" v-if="EditInfo==1 && currentPage==0">إلغاء التعديل</el-button>
+                            <el-button class="btn btn-danger" style="font-size:14px" type="danger" @click="canselEdit()" v-if="EditInfo==1 && currentPage==0">إلغاء التعديل</el-button>
                         </div>
                         <div class="pull-left">
-                            <input type="button" class="btn btn-previous btn-fill btn-default btn-wd disabled" name="previous" value="Previous">
+                            <input type="button" style="font-size:14px" class="btn btn-previous btn-fill btn-default btn-wd disabled" name="previous" value="Previous">
                         </div>
                         <div class="clearfix"></div>
                     </div>

@@ -8,6 +8,7 @@
     data() {
         return {
             customersInfo: {
+                custmorId: 0,
                 name: '',
                 phone: '',
                 date: '',

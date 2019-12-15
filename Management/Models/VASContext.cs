@@ -75,6 +75,8 @@ namespace Management.Models1
 
                 entity.Property(e => e.UsageSms).HasColumnName("UsageSMS");
 
+                entity.Property(e => e.State).HasColumnName("State");
+
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.ShoortNumber)
                     .HasForeignKey(d => d.CustomerId)

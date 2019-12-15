@@ -22,6 +22,7 @@ namespace Management.Models1
         public DateTime? CreatedOn { get; set; }
         public long? CreatedBy { get; set; }
         public long? CustomerId { get; set; }
+        public short? State { get; set; }
 
         public Cutomers Customer { get; set; }
         public ICollection<ShoortNumberActions> ShoortNumberActions { get; set; }

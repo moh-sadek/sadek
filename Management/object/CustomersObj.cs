@@ -7,6 +7,7 @@ namespace Managegment.objects
 {
     public class CustomersObj
     {
+        public long custmorId { get; set; }
         public string name { get; set; }
         public string phone { get; set; }
         public DateTime date { get; set; }
