@@ -146,6 +146,12 @@ export default {
         return axios.get(baseUrl + `/Admin/Customer/GetCustomers?pageNo=${pageNo}&pagesize=${pageSize}&id=${id}`);
     },
 
+    AddCustomorPackage(serviceInfo) {
+        debugger
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.post(baseUrl + `/Admin/Customer/AddPackage`, serviceInfo);//change path
+    },
+
 
 
 }

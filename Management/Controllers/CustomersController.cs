@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Managegment.Controllers;
 using Managegment.objects;
 using Management.Models1;
+using Management.objects;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Management.Controllers
@@ -112,6 +113,53 @@ namespace Management.Controllers
                 db.SaveChanges();
 
                 return Ok("لقد قمت بتسـجيل بيانات العميل بنــجاح");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPost("AddPackage")]
+        public IActionResult AddPackage([FromBody] PackegeObj serviceInfo)
+        {
+            try
+            {
+
+                if (serviceInfo == null)
+                {
+                    return BadRequest("حذث خطأ في ارسال البيانات الرجاء إعادة الادخال");
+                }
+
+                var userId = this.help.GetCurrentUser(HttpContext);
+
+                //if (userId <= 0)
+                //{
+                //    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
+                //}
+                
+                var ShoortNumber = new ShoortNumber();
+                
+
+                ShoortNumber.Code = serviceInfo.code;
+                ShoortNumber.Amount = serviceInfo.amount;
+                ShoortNumber.From = serviceInfo.from;
+                //ShoortNumber.To = package.to;
+                ShoortNumber.To = DateTime.Now; 
+                ShoortNumber.Smscount = serviceInfo.countMassage;
+                ShoortNumber.UsageSms = 0;
+                ShoortNumber.Service = serviceInfo.serviceName;
+                //ShoortNumber.Description = serviceInfo.discriptions;
+                ShoortNumber.Description = "d";
+                ShoortNumber.CreatedBy = 0;//user dontforget
+                ShoortNumber.CreatedOn = DateTime.Now;
+                ShoortNumber.CustomerId = serviceInfo.custmorId;
+
+                db.ShoortNumber.Add(ShoortNumber);
+
+                db.SaveChanges();
+
+                return Ok("لقد قمت بتسـجيل بيانات الخدمة بنــجاح");
             }
             catch (Exception e)
             {
