@@ -6,6 +6,7 @@ export default {
         
         this.custmor = this.$parent.selectedCustmor;
         this.serviceInfo.customerId = this.custmor.customerId;
+        this.ReloadserviceInfo.customerId = this.custmor.customerId;
         this.customersInfo.name = this.custmor.fullName;
         this.customersInfo.phone = this.custmor.phone;
         this.customersInfo.date = this.custmor.birthDate;
@@ -80,6 +81,16 @@ export default {
                 
             },
 
+            ReloadserviceInfo:
+            {
+                custmorId: 0,
+                amount: '',
+                countMassage: '',
+                to: '',
+            },
+
+
+
 
             ActivePageNo: 1,
             ActivePageSize: 10,
@@ -100,7 +111,7 @@ export default {
             stoppedPackges: [],
 
             historyPageNo: 1,
-            historyPageSize: 4,
+            historyPageSize: 10,
             historyPages: 0,
 
             historyPackges: [],
@@ -205,21 +216,20 @@ export default {
             this.selectedPackege = item;
         },
 
-        showReloadDialog()
+        showReloadDialog(item)
         {
+            this.selectedPackege = item;
             this.ReloadServiceDialog=true;
         },
 
         editPersnalInfo() {
             this.$http.EditCustomorInfo(this.customersInfo)
                 .then(response => {
-                    //this.$parent.state = 0;
                     this.$message({
                         type: 'info',
                         message: response.data
                     });
                     this.$blockUI.Stop();
-                    //this.ChangDivStyle(2)
                 })
                 .catch((err) => {
                     this.$blockUI.Stop();
@@ -280,45 +290,18 @@ export default {
 
         },
 
-
-
-
-
-        //method 
-        //1 add pakege
-        //2 edit customr info
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    if (this.currentPage == 0)
-                    {
-                        this.editPersnalInfo();
-
-                    }else if(this.currentPage==2)
-                    {
-                        this.addPackage();
-                    }
-                    //this.addCustomor();
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
-
-
-        },
-
-        addCustomor() {
-
-            this.$http.AddCustomor(this.customersInfo)
+        rechargeService() {
+            this.$http.rechargeService(this.selectedPackege.id, this.ReloadserviceInfo)
                 .then(response => {
-                    this.$parent.state = 0;
+                    //this.$parent.state = 0;
                     this.$message({
                         type: 'info',
                         message: response.data
                     });
                     this.$blockUI.Stop();
-                    this.$parent.state = 0;
+                    this.getPakegeByState(1, 1);
+                    this.getPakegeByState(1, 2);
+                    this.ReloadServiceDialog = false;
                 })
                 .catch((err) => {
                     this.$blockUI.Stop();
@@ -327,8 +310,9 @@ export default {
                         message: err.response.data
                     });
                 });
-            
         },
+
+
 
 
 
@@ -358,6 +342,9 @@ export default {
                     });
                     this.$blockUI.Stop();
                     this.StopSMSServiceDialog = false;
+                    this.getPakegeByState(1, 1);
+                    this.getPakegeByState(1, 2);
+                    this.getPakegeByState(1, 3);
                 })
                 .catch((err) => {
                     this.$blockUI.Stop();
@@ -368,7 +355,64 @@ export default {
                 });
         },
 
+        backService(item) {
 
+
+            this.$confirm('سيؤدي ذلك إلى إعادة تشغيل الباقة  . استمر؟', 'تـحذير', {
+                confirmButtonText: 'نـعم',
+                cancelButtonText: 'لا',
+                type: 'warning'
+            }).then(() => {
+
+
+                this.$http.backServeice(item.id)
+                    .then(response => {
+                        this.$message({
+                            type: 'info',
+                            message: response.data
+                        });
+                        this.$blockUI.Stop();
+                        this.getPakegeByState(1, 1);
+                        this.getPakegeByState(1, 2);
+                        this.getPakegeByState(1, 3);
+                    })
+                    .catch((err) => {
+                        this.$blockUI.Stop();
+                        this.$message({
+                            type: 'error',
+                            message: err.response.data
+                        });
+                    });
+            });
+        },
+
+
+
+
+        //method 
+        //1 add pakege
+        //2 edit customr info
+        //3 recharge packge
+        submitForm(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    if (this.currentPage == 0) {
+                        this.editPersnalInfo();
+
+                    } else if (this.currentPage == 2) {
+                        this.addPackage();
+                    } else if (formName = "ReloadserviceInfo") {
+                        this.rechargeService();
+                    }
+                    //this.addCustomor();
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
+
+
+        },
 
 
         resetForm(formName) {

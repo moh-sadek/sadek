@@ -254,7 +254,7 @@
 
                                                                         <el-button class="btn btn-success btn-round btn-icon btn"
                                                                                    style="float: left;margin-left:12px"
-                                                                                   @click.prevent="showReloadDialog"
+                                                                                   @click.prevent="showReloadDialog(item)"
                                                                                    title="تجديد الباقة">
                                                                             <i class="nc-icon nc-refresh-69" style="padding: 2px;"></i>
                                                                         </el-button>
@@ -524,41 +524,67 @@
                                         </div>
                                         <br />
                                         <br />
-                                        <div class="tab-pane active show" id="address">
-                                            <div class="row justify-content-center">
+                                        <el-form :model="ReloadserviceInfo" ref="ReloadserviceInfo">
+                                            <div class="tab-pane active show" id="address">
+                                                <div class="row justify-content-center">
 
-                                                <div class="col-sm-7">
-                                                    <div class="form-group">
-                                                        <label>عدد الرسائل</label>
-                                                        <input type="text" class="form-control">
+                                                    <div class="col-sm-7">
+                                                        <div class="form-group">
+                                                            <label>عدد الرسائل</label>
+                                                            <el-form-item prop="countMassage"
+                                                                          label-width="0px"
+                                                                          :rules="[{required: true, message: 'الرجاء إدخال عدد الرسائل'}
+                                                                  ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
+                                                                <el-input type="countMassage"
+                                                                          placeholder="عدد الرسائل"
+                                                                          v-model.number="ReloadserviceInfo.countMassage"
+                                                                          autocomplete="off" />
+                                                            </el-form-item>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <div class="form-group">
-                                                        <label>القيمة</label>
-                                                        <input type="text" class="form-control">
+                                                    <div class="col-sm-3">
+                                                        <div class="form-group">
+                                                            <label>القيمة</label>
+                                                            <el-form-item prop="amount"
+                                                                          label-width="0px"
+                                                                          :rules="[{required: true, message: 'الرجاء إدخال القيمة'}
+                                                                  ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
+                                                                <el-input type="amount"
+                                                                          placeholder="القيمة"
+                                                                          v-model.number="ReloadserviceInfo.amount"
+                                                                          autocomplete="off"
+                                                                          />
+                                                            </el-form-item>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-5">
-                                                    <div class="form-group">
-                                                        <label>تاريخ إنتهاء الصلاحية</label>
-                                                        <el-date-picker v-model="value1"
-                                                                        type="date"
-                                                                        placeholder="">
-                                                        </el-date-picker>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-5">
-                                                    <div class="form-group select-wizard" style="float:left ;">
-                                                        <el-button class="btn btn-twitter"
-                                                                   style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
-                                                            تجديد الباقة
-                                                        </el-button>
+                                                    <div class="col-sm-5">
+                                                        <div class="form-group">
+                                                            <label>تاريخ إنتهاء الصلاحية</label>
+                                                            <el-form-item prop="to"
+                                                                          label-width="0px"
+                                                                          :rules="[{ required: true, message: 'الرجاء إدخال تاريخ  '} ]">
 
+                                                                <el-date-picker style="width:100%"
+                                                                                v-model="ReloadserviceInfo.to"
+                                                                                type="date"
+                                                                                placeholder="من">
+                                                                </el-date-picker>
+
+                                                            </el-form-item>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        <div class="form-group select-wizard" style="float:left ;">
+                                                            <el-button class="btn btn-twitter" @click="submitForm('ReloadserviceInfo')"
+                                                                       style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+                                                                تجديد الباقة
+                                                            </el-button>
+
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </el-form>
                                     </el-dialog>
 
                                     <!--Stop SMS Service -->
@@ -628,16 +654,17 @@
 
                                                                         <el-button class="btn btn-success btn-round btn-icon btn"
                                                                                    style="float: left;margin-left:12px"
-                                                                                   @click.prevent="showReloadDialog"
+                                                                                   @click.prevent="showReloadDialog(item)"
                                                                                    title="تجديد الباقة">
                                                                             <i class="nc-icon nc-refresh-69" style="padding: 2px;"></i>
                                                                         </el-button>
-                                                                        <el-button class="btn btn-danger btn-round btn-icon btn"
-                                                                                   style="float: left;margin-left:5px"
-                                                                                   @click.prevent="showStopSMSDialog"
-                                                                                   title="إيقاف الخدمة">
-                                                                            <i class="nc-icon nc-button-pause" style="padding: 2px;"></i>
-                                                                        </el-button>
+                                                                        <!--
+    <el-button class="btn btn-danger btn-round btn-icon btn"
+               style="float: left;margin-left:5px"
+               @click.prevent="showStopSMSDialog(item)"
+               title="إيقاف الخدمة">
+        <i class="nc-icon nc-button-pause" style="padding: 2px;"></i>
+    </el-button>-->
                                                                         <el-button class="btn btn-warning btn-round btn-icon btn"
                                                                                    style="float: left;margin-left:5px"
                                                                                    @click.prevent="showSMSInfo"
@@ -762,8 +789,7 @@
                                     </div>
 
                                     <!--Stopped-->
-                                    <div class="col-md-10" v-if="currentState==4">
-                                        {{stoppedPackges}}
+                                    <div class="col-md-10" v-if="currentState==4 && stoppedPackges!=0">
                                         <div class="table-responsive" style="overflow: hidden;">
                                             <table class="table">
                                                 <thead class="text-primary">
@@ -778,23 +804,11 @@
                                                                     <h5 class="card-title">
                                                                         {{item.code}}
 
-                                                                        <el-button class="btn btn-success btn-round btn-icon btn"
-                                                                                   style="float: left;margin-left:12px"
-                                                                                   @click.prevent="showReloadDialog"
-                                                                                   title="تجديد الباقة">
-                                                                            <i class="nc-icon nc-refresh-69" style="padding: 2px;"></i>
-                                                                        </el-button>
                                                                         <el-button class="btn btn-danger btn-round btn-icon btn"
-                                                                                   style="float: left;margin-left:5px"
-                                                                                   @click.prevent="showStopSMSDialog"
-                                                                                   title="إيقاف الخدمة">
-                                                                            <i class="nc-icon nc-button-pause" style="padding: 2px;"></i>
-                                                                        </el-button>
-                                                                        <el-button class="btn btn-warning btn-round btn-icon btn"
-                                                                                   style="float: left;margin-left:5px"
-                                                                                   @click.prevent="showSMSInfo"
-                                                                                   title="عرض الرسائل">
-                                                                            <i class="nc-icon nc-alert-circle-i" style="padding: 2px;"></i>
+                                                                                   style="float: left;margin-left:12px"
+                                                                                   @click.prevent="backService(item)"
+                                                                                   title="إيرجاع الخدمة">
+                                                                            <i class="nc-icon nc-button-play" style="padding: 2px;"></i>
                                                                         </el-button>
 
 
@@ -863,7 +877,7 @@
                                                                 </div>
                                                                 <div class="card-footer ">
                                                                     <div class="legend">
-                                                                        <i class="fa fa-circle text-danger"></i> Not Active
+                                                                        <i class="fa fa-circle text-danger"></i> Stopped
                                                                     </div>
                                                                     <hr>
                                                                     <div class="row" style="padding-right:20px">
@@ -890,7 +904,7 @@
                                         </div>
                                         <br />
                                         <hr />
-                                        <div class="row" dir="ltr">
+                                        <div class="row" dir="ltr" v-if="stoppedPackges!=0">
                                             <div class="col-sm-12 col-md-5">
                                                 <div class="disabled-sorting text-right" id="datatable_info" role="status" aria-live="polite">Showing {{stoppedPageNo}} to {{stoppedPageSize}} of {{stoppedPages}} entries</div>
                                             </div>
@@ -908,6 +922,8 @@
                                             </div>
 
                                         </div>
+
+
                                         <br />
                                         <hr />
                                         <br />
@@ -1092,7 +1108,7 @@
                                                     <el-date-picker style="width:100%"
                                                                     v-model="serviceInfo.from"
                                                                     type="date"
-                                                                    placeholder="من">
+                                                                    placeholder="">
                                                     </el-date-picker>
 
                                                 </el-form-item>

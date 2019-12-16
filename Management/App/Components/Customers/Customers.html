@@ -86,8 +86,8 @@
                         <br />
                         <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
-                                <tr>
-                                    <th>ترقيم</th>
+                                <tr class="text-primary">
+                                    <th>#</th>
                                     <th>إسم العميل</th>
                                     <th>رقم الهاتف </th>
                                     <th>عدد الباقات </th>
@@ -118,8 +118,8 @@
                                         <a title="متابعة العميل" href="#" class="btn btn-info btn-link btn-icon btn-sm like" @click.prevent="viewCustmor(item)">
                                             <i class="fa fa-line-chart" style="font-size:13px"></i>
                                         </a>
-                                        
-                                        <a title="حدف العميل" href="#" class="btn btn-danger btn-link btn-icon btn-sm remove">
+                                         
+                                        <a title="حدف العميل" href="#" class="btn btn-danger btn-link btn-icon btn-sm remove" @click.prevent="delteCustmor(item)">
                                             <i class="fa fa-times" style="font-size:13px"></i>
                                         </a>
                                     </td>

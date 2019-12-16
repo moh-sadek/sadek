@@ -1,8 +1,10 @@
-﻿import moment from 'moment';
-import addCustomers from './AddCustomers/AddCustomers.vue';
-import customersSteps from './CustomersSteps/CustomersSteps.vue';
+﻿import addUsers from './AddUsers/AddUsers.vue';
+import editUsers from './EditUsers/EditUsers.vue';
+import moment from 'moment';
+import CryptoJS from 'crypto-js';
+
 export default {
-    name: 'Customers',    
+    name: 'Customers',
     created() {
 
         this.SearchType = [
@@ -13,7 +15,7 @@ export default {
             {
                 id: 2,
                 name: 'رقم الخدمة'
-            },{
+            }, {
                 id: 3,
                 name: "الحالة"
             }
@@ -37,28 +39,20 @@ export default {
 
         ];
 
-        this.getCustomers(1,0);
+        this.getUser();
         this.getCodes();
-        
 
-        //console.log(this.$route.params.SuperPackageId)
-        //console.log(this.$parent.SuperPackageParent);
-        //if (this.$parent.SuperPackageParent==null) {
-        //    this.$router.push("/Packages/SuperPackages");
-        //}
-       // this.GetCoursesBySuperPackageId(this.pageNo);  
-        //welcome
     },
     components: {
-        'add-coustomers': addCustomers,
-        'customersSteps': customersSteps,
+        'add-Users': addUsers,
+        'edit-Users': editUsers
     },
     filters: {
         moment: function (date) {
             if (date === null) {
                 return "فارغ";
             }
-           // return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+            // return moment(date).format('MMMM Do YYYY, h:mm:ss a');
             return moment(date).format('MMMM Do YYYY');
         }
     },
@@ -68,7 +62,7 @@ export default {
             SearchTypeSelected: [],
             Coustmors: [],
             CoustmorSelected: [],
-            
+
             pakegeStatus: [],
             pakegeStatusSelected: [],
             packeges: [],
@@ -76,34 +70,42 @@ export default {
             codes: [],
             CodeSelectd: [],
 
-            selectedCustmor:[],
+            selectedCustmor: [],
 
 
-            CourseEdit:[],
+            CourseEdit: [],
             SuperPackageParent: this.$parent.SuperPackageParent,
             pageNo: 1,
             pageSize: 10,
-            pages: 0,  
+            pages: 0,
             Courses: [],
-            state:0,
-          
+            state: 0,
+
+
+
+
+
+
+
+            users:[],
+
         };
     },
     methods: {
 
-        
 
-        getCustomers(pageNo,id) {
+
+        getUser(pageNo) {
             this.pageNo = pageNo;
             if (this.pageNo === undefined) {
                 this.pageNo = 1;
             }
-            
+
             this.$blockUI.Start();
-            this.$http.GetCustomersInfo(this.pageNo, this.pageSize,id)//this.$parent.SuperPackageParent.superPackageId
+            this.$http.getUser(this.pageNo, this.pageSize)//this.$parent.SuperPackageParent.superPackageId
                 .then(response => {
                     this.$blockUI.Stop();
-                    this.custmors = response.data.custmor;
+                    this.users = response.data.users;
                     this.pages = response.data.count;
                 })
                 .catch((err) => {
@@ -138,7 +140,7 @@ export default {
             this.selectedCustmor = item;
             this.state = 2;
         },
-        
+
 
         delteCustmor(item) {
 
@@ -168,5 +170,5 @@ export default {
                     });
             });
         },
-    }    
+    }
 }

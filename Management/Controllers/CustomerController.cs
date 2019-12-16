@@ -352,6 +352,173 @@ namespace Management.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpPost("backServeice")]
+        public IActionResult backServeice(long id)
+        {
+            try
+            {
+
+                if (id == 0)
+                {
+                    return BadRequest("حذث خطأ في ارسال البيانات الرجاء إعادة المحاولة");
+                }
+
+                var userId = this.help.GetCurrentUser(HttpContext);
+
+                //if (userId <= 0)
+                //{
+                //    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
+                //}
+
+
+                var packge = new ShoortNumber();
+
+
+
+
+                packge = (from p in db.ShoortNumber where p.Id == id select p).SingleOrDefault();
+
+                if (packge == null)
+                {
+                    return BadRequest("لم يتم العتور علي الباقة الرجاء إعادة المحاولة");
+                }
+
+                packge.State = 1;
+                db.ShoortNumber.Update(packge);
+
+                var Action = new ShoortNumberActions();
+                Action.ShoortNumberId = id;
+                Action.ActionType = 4;
+                Action.ActionDescription = "إلغاء إيقاف الباقة";
+                Action.Amount = 0;
+                Action.Smscount = 0;
+                Action.CreatedBy = userId;
+                Action.CreatecdOn = DateTime.Now;
+                db.ShoortNumberActions.Update(Action);
+
+                db.SaveChanges();
+
+                return Ok("تمت عملية إرجاع الخدمة بنجاح");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPost("rechargeService")]
+        public IActionResult rechargeService(long id,[FromBody] CustomersObj ReloadserviceInfo)
+        {
+            try
+            {
+
+                if (ReloadserviceInfo == null)
+                {
+                    return BadRequest("حذث خطأ في ارسال البيانات الرجاء إعادة الادخال");
+                }
+
+                var userId = this.help.GetCurrentUser(HttpContext);
+
+                //if (userId <= 0)
+                //{
+                //    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
+                //}
+
+                var shoortNumber = new ShoortNumber();
+
+                shoortNumber = (from p in db.ShoortNumber where p.Id == id select p).SingleOrDefault();
+
+                if(shoortNumber==null)
+                {
+                    return BadRequest("لم يتم العتور علي الباقة الرجاء إعادة المحاولة");
+                }
+
+                //if state 1 you need to add bc the packege is active 
+                //if state 2 you need to set as new packege 
+
+
+                if(shoortNumber.State==1)
+                {
+                    shoortNumber.Amount += ReloadserviceInfo.amount;
+                    shoortNumber.Smscount += ReloadserviceInfo.countMassage;
+                }else if (shoortNumber.State == 2)
+                {
+                    shoortNumber.State = 1;//its active now !!
+                    shoortNumber.Amount = ReloadserviceInfo.amount;
+                    shoortNumber.Smscount = ReloadserviceInfo.countMassage;
+                }
+
+                shoortNumber.To = ReloadserviceInfo.to;
+
+                db.ShoortNumber.Update(shoortNumber);
+
+
+                var shoortNumberActions = new ShoortNumberActions();
+
+                shoortNumberActions.ShoortNumberId = id;
+                shoortNumberActions.ActionType = 2;
+                shoortNumberActions.ActionDescription = "إعادة شحن الباقة";
+                shoortNumberActions.Smscount = ReloadserviceInfo.countMassage;
+                shoortNumberActions.Amount = ReloadserviceInfo.amount;
+                shoortNumberActions.From = ReloadserviceInfo.to;
+                shoortNumberActions.To = ReloadserviceInfo.to;
+                shoortNumberActions.CreatedBy = userId;
+                shoortNumberActions.CreatecdOn = DateTime.Now;
+
+                db.ShoortNumberActions.Add(shoortNumberActions);
+
+
+                db.SaveChanges();
+
+                return Ok("تمت عملية إعادة الشحن بنجاح");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPost("deleteCustmor")]
+        public IActionResult deleteCustmor(long id)
+        {
+            try
+            {
+
+                if ( id== 0)
+                {
+                    return BadRequest("حذث خطأ في ارسال البيانات الرجاء إعادة الادخال");
+                }
+
+                var userId = this.help.GetCurrentUser(HttpContext);
+
+                //if (userId <= 0)
+                //{
+                //    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
+                //}
+
+                var custmor = new Cutomers();
+
+                custmor = (from p in db.Cutomers where p.CustomerId == id select p).SingleOrDefault();
+
+                if (custmor == null)
+                {
+                    return BadRequest("لم يتم العتور علي العميل الرجاء إعادة المحاولة");
+                }
+
+                custmor.Status = 9;
+
+                db.Cutomers.Update(custmor);
+
+                db.SaveChanges();
+
+                return Ok("تمت عملية حدف العميل بنجاح");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
     
 }

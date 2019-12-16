@@ -10,6 +10,9 @@ import Home from './Components/Home/Home.vue';
 import Courses from './Components/Courses/Courses.vue';
 import Packages from './Components/Packages/Packages.vue';
 import Customers from './Components/Customers/Customers.vue';
+import Users from './Components/Users/Users.vue';
+import EditUsersProfile from './Components/Users/EditUsersProfile/EditUsersProfile.vue';
+import ChangePassword from './Components/Users/ChangePassword/ChangePassword.vue';
 /*import Students from './Components/Students/Students.vue';
 import Companies from './Components/Companies/Companies.vue';
 import Packages from './Components/Packages/Packages.vue';
@@ -53,6 +56,9 @@ const router = new VueRouter({
         { path: '/Courses', component: Courses },
         { path: '/home', component: Home },
         { path: '/Packages', component: Packages },
+        { path: '/Users', component: Users },
+        { path: '/EditUsersProfile', component: EditUsersProfile },
+        { path: '/ChangePassword', component: ChangePassword },  
         { path: '/Customers', component: Customers },
         ]
 

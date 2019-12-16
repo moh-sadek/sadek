@@ -59,7 +59,7 @@
         <ul class="nav" style="padding:0px">
             <li @click="active = 1" :class="{'active':1 == active}">
                 <a href="#" @click.prevent="href('/home')">
-                    <i class="nc-icon nc-bank"></i>
+                    <i class="nc-icon nc-layout-11"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
@@ -74,6 +74,13 @@
                 <a href="#" @click.prevent="href('/Customers')">
                     <i class="nc-icon nc-single-02"></i>
                     <p>Customers</p>
+                </a>
+            </li>
+
+            <li @click="active = 4" :class="{'active':4 == active}">
+                <a href="#" @click.prevent="href('/Users')">
+                    <i class="nc-icon nc-badge"></i>
+                    <p>Users</p>
                 </a>
             </li>
 

@@ -105,15 +105,22 @@ namespace Management.Models1
             {
                 entity.HasKey(e => e.UserId);
 
-                entity.Property(e => e.CreatedOn).HasColumnType("nchar(10)");
+                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.Email).HasColumnType("nchar(10)");
+                entity.Property(e => e.BirthDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Image).HasColumnType("binary(50)");
 
                 entity.Property(e => e.Name).HasMaxLength(50);
 
-                entity.Property(e => e.Password).HasColumnType("nchar(10)");
+                entity.Property(e => e.LoginName).HasMaxLength(50);
+
+                entity.Property(e => e.Email).HasMaxLength(50);
+
+                entity.Property(e => e.Phone).HasMaxLength(50);
+
+                entity.Property(e => e.Password).HasMaxLength(250);
+
             });
         }
     }
