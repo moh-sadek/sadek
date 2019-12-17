@@ -1,34 +1,34 @@
 ﻿export default {
-    name: 'AddUser',    
-    created() {        
-        //this.SelectHospital();
+    name: 'AddUser',
+    created() {
+        this.SelectHospital();
 
-        //var Father;
-        //var familyname;
-        //if (this.AllData["0"].arabicfathername != '') {
-        //    Father = ' ' + this.AllData["0"].arabicfathername;
-        //}
+        var Father;
+        var familyname;
+        if (this.AllData["0"].arabicfathername != '') {
+            Father = ' ' + this.AllData["0"].arabicfathername;
+        }
 
-        //if (this.AllData["0"].arabicfamilyname != '') {
-        //    familyname = ' ' + this.AllData["0"].arabicfamilyname
-        //}
-        ////console.log(this.$parent.persmissonLable);    
-        //console.log(this.$parent.PermissionModale);
-        //if (this.$parent.PermissionModale == 4) {
-        //    this.form.SearchByRegistryNumber = true;
-        //}
-       
-        //this.form.FullName = this.AllData["0"].arabicfirstname + Father + familyname;
-        //this.form.DateOfBirth = this.AllData["0"].dateOfBirth;
-        //this.form.PersonId = this.AllData["0"].personId;
+        if (this.AllData["0"].arabicfamilyname != '') {
+            familyname = ' ' + this.AllData["0"].arabicfamilyname
+        }
+        //console.log(this.$parent.persmissonLable);    
+        console.log(this.$parent.PermissionModale);
+        if (this.$parent.PermissionModale == 4) {
+            this.form.SearchByRegistryNumber = true;
+        }
+
+        this.form.FullName = this.AllData["0"].arabicfirstname + Father + familyname;
+        this.form.DateOfBirth = this.AllData["0"].dateOfBirth;
+        this.form.PersonId = this.AllData["0"].personId;
 
 
-        //if (this.AllData["0"].gender == 'M') {
+        if (this.AllData["0"].gender == 'M') {
 
-        //    this.form.Gender = 1;
-        //} else {
-        //    this.form.Gender = 2;
-        //}
+            this.form.Gender = 1;
+        } else {
+            this.form.Gender = 2;
+        }
 
     },
     data() {
@@ -43,10 +43,10 @@
                 FullName: '',
                 UserType: '',
                 NationalId: '',
-                PersonId:'',
+                PersonId: '',
                 Email: '',
                 Gender: '',
-                Phone:'',
+                Phone: '',
                 DateOfBirth: '',
                 Status: 0,
                 OfficeId: '',
@@ -58,13 +58,13 @@
                 SearchQouta: 0,
                 DeathInfoPrivilege: false,
                 DeathEntryPrivilege: false,
-                HospitalId:'',
-            },  
+                HospitalId: '',
+            },
             AllData: this.$parent.AllData,
             ConfimPassword: '',
             NID: this.$parent.NID,
             PermissionLable: this.$parent.persmissonLable,
-            Hospital:[]
+            Hospital: []
         };
     },
     methods: {
@@ -87,9 +87,9 @@
             this.$parent.GetUsers();
             this.$parent.NID = '';
             this.$parent.PermissionModale = '';
-            this.$parent.state = 0;       
+            this.$parent.state = 0;
         },
-   
+
 
         validEmail: function (email) {
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -104,9 +104,9 @@
             return loginArabic.test(FullName);
         },
 
-       validPassword: function (Password) {
-          
-           var PasswordT = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]){8,}.*$/;
+        validPassword: function (Password) {
+
+            var PasswordT = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]){8,}.*$/;
 
             return PasswordT.test(Password);
         },
@@ -116,17 +116,17 @@
 
             return mobileRegex.test(Phone);
         },
-       
 
-        Save() {   
+
+        Save() {
             this.$blockUI.Start();
             this.form.UserType = this.$parent.PermissionModale;
             if (this.form.UserType == 3) {
                 this.$blockUI.Stop();
-                this.form.OfficeId = this.$parent.Office;                        
+                this.form.OfficeId = this.$parent.Office;
             }
             this.form.NationalId = this.$parent.NID;
-            
+
             if (!this.form.LoginName) {
                 this.$blockUI.Stop();
                 this.$message({
@@ -174,8 +174,8 @@
                     message: 'الرجاء إدخال البريد الإلكتروني بطريقه صحيحه '
                 });
                 return;
-}
-            
+            }
+
             if (!this.form.Gender) {
                 this.$blockUI.Stop();
                 this.$message({
@@ -243,7 +243,7 @@
                 });
                 return;
             }
-            
+
 
             if (this.form.Password != this.ConfimPassword) {
                 this.$blockUI.Stop();
@@ -254,26 +254,7 @@
                 return;
             }
 
-            if (this.$parent.PermissionModale == 5) {
-                if (!this.form.SearchDeathsQouta) {
-                    this.$blockUI.Stop();
-                    this.$message({
-                        type: 'error',
-                        message: 'الرجاء ادخال العدد المتاح للبحت'
-                    });
-                    return;
-                }
-            }
-            if (this.$parent.PermissionModale != 5) {
-                if (!this.form.SearchQouta) {
-                    this.$blockUI.Stop();
-                    this.$message({
-                        type: 'error',
-                        message: 'الرجاء ادخال العدد المتاح للبحت'
-                    });
-                    return;
-                }
-            }
+            
             this.$http.AddUser(this.form)
                 .then(response => {
                     this.$parent.state = 0;
@@ -281,12 +262,8 @@
                         type: 'info',
                         message: response.data
                     });
-                    this.$parent.GetUsers();
-                    this.$parent.NID = '';
+                    this.$parent.getUser();
                     this.$blockUI.Stop();
-                    // this line of code is not correct , the admin need to contnue entering the users in the same office of level 
-                    // dont refresh it 
-                   // this.$parent.PermissionModale = '';
                 })
                 .catch((err) => {
                     this.$blockUI.Stop();
@@ -300,5 +277,5 @@
 
 
 
-    }    
+    }
 }

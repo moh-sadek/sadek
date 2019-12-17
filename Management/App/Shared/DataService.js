@@ -33,6 +33,11 @@ export default {
         return axios.get(baseUrl + `/Admin/Packeges/GetCodes`);
     },
 
+    getCustomersPhone() {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.get(baseUrl + `/Admin/Customer/getCustomersPhone`);
+    },
+
     AddCustomor(customersInfo) {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
         return axios.post(baseUrl + `/Admin/Customer/Add`, customersInfo);//change path
@@ -90,6 +95,30 @@ export default {
         return axios.get(baseUrl + `/Admin/User/getUser?pageNo=${pageNo}&pagesize=${pageSize}`);
     },
 
+    AddUser(User) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.post(baseUrl + '/Admin/User/AddUser', User);
+    },
+
+    EditUser(User) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.post(baseUrl + '/Admin/User/EditUser', User);
+    },
+
+    DeactivateUser(UserId) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.post(baseUrl + `/admin/User/${UserId}/Deactivate`);
+    },
+
+    ActivateUser(UserId) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.post(baseUrl + `/admin/User/${UserId}/Activate`);
+    },
+
+    delteUser(UserId) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.post(baseUrl + `/admin/User/${UserId}/delteUser`);
+    },
 
 
 }

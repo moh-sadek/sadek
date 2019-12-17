@@ -68,7 +68,7 @@ namespace Management.Controllers
                                        SMSCount = p.Smscount,
                                        UsageSMS = p.UsageSms,
                                        To = p.To,
-                                       Status = DateTime.Now > p.To ? 1 :0,
+                                       State = p.State,
                                        CustomerId = p.CustomerId,
                                        Id=p.Id,
                                    }).Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();

@@ -38,7 +38,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" @click.prevent="href('/EditUsersProfile')">
                                 <span class="sidebar-mini-icon">EP</span>
                                 <span class="sidebar-normal">Edit Profile</span>
                             </a>
@@ -66,7 +66,7 @@
             <li @click="active = 2" :class="{'active':2 == active}">
                 <a href="#" @click.prevent="href('/Packages')">
                     <i class="nc-icon nc-bank"></i>
-                    <p>Packages</p>
+                    <p>Subscriptions</p>
                 </a>
             </li>
 

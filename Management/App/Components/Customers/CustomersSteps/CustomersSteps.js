@@ -5,7 +5,7 @@ export default {
 
         
         this.custmor = this.$parent.selectedCustmor;
-        this.serviceInfo.customerId = this.custmor.customerId;
+        this.serviceInfo.custmorId = this.custmor.customerId;
         this.ReloadserviceInfo.customerId = this.custmor.customerId;
         this.customersInfo.name = this.custmor.fullName;
         this.customersInfo.phone = this.custmor.phone;
@@ -155,8 +155,6 @@ export default {
             }
         },
 
-
-
         allowEdit() {
             this.EditInfo = 1;
         },
@@ -167,7 +165,6 @@ export default {
 
         addPackage()
         {
-
             //this.to=this.from;
             this.$http.AddCustomorPackage(this.serviceInfo)
                 .then(response => {
@@ -177,7 +174,6 @@ export default {
                         message: response.data
                     });
                     this.$blockUI.Stop();
-                    this.ChangDivStyle(2)
                 })
                 .catch((err) => {
                     this.$blockUI.Stop();
@@ -239,7 +235,6 @@ export default {
                     });
                 });
         },
-
 
         getPakegeByState(pageNo, state) {
             this.ActivePageNo = pageNo;
@@ -312,10 +307,6 @@ export default {
                 });
         },
 
-
-
-
-
         cansel() {
             this.$parent.getCustomers();
             this.$parent.state = 0;
@@ -386,9 +377,6 @@ export default {
             });
         },
 
-
-
-
         //method 
         //1 add pakege
         //2 edit customr info
@@ -413,7 +401,6 @@ export default {
 
 
         },
-
 
         resetForm(formName) {
             this.$refs[formName].resetFields();

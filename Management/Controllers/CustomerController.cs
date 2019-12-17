@@ -150,9 +150,10 @@ namespace Management.Controllers
                 ShoortNumber.Service = serviceInfo.serviceName;
                 //ShoortNumber.Description = serviceInfo.discriptions;
                 ShoortNumber.Description = "d";
-                ShoortNumber.CreatedBy = 0;//user dontforget
+                ShoortNumber.CreatedBy = userId;//user dontforget
                 ShoortNumber.CreatedOn = DateTime.Now;
                 ShoortNumber.CustomerId = serviceInfo.custmorId;
+                ShoortNumber.State = 1;
 
                 db.ShoortNumber.Add(ShoortNumber);
 
@@ -447,6 +448,7 @@ namespace Management.Controllers
                     shoortNumber.State = 1;//its active now !!
                     shoortNumber.Amount = ReloadserviceInfo.amount;
                     shoortNumber.Smscount = ReloadserviceInfo.countMassage;
+                    shoortNumber.UsageSms =0;
                 }
 
                 shoortNumber.To = ReloadserviceInfo.to;
@@ -513,6 +515,31 @@ namespace Management.Controllers
                 db.SaveChanges();
 
                 return Ok("تمت عملية حدف العميل بنجاح");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet("getCustomersPhone")]
+        public IActionResult getCustomersPhone()//type of id 
+        {
+            try
+            {
+                IQueryable<Cutomers> CodesInfo = from p in db.Cutomers where p.Status!=9 select p;
+
+
+                var CodesInfos = (from p in CodesInfo
+                                  orderby p.CreatedOn descending
+                                  select new
+                                  {
+                                      CustomerId = p.CustomerId,
+                                      FullName = p.FullName,
+                                      Phone=p.Phone,
+                                  }).ToList();
+
+                return Ok(new { CustomersPhone = CodesInfos });
             }
             catch (Exception e)
             {

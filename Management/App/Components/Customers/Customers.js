@@ -12,33 +12,16 @@ export default {
             },
             {
                 id: 2,
-                name: 'رقم الخدمة'
-            },{
-                id: 3,
-                name: "الحالة"
+                name: 'رقم الهاتف'
             }
 
 
         ];
 
-        this.pakegeStatus = [
-            {
-                id: 1,
-                name: "Active"
-            },
-            {
-                id: 2,
-                name: 'Not Active'
-            }, {
-                id: 3,
-                name: "Done"
-            }
-
-
-        ];
 
         this.getCustomers(1,0);
         this.getCodes();
+        this.getCustomersPhone();
         
 
         //console.log(this.$route.params.SuperPackageId)
@@ -85,7 +68,10 @@ export default {
             pageSize: 10,
             pages: 0,  
             Courses: [],
-            state:0,
+            state: 0,
+
+            custmorPhone:[],
+            PhoneSelected:[],
           
         };
     },
@@ -110,6 +96,21 @@ export default {
                     this.$blockUI.Stop();
                     console.error(err);
                     this.pages = 0;
+                });
+
+        },
+
+        getCustomersPhone() {
+
+            this.$blockUI.Start();
+            this.$http.getCustomersPhone()//this.$parent.SuperPackageParent.superPackageId
+                .then(response => {
+                    this.$blockUI.Stop();
+                    this.custmorPhone = response.data.customersPhone;
+                })
+                .catch((err) => {
+                    this.$blockUI.Stop();
+                    console.error(err);
                 });
 
         },

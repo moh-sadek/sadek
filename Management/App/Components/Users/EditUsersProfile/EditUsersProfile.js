@@ -2,7 +2,7 @@
 export default {
     name: 'EditUsersProfile',    
     created() {
-        this.CheckLoginStatus();
+        //this.CheckLoginStatus();
 
     },
     data() {  

@@ -11,7 +11,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">DataTables.net</h4>
+                        <h4 class="card-title"><i class="nc-icon nc-single-02" style="color:#ef8157;margin-left: 10px;" ></i>إدارة العملاء </h4>
                     </div>
                     <div class="card-body">
                         <div class="toolbar">
@@ -34,9 +34,9 @@
 
                                 <div class="col-md-3" v-if="SearchTypeSelected==1">
 
-                                    <el-select style="width: 100%;" filterable placeholder="إسم العميل" v-model="CoustmorSelected" @change="getPackeges(1,1,CoustmorSelected)">
+                                    <el-select style="width: 100%;" filterable placeholder="إسم العميل" v-model="PhoneSelected" @change="getCustomers(1,PhoneSelected);">
 
-                                        <el-option v-for="item in custmors"
+                                        <el-option v-for="item in custmorPhone"
                                                    :key="item.customerId"
                                                    :label="item.fullName"
                                                    :value="item.customerId">
@@ -47,30 +47,16 @@
 
                                 <div class="col-md-3" v-if="SearchTypeSelected==2">
 
-                                    <el-select style="width: 100%;" filterable placeholder="رقم الخدمة" v-model="CodeSelectd" @change="getPackeges(1,1,CodeSelectd)">
+                                    <el-select style="width: 100%;" filterable placeholder="رقم الهاتف" v-model="PhoneSelected" @change="getCustomers(1,PhoneSelected)">
 
-                                        <el-option v-for="item in codes"
-                                                   :key="item.id"
-                                                   :label="item.code"
-                                                   :value="item.id">
+                                        <el-option v-for="item in custmorPhone"
+                                                   :key="item.customerId"
+                                                   :label="item.phone"
+                                                   :value="item.customerId">
                                         </el-option>
 
                                     </el-select>
                                 </div>
-
-                                <div class="col-md-3" v-if="SearchTypeSelected==3">
-
-                                    <el-select style="width: 100%;" filterable placeholder="الحالة" v-model="pakegeStatusSelected">
-
-                                        <el-option v-for="item in pakegeStatus"
-                                                   :key="item.id"
-                                                   :label="item.name"
-                                                   :value="item.id">
-                                        </el-option>
-
-                                    </el-select>
-                                </div>
-
 
 
                             </div>

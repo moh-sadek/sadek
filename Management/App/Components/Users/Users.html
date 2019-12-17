@@ -1,12 +1,13 @@
 ﻿
 
     <div class="content" style="direction:rtl">
+        <add-Users v-if="state==1"></add-Users>
+        <edit-Users v-if="state==2"></edit-Users>
         <div class="row" v-if="state==0">
-            <add-Users v-if="state==1"></add-Users>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">إدارة المستخدمين</h4>
+                        <h4 class="card-title"><i class="nc-icon nc-badge" style="color:#ef8157;margin-left: 10px;"></i>إدارة المستخدمين</h4>
                     </div>
                     <div class="card-body">
                         <div class="toolbar">
@@ -15,7 +16,7 @@
                             <br />
 
                             <div class="disabled-sorting text-right" style="margin-top:-49px">
-                                <el-button class="btn btn-primary" type="primary" @click="addCustomur">إضافة مستخدم</el-button>
+                                <el-button class="btn btn-primary" type="primary" @click="addUser">إضافة مستخدم</el-button>
                             </div>
 
 
@@ -44,32 +45,36 @@
                                     <td>{{item.loginName}}</td>
                                     <td>{{item.phone}}</td>
                                     <td>{{item.birthDate | moment}}</td>
-                                    <td>{{item.image}}</td>
+                                    <td><a :href="'http://localhost:443/Api/Admin/User/' + item.userId + '/image'"><img :src="'http://localhost:443/Api/Admin/User/' + item.userId + '/image'" style="height: 80px; width:80px" /></a></td>
                                     <td>{{item.email}}</td>
 
                                     <td class="text-right">
 
-                                        <a title="عرض الصفجة الشخصية" href="#" class="btn btn-info btn-link btn-icon btn-sm like" @click.prevent="viewCustmor(item)">
-                                            <i class="fa fa-user" style="font-size:13px"></i>
-                                        </a>
-
-                                        <a title="تعديل البيانات" href="#" class="btn btn-warning btn-link btn-icon btn-sm edit" @click.prevent="delteCustmor(item)">
+                                        <a title="تعديل البيانات" href="#" class="btn btn-warning btn-link btn-icon btn-sm edit" @click.prevent="EditUser(item)">
                                             <i class="fa fa-edit" style="font-size:13px"></i>
                                         </a>
 
                                         <!--
-                                <a href="#" v-if="item.state=1">
-                                    <i class="fa fa-lock" title="ايقاف"></i>
-                                </a>
-                                <a href="#" v-if="item.state=3">
-                                    <i class="fa fa-unlock" title="تفعيل"></i>
-                                </a>-->
+    <a href="#" v-if="item.state=1">
+        <i class="fa fa-lock" title="ايقاف"></i>
+    </a>
+    <a href="#" v-if="item.state=3">
+        <i class="fa fa-unlock" title="تفعيل"></i>
+    </a>-->
 
-                                        <a title="ايقاف" href="#" class="btn btn-info btn-link btn-icon btn-sm like" @click.prevent="viewCustmor(item)">
+                                        <a title="ايقاف" href="#" class="btn btn-info btn-link btn-icon btn-sm like"
+                                           @click.prevent="DeactivateUser(item.userId)"
+                                           v-if="item.state==1">
                                             <i class="fa fa-lock" style="font-size:13px"></i>
                                         </a>
 
-                                        <a title="حدف المستخدم" href="#" class="btn btn-danger btn-link btn-icon btn-sm remove" @click.prevent="delteCustmor(item)">
+                                        <a title="تفعيل الحساب" href="#" class="btn btn-info btn-link btn-icon btn-sm like"
+                                           @click.prevent="ActivateUser(item.userId)"
+                                           v-if="item.state==2 || item.stat==0">
+                                            <i class="fa fa-unlock" style="font-size:13px"></i>
+                                        </a>
+
+                                        <a title="حدف المستخدم" href="#" class="btn btn-danger btn-link btn-icon btn-sm remove" @click.prevent="delteUser(item.userId)">
                                             <i class="fa fa-times" style="font-size:13px"></i>
                                         </a>
 

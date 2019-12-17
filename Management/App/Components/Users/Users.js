@@ -1,7 +1,6 @@
 ﻿import addUsers from './AddUsers/AddUsers.vue';
 import editUsers from './EditUsers/EditUsers.vue';
 import moment from 'moment';
-import CryptoJS from 'crypto-js';
 
 export default {
     name: 'Customers',
@@ -40,7 +39,6 @@ export default {
         ];
 
         this.getUser();
-        this.getCodes();
 
     },
     components: {
@@ -58,37 +56,13 @@ export default {
     },
     data() {
         return {
-            SearchType: [],
-            SearchTypeSelected: [],
-            Coustmors: [],
-            CoustmorSelected: [],
-
-            pakegeStatus: [],
-            pakegeStatusSelected: [],
-            packeges: [],
-            custmors: [],
-            codes: [],
-            CodeSelectd: [],
-
-            selectedCustmor: [],
-
-
-            CourseEdit: [],
-            SuperPackageParent: this.$parent.SuperPackageParent,
             pageNo: 1,
             pageSize: 10,
             pages: 0,
-            Courses: [],
             state: 0,
-
-
-
-
-
-
-
             users:[],
 
+            EditUsersObj: [],
         };
     },
     methods: {
@@ -116,59 +90,113 @@ export default {
 
         },
 
-        getCodes() {
-
-            this.$blockUI.Start();
-            this.$http.GetCodes()
-                .then(response => {
-                    this.$blockUI.Stop();
-                    this.codes = response.data.codes;
-                })
-                .catch((err) => {
-                    this.$blockUI.Stop();
-                    console.error(err);
-                    this.pages = 0;
-                });
-
-        },
-
-        addCustomur() {
+        addUser() {
             this.state = 1;
         },
 
-        viewCustmor(item) {
-            this.selectedCustmor = item;
+        EditUser(User) {
             this.state = 2;
+            this.EditUsersObj = User;
+
         },
 
+        DeactivateUser(UserId) {
 
-        delteCustmor(item) {
 
-
-            this.$confirm('سيؤدي ذلك إلى حدف العميل  . استمر؟', 'تـحذير', {
+            this.$confirm('سيؤدي ذلك إلى ايقاف تفعيل المستخدم  . استمر؟', 'تـحذير', {
                 confirmButtonText: 'نـعم',
                 cancelButtonText: 'لا',
                 type: 'warning'
             }).then(() => {
 
 
-                this.$http.deleteCustmor(item.customerId)
+                this.$http.DeactivateUser(UserId)
                     .then(response => {
+                        if (this.users.lenght === 1) {
+                            this.pageNo--;
+                            if (this.pageNo <= 0) {
+                                this.pageNo = 1;
+                            }
+                        }
                         this.$message({
                             type: 'info',
-                            message: response.data
+                            message: 'تم ايقاف التفعيل المستخدم بنجاح',
                         });
-                        this.$blockUI.Stop();
-                        this.getCustomers(1, 0);
+                        this.getUser();
                     })
                     .catch((err) => {
-                        this.$blockUI.Stop();
                         this.$message({
                             type: 'error',
                             message: err.response.data
                         });
                     });
             });
+        },
+
+        ActivateUser(UserId) {
+
+            this.$confirm('سيؤدي ذلك إلى تفعيل المستخدم  . استمر؟', 'تـحذير', {
+                confirmButtonText: 'نـعم',
+                cancelButtonText: 'لا',
+                type: 'warning'
+            }).then(() => {
+
+
+                this.$http.ActivateUser(UserId)
+                    .then(response => {
+                        if (this.users.lenght === 1) {
+                            this.pageNo--;
+                            if (this.pageNo <= 0) {
+                                this.pageNo = 1;
+                            }
+                        }
+                        this.$message({
+                            type: 'info',
+                            message: 'تم تفعيل المستخدم بنجاح',
+                        });
+                        this.getUser();
+                    })
+                    .catch((err) => {
+                        this.$message({
+                            type: 'error',
+                            message: err.response.data
+                        });
+                    });
+            });
+
+        },
+
+        delteUser(UserId) {
+
+            this.$confirm('سيؤدي ذلك إلى حدف المستخدم  . استمر؟', 'تـحذير', {
+                confirmButtonText: 'نـعم',
+                cancelButtonText: 'لا',
+                type: 'warning'
+            }).then(() => {
+
+
+                this.$http.delteUser(UserId)
+                    .then(response => {
+                        if (this.users.lenght === 1) {
+                            this.pageNo--;
+                            if (this.pageNo <= 0) {
+                                this.pageNo = 1;
+                            }
+                        }
+                        this.$message({
+                            type: 'info',
+                            message: 'تم حدف المستخدم بنجاح',
+                        });
+                        this.getUser();
+                    })
+                    .catch((err) => {
+                        this.$message({
+                            type: 'error',
+                            message: err.response.data
+                        });
+                    });
+            });
+
         },
     }
 }
