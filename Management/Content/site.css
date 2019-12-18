@@ -3,3 +3,13 @@
 @import "../Content/assets/css/bootstrap.min.rtl.css";
 @import "../Content/assets/css/paper-dashboard.rtl.css";
 @import "../Content/assets/demo/demo.rtl.css";
+@font-face {
+    font-family: 'DroidArabicKufiRegular';
+    src: url('fonts/DroidKufi-Regular.eot') format('embedded-opentype'), url('fonts/DroidKufi-Regular.woff') format('woff'), url('fonts/DroidKufi-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'DroidArabicKufiRegular';
+}
