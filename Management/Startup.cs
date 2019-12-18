@@ -20,7 +20,8 @@ using System.IO;
 //using Managegment.Models;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Authorization;
-using Management.Models1;
+using Management.Models;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace Managegment
 {
@@ -49,8 +50,17 @@ namespace Managegment
                     .AllowCredentials());
             });
 
-            services.AddMvc();
-          
+            var policy = new AuthorizationPolicyBuilder()
+                 //.RequireClaim("")
+              .RequireAuthenticatedUser()
+             
+              .Build();
+
+            services.AddMvc(opt =>
+            {
+                opt.Filters.Add(new AuthorizeFilter(policy));
+            });
+
 
             services.AddAuthentication(o =>
             {

@@ -2,20 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Management.Models1
+namespace Management.Models
 {
     public partial class VASContext : DbContext
     {
-
-        public VASContext()
-        {
-        }
-
-        public VASContext(DbContextOptions<VASContext> options)
-            : base(options)
-        {
-        }
-
         public virtual DbSet<Cutomers> Cutomers { get; set; }
         public virtual DbSet<SentSms> SentSms { get; set; }
         public virtual DbSet<ShoortNumber> ShoortNumber { get; set; }
@@ -30,6 +20,8 @@ namespace Management.Models1
                 optionsBuilder.UseSqlServer(@"server=guj-devdb-t01;database=VAS;uid=alm_nid;pwd=alm_nid;");
             }
         }
+
+        public VASContext(DbContextOptions<VASContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -71,11 +63,11 @@ namespace Management.Models1
 
                 entity.Property(e => e.Smscount).HasColumnName("SMSCount");
 
+                entity.Property(e => e.State).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.To).HasColumnType("datetime");
 
                 entity.Property(e => e.UsageSms).HasColumnName("UsageSMS");
-
-                entity.Property(e => e.State).HasColumnName("State");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.ShoortNumber)
@@ -105,22 +97,25 @@ namespace Management.Models1
             {
                 entity.HasKey(e => e.UserId);
 
-                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
-
                 entity.Property(e => e.BirthDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Image).HasColumnType("binary(50)");
-
-                entity.Property(e => e.Name).HasMaxLength(50);
-
-                entity.Property(e => e.LoginName).HasMaxLength(50);
+                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
                 entity.Property(e => e.Email).HasMaxLength(50);
 
-                entity.Property(e => e.Phone).HasMaxLength(50);
+                entity.Property(e => e.LoginName).HasMaxLength(50);
+
+                entity.Property(e => e.LoginTryAttemptDate).HasColumnType("datetime");
+
+                entity.Property(e => e.LastLoginOn).HasColumnType("datetime");
+
+                entity.Property(e => e.Name).HasMaxLength(50);
 
                 entity.Property(e => e.Password).HasMaxLength(250);
 
+                entity.Property(e => e.Phone).HasMaxLength(25);
+
+                entity.Property(e => e.State).HasDefaultValueSql("((0))");
             });
         }
     }
