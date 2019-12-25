@@ -55,8 +55,6 @@ namespace Management.Models
             {
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
-                entity.Property(e => e.Description).HasMaxLength(250);
-
                 entity.Property(e => e.From).HasColumnType("datetime");
 
                 entity.Property(e => e.Service).HasMaxLength(150);

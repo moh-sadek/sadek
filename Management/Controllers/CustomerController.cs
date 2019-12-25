@@ -77,10 +77,66 @@ namespace Management.Controllers
 
                 var userId = this.help.GetCurrentUser(HttpContext);
 
-                //if (userId <= 0)
-                //{
-                //    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
-                //}
+                if (userId <= 0)
+                {
+                    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
+                }
+
+
+
+                var Cutomers = new Cutomers();
+                var ShoortNumber = new ShoortNumber();
+
+                Cutomers.FullName = customer.name;
+                Cutomers.Phone = customer.phone;
+                Cutomers.BirthDate = customer.date;
+                Cutomers.CompanyName = customer.companyName;
+                Cutomers.Email = customer.email;
+                Cutomers.Status = 0;
+                Cutomers.CreatedBy = userId;
+                Cutomers.CreatedOn = DateTime.Now;
+                db.Cutomers.Add(Cutomers);
+
+                ShoortNumber.Code = customer.code;
+                ShoortNumber.Amount = customer.amount;
+                ShoortNumber.From = customer.from;
+                ShoortNumber.To = customer.to;
+                ShoortNumber.Smscount = customer.countMassage;
+                ShoortNumber.UsageSms = 0;
+                ShoortNumber.Service = customer.serviceName;
+                ShoortNumber.CreatedBy = userId;
+                ShoortNumber.CreatedOn = DateTime.Now;
+                ShoortNumber.CustomerId = Cutomers.CustomerId;
+
+                db.ShoortNumber.Add(ShoortNumber);
+
+                db.SaveChanges();
+
+                return Ok("لقد قمت بتسـجيل بيانات العميل بنــجاح");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPost("AddOldCustomor")]
+        public IActionResult AddOldCustomor([FromBody] CustomersObj customer)
+        {
+            try
+            {
+
+                if (customer == null)
+                {
+                    return BadRequest("حذث خطأ في ارسال البيانات الرجاء إعادة الادخال");
+                }
+
+                var userId = this.help.GetCurrentUser(HttpContext);
+
+                if (userId <= 0)
+                {
+                    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
+                }
 
                 var Cutomers = new Cutomers();
                 var ShoortNumber = new ShoortNumber();
@@ -100,10 +156,9 @@ namespace Management.Controllers
                 ShoortNumber.From = customer.from;
                 ShoortNumber.To = customer.to;
                 ShoortNumber.Smscount = customer.countMassage;
-                ShoortNumber.UsageSms = 0;
+                ShoortNumber.UsageSms = customer.countUseMassage;
                 ShoortNumber.Service = customer.serviceName;
-                ShoortNumber.Description = customer.discriptions;
-                ShoortNumber.CreatedBy = 0;//user dontforget
+                ShoortNumber.CreatedBy = userId;
                 ShoortNumber.CreatedOn = DateTime.Now;
                 ShoortNumber.CustomerId = Cutomers.CustomerId;
 
@@ -132,24 +187,82 @@ namespace Management.Controllers
 
                 var userId = this.help.GetCurrentUser(HttpContext);
 
-                //if (userId <= 0)
-                //{
-                //    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
-                //}
-                
+                if (userId <= 0)
+                {
+                    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
+                }
+
+                var shortNumbersCode = (from p in db.ShoortNumber where p.Code == serviceInfo.code select p).SingleOrDefault();
+
+                if (shortNumbersCode != null)
+                {
+                    return BadRequest("رقم الخدمة موجود مسبقا الرجاء إعادة الإدخال");
+                }
+
+                if (serviceInfo.from>= serviceInfo.to)
+                {
+                    return BadRequest("خطأ في الإدخال تاريخ البداية أصغر من تاريخ النهاية ");
+                }
+
+
                 var ShoortNumber = new ShoortNumber();
                 
 
                 ShoortNumber.Code = serviceInfo.code;
                 ShoortNumber.Amount = serviceInfo.amount;
                 ShoortNumber.From = serviceInfo.from;
-                //ShoortNumber.To = package.to;
+                ShoortNumber.To = serviceInfo.to;
                 ShoortNumber.To = DateTime.Now; 
                 ShoortNumber.Smscount = serviceInfo.countMassage;
                 ShoortNumber.UsageSms = 0;
                 ShoortNumber.Service = serviceInfo.serviceName;
+                ShoortNumber.CreatedBy = userId;
+                ShoortNumber.CreatedOn = DateTime.Now;
+                ShoortNumber.CustomerId = serviceInfo.custmorId;
+                ShoortNumber.State = 1;
+
+                db.ShoortNumber.Add(ShoortNumber);
+
+                db.SaveChanges();
+
+                return Ok("لقد قمت بتسـجيل بيانات الخدمة بنــجاح");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPost("AddOldPackage")]
+        public IActionResult AddOldPackage([FromBody] PackegeObj serviceInfo)
+        {
+            try
+            {
+
+                if (serviceInfo == null)
+                {
+                    return BadRequest("حذث خطأ في ارسال البيانات الرجاء إعادة الادخال");
+                }
+
+                var userId = this.help.GetCurrentUser(HttpContext);
+
+                //if (userId <= 0)
+                //{
+                //    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
+                //}
+
+                var ShoortNumber = new ShoortNumber();
+
+
+                ShoortNumber.Code = serviceInfo.code;
+                ShoortNumber.Amount = serviceInfo.amount;
+                ShoortNumber.From = serviceInfo.from;
+                ShoortNumber.UsageSms = serviceInfo.countUseMassage;
+                //ShoortNumber.To = package.to;
+                ShoortNumber.To = DateTime.Now;
+                ShoortNumber.Smscount = serviceInfo.countMassage;
+                ShoortNumber.Service = serviceInfo.serviceName;
                 //ShoortNumber.Description = serviceInfo.discriptions;
-                ShoortNumber.Description = "d";
                 ShoortNumber.CreatedBy = userId;//user dontforget
                 ShoortNumber.CreatedOn = DateTime.Now;
                 ShoortNumber.CustomerId = serviceInfo.custmorId;
@@ -337,7 +450,7 @@ namespace Management.Controllers
                 var Action = new ShoortNumberActions();
                 Action.ShoortNumberId = id;
                 Action.ActionType = 3;
-                Action.ActionDescription = disc;
+                Action.ActionDescription ="إيقاف الباقة - "+ disc;
                 Action.Amount = 0;
                 Action.Smscount = 0;
                 Action.CreatedBy = userId;
@@ -421,10 +534,10 @@ namespace Management.Controllers
 
                 var userId = this.help.GetCurrentUser(HttpContext);
 
-                //if (userId <= 0)
-                //{
-                //    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
-                //}
+                if (userId <= 0)
+                {
+                    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
+                }
 
                 var shoortNumber = new ShoortNumber();
 
@@ -435,23 +548,31 @@ namespace Management.Controllers
                     return BadRequest("لم يتم العتور علي الباقة الرجاء إعادة المحاولة");
                 }
 
-                //if state 1 you need to add bc the packege is active 
-                //if state 2 you need to set as new packege 
+                if(ReloadserviceInfo.to<=DateTime.Now)
+                {
+                    return BadRequest("لايمكن التجديد لتاريخ قديم");
+                }
 
+                //if state 1 you need to add becuse the packege is active 
+                //if state 2 you need to set as new packege 
 
                 if(shoortNumber.State==1)
                 {
                     shoortNumber.Amount += ReloadserviceInfo.amount;
                     shoortNumber.Smscount += ReloadserviceInfo.countMassage;
-                }else if (shoortNumber.State == 2)
+                    shoortNumber.To = ReloadserviceInfo.to;
+                }
+                else if (shoortNumber.State == 2)
                 {
                     shoortNumber.State = 1;//its active now !!
                     shoortNumber.Amount = ReloadserviceInfo.amount;
                     shoortNumber.Smscount = ReloadserviceInfo.countMassage;
+                    shoortNumber.From = ReloadserviceInfo.from;
+                    shoortNumber.To = ReloadserviceInfo.to;
                     shoortNumber.UsageSms =0;
                 }
 
-                shoortNumber.To = ReloadserviceInfo.to;
+                
 
                 db.ShoortNumber.Update(shoortNumber);
 

@@ -4,27 +4,23 @@
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
         -->
     <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-            <!--<div class="logo-image-small">
-                <img src="../../../Content/assets/img/logo-small.png">
-            </div>-->
+        <a href="" class="simple-text logo-mini">
+            
         </a>
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-            VAS | System
-            <!--<div class="logo-image-big">
-              <img src="../assets/img/logo-big.png">
-            </div>-->
+        <a href="" class="simple-text logo-normal">
+            VAS | System 
         </a>
+
     </div>
     <div class="sidebar-wrapper">
         <div class="user">
             <div class="photo">
-                <img src="../../../../Content/assets/img/faces/ayo-ogunseinde-2.jpg" />
+                <img :src="'http://localhost:4810/Api/Admin/User/' + loginDetails.userId + '/image'" />
             </div>
             <div class="info">
                 <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                     <span>
-                        Chet Faker
+                        {{loginDetails.fullName.slice(0,20)}}
                         <b class="caret"></b>
                     </span>
                 </a>
@@ -32,21 +28,15 @@
                 <div class="collapse" id="collapseExample">
                     <ul class="nav">
                         <li>
-                            <a href="#">
-                                <span class="sidebar-mini-icon">MP</span>
-                                <span class="sidebar-normal">My Profile</span>
-                            </a>
-                        </li>
-                        <li>
                             <a href="#" @click.prevent="href('/EditUsersProfile')">
-                                <span class="sidebar-mini-icon">EP</span>
-                                <span class="sidebar-normal">Edit Profile</span>
+                                <span class="sidebar-mini-icon">MP</span>
+                                <span class="sidebar-normal">الصفحة الشخصية</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <span class="sidebar-mini-icon">S</span>
-                                <span class="sidebar-normal">Settings</span>
+                            <a href="#" @click.prevent="href('/ChangePassword')">
+                                <span class="sidebar-mini-icon">CP</span>
+                                <span class="sidebar-normal">تغير كلمة المرور</span>
                             </a>
                         </li>
                     </ul>
@@ -60,27 +50,69 @@
             <li @click="active = 1" :class="{'active':1 == active}">
                 <a href="#" @click.prevent="href('/home')">
                     <i class="nc-icon nc-layout-11"></i>
-                    <p>Dashboard</p>
+                    <p>الصفحة الرئيسية</p>
                 </a>
             </li>
-            <li @click="active = 2" :class="{'active':2 == active}">
-                <a href="#" @click.prevent="href('/Packages')">
+
+
+            <li :class="{'active':3 == active,'active':2 == active}">
+                <!--this line need to some ending so far as wall -->
+                <a data-toggle="collapse" href="#pagesExamples">
                     <i class="nc-icon nc-bank"></i>
-                    <p>Subscriptions</p>
+                    <p>
+                        إدارة الإشتراكات
+                        <b class="caret"></b>
+                    </p>
                 </a>
+                <div class="collapse " id="pagesExamples">
+                    <ul class="nav" style="padding:0px">
+                        <li @click="active = 2" :class="{'active':2 == active}">
+                            <a href="#" @click.prevent="href('/Packages')">
+                                <i class="nc-icon nc-layout-11" style="font-size:10px"></i>
+                                <span class="sidebar-normal"> عرض الإشتراكات </span>
+                            </a>
+                        </li>
+                        <li @click="active = 3" :class="{'active':3 == active}">
+                            <a href="#" @click.prevent="href('/AddPackage')">
+                                <i class="nc-icon nc-layout-11" style="font-size:10px"></i>
+                                <span class="sidebar-normal"> إشتراك جديد </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
 
-            <li @click="active = 3" :class="{'active':3 == active}">
-                <a href="#" @click.prevent="href('/Customers')">
+            <li :class="{'active':4 == active,'active':4 == active}" >
+                <a data-toggle="collapse" href="#componentsExamples">
                     <i class="nc-icon nc-single-02"></i>
-                    <p>Customers</p>
+                    <p>
+                        إدارة العملاء
+                        <b class="caret"></b>
+                    </p>
                 </a>
+                <div class="collapse " id="componentsExamples">
+                    <ul class="nav" style="padding:0px">
+                        <li @click="active = 4" :class="{'active':4 == active}">
+                            <a href="#" @click.prevent="href('/Customers')">
+                                <i class="nc-icon nc-single-02" style="font-size:10px"></i>
+                                <span class="sidebar-normal"> عرض العملاء </span>
+                            </a>
+                        </li>
+                        <li @click="active = 5" :class="{'active':5 == active}">
+                            <a href="#" @click.prevent="href('/AddCustomers')">
+                                <i class="nc-icon nc-single-02" style="font-size:10px"></i>
+                                <span class="sidebar-normal"> إضافة عميل </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
 
-            <li @click="active = 4" :class="{'active':4 == active}">
+
+            <li @click="active = 6" :class="{'active':6 == active}">
                 <a href="#" @click.prevent="href('/Users')">
                     <i class="nc-icon nc-badge"></i>
-                    <p>Users</p>
+                    <p>إدارة المستخدمين</p>
                 </a>
             </li>
 

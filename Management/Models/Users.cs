@@ -17,6 +17,7 @@ namespace Management.Models
         public string Phone { get; set; }
         public DateTime? BirthDate { get; set; }
         public short? State { get; set; }
+        public short? Gender { get; set; }
         public DateTime? LoginTryAttemptDate { get; set; }
         public short? LoginTryAttempts { get; set; }
     }

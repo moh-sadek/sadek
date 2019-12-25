@@ -18,7 +18,6 @@ namespace Management.Models
         public int? Smscount { get; set; }
         public int? UsageSms { get; set; }
         public string Service { get; set; }
-        public string Description { get; set; }
         public DateTime? CreatedOn { get; set; }
         public long? CreatedBy { get; set; }
         public long? CustomerId { get; set; }

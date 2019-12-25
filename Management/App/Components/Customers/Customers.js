@@ -77,8 +77,6 @@ export default {
     },
     methods: {
 
-        
-
         getCustomers(pageNo,id) {
             this.pageNo = pageNo;
             if (this.pageNo === undefined) {

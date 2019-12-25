@@ -28,7 +28,6 @@
       
         Save() {
 
-
             if (!this.form.Password) {
                 this.$message({
                     type: 'error',
@@ -74,6 +73,9 @@
                 });
                 return;
             }
+
+            debugger
+            
             this.$http.ChangePassword(this.form)
                 .then(response => {
                     this.form.NewPassword = '';
@@ -81,7 +83,7 @@
                     this.form.Password = '';
                     this.$message({
                         type: 'info',
-                        message: 'تم تغير بنجاح',
+                        message: 'تم تغير كلمة المرور بنجاح',
                     });
                 })
                 .catch((err) => {

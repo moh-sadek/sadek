@@ -43,15 +43,24 @@ export default {
         return axios.post(baseUrl + `/Admin/Customer/Add`, customersInfo);//change path
     },
 
+    AddOldCustomor(customersInfo) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.post(baseUrl + `/Admin/Customer/AddOldCustomor`, customersInfo);//change path
+    },
+
     GetCustomersInfo(pageNo, pageSize,id) {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
         return axios.get(baseUrl + `/Admin/Customer/GetCustomers?pageNo=${pageNo}&pagesize=${pageSize}&id=${id}`);
     },
 
     AddCustomorPackage(serviceInfo) {
-        debugger
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
         return axios.post(baseUrl + `/Admin/Customer/AddPackage`, serviceInfo);//change path
+    },
+
+    AddOldPackage(serviceInfo) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.post(baseUrl + `/Admin/Customer/AddOldPackage`, serviceInfo);//change path
     },
 
     EditCustomorInfo(customersInfo) {
@@ -118,6 +127,26 @@ export default {
     delteUser(UserId) {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
         return axios.post(baseUrl + `/admin/User/${UserId}/delteUser`);
+    },
+
+    UploadImage(obj) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.post(baseUrl + '/Admin/User/UploadImage', obj);
+    },
+
+    EditUsersProfile(User) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+
+        return axios.post(baseUrl + '/Admin/User/EditUsersProfile', User);
+    },
+
+    ChangePassword(userPassword) {
+        return axios.post(`/Security/ChangePassword`, userPassword);
+    },
+
+    getPakegesInfo() {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.get(baseUrl + `/Admin/Packeges/getPakegesInfo`);
     },
 
 

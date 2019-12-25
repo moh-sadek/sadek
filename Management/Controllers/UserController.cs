@@ -139,6 +139,8 @@ namespace Management.Controllers
                 cUser.BirthDate = user.DateOfBirth;
                 cUser.CreatedBy = userId;
                 cUser.CreatedOn = DateTime.Now;
+                cUser.Gender = (short)user.Gender;
+                cUser.LoginTryAttempts = 0;
                 cUser.Password = Security.ComputeHash(user.Password, HashAlgorithms.SHA512, null);
                 if (user.Photo == null)
                 {
@@ -330,6 +332,133 @@ namespace Management.Controllers
                 User.State = 9;
                 db.SaveChanges();
                 return Ok("تم العمليه بنجاح");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet("{UserId}/image")]
+        public IActionResult GetUserImage(long UserId)
+        {
+            try
+            {
+                var UserImage = (from p in db.Users
+                                 where p.UserId == UserId
+                                 select p.Image).SingleOrDefault();
+
+                if (UserImage == null)
+                {
+                    return NotFound("المستخدم غير موجــود");
+                }
+
+                return File(UserImage, "image/jpeg");
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPost("UploadImage")]
+        public IActionResult UploadImage([FromBody] UsersObject user)
+        {
+            var userId = this.help.GetCurrentUser(HttpContext);
+
+            if (userId <= 0 && userId == user.UserId)
+            {
+                return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
+            }
+            var Users = (from p in db.Users
+                         where p.UserId == user.UserId
+                         && (p.State == 1 || p.State == 2)
+                         select p).SingleOrDefault();
+
+            if (Users == null)
+            {
+                return BadRequest("عفوا هدا المستخدم غير موجود");
+            }
+
+            Users.Image = Convert.FromBase64String(user.Photo.Substring(user.Photo.IndexOf(",") + 1));
+            //Users.ModifiedBy = userId;
+            //Users.ModifiedOn = DateTime.Now;
+            db.SaveChanges();
+            return Ok("تم تغير الصورة بنـجاح");
+
+        }
+
+        [HttpPost("EditUsersProfile")]
+        public IActionResult EditUsersProfile([FromBody] UsersObject user)
+        {
+            try
+            {
+                var userId = this.help.GetCurrentUser(HttpContext);
+
+                if (userId <= 0)
+                {
+                    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
+                }
+
+                var Users = (from p in db.Users
+                             where p.UserId == userId
+                             && (p.State != 9)
+                             select p).SingleOrDefault();
+
+                if (Users == null)
+                {
+                    return BadRequest("خطأ بيانات المستخدم غير موجودة");
+                }
+
+
+                if (Users.Phone != user.Phone)
+                {
+                    var cPhone = (from u in db.Users
+                                  where u.Phone == user.Phone
+                                  select u).SingleOrDefault();
+                    if (cPhone != null)
+                    {
+                        return BadRequest(" رقم الهاتف موجود مسبقا");
+
+
+
+
+                    }
+
+                }
+                if (Users.Email != user.Email)
+                {
+                    var cUser = (from u in db.Users
+                                 where u.Email == user.Email && u.State != 9
+                                 select u).SingleOrDefault();
+
+                    if (cUser != null)
+                    {
+                        if (cUser.State == 0)
+                        {
+                            return BadRequest("هدا المستخدم موجود من قبل يحتاج الي تقعيل الحساب فقط");
+                        }
+                        if (cUser.State == 1 || cUser.State == 2)
+                        {
+                            return BadRequest("هدا المستخدم موجود من قبل يحتاج الي دخول فقط");
+                        }
+                    }
+                }
+
+                Users.Email = user.Email;
+
+                Users.Phone = user.Phone;
+                Users.LoginName = user.LoginName;
+                Users.Name = user.FullName;
+                Users.BirthDate = user.DateOfBirth;
+                Users.Gender = user.Gender;
+
+                //Users.ModifiedBy = userId;
+                //Users.ModifiedOn = DateTime.Now;
+
+
+                db.SaveChanges();
+                return Ok("تم تعديل بيانات المستخدم بنجاح");
             }
             catch (Exception e)
             {

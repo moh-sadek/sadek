@@ -1,8 +1,10 @@
 ﻿import CryptoJS from 'crypto-js';
+import moment from 'moment';
 export default {
     name: 'EditUsersProfile',    
     created() {
-        //this.CheckLoginStatus();
+        debugger
+        this.CheckLoginStatus();
 
     },
     data() {  
@@ -28,14 +30,30 @@ export default {
             form2: {
                 Phone: '',
                 Email: '',
+                LoginName: '',
+                FullName: '',
+                Gender: '',
+                DateOfBirth: '',
                 Status: 0,
             },   
             
         }
     },
+
+    filters: {
+        moment: function (date) {
+            if (date === null) {
+                return "فارغ";
+            }
+            // return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+            return moment(date).format('MMMM Do YYYY');
+        }
+    },
+
     methods: {
         CheckLoginStatus() {
             try {
+                debugger
                 this.loginDetails = this.decrypt(sessionStorage.getItem('currentUser'), sessionStorage.getItem('SECRET_KEY'));
                 if (this.loginDetails != null) {
                     this.form.FullName = this.loginDetails.fullName;
@@ -44,27 +62,6 @@ export default {
                     this.form.Email = this.loginDetails.email;
                     this.form.Gender = this.loginDetails.gender;
                     this.form.DateOfBirth = this.loginDetails.dateOfBirth;
-
-                    var statusObject = this.loginDetails.officeName;
-                    var statusArray = statusObject.map(item => item.officeName);
-
-                    this.form.OfficeName = statusArray;
-                    var type = this.loginDetails.userType;
-                    if (type == 1) {
-                        this.form.UserType = 'المديـر';
-                    } else if (type == 2) {
-                        this.form.UserType = 'الشهائد العام';
-                    } else if (type == 4) {
-                        this.form.UserType = 'البحث العام';
-                    } else if (type == 5) {
-                        this.form.UserType = 'ايقاف متوفي';
-                    }
-                    else if (type == 6) {
-                        this.form.UserType = 'التقارير';
-                    }
-                    else {
-                        this.form.UserType = 'المكاتب';
-                    }
                 } else {
                     window.location.href = '/Security/Login';
                 }
@@ -212,17 +209,27 @@ export default {
                 return;
             }
 
-
             this.form2.Phone = this.form.Phone
             this.form2.Email = this.form.Email;
+            this.form2.LoginName = this.form.LoginName;
+            this.form2.FullName = this.form.FullName;
+            this.form2.Gender = this.form.Gender;
+            this.form2.DateOfBirth = this.form.DateOfBirth;
        
             this.$http.EditUsersProfile(this.form2)
                 .then(response => {
-                    this.$parent.state = 0;
-               
+                    debugger
                     this.loginDetails.email = this.form2.Email;
                     this.loginDetails.phone = this.form2.Phone;
-                    sessionStorage.setItem('currentUser', JSON.stringify(this.loginDetails));
+                    this.loginDetails.LoginName = this.form2.LoginName;
+                    this.loginDetails.FullName = this.form2.FullName;
+                    this.loginDetails.Gender = this.form2.Gender;
+                    this.loginDetails.DateOfBirth = this.form2.DateOfBirth;
+                    //sessionStorage.setItem('currentUser', JSON.stringify(this.loginDetails));
+                    //sessionStorage.clear();
+                    sessionStorage.setItem('SECRET_KEY', sessionStorage.getItem('SECRET_KEY'));
+                    sessionStorage.setItem('currentUser', this.encrypt(this.loginDetails, sessionStorage.getItem('SECRET_KEY')));
+                    this.CheckLoginStatus();
                    
                     this.$message({
                         type: 'info',

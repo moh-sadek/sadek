@@ -13,6 +13,10 @@ import Customers from './Components/Customers/Customers.vue';
 import Users from './Components/Users/Users.vue';
 import EditUsersProfile from './Components/Users/EditUsersProfile/EditUsersProfile.vue';
 import ChangePassword from './Components/Users/ChangePassword/ChangePassword.vue';
+import AddOldPackage from './Components/Packages/AddOldPackage/AddOldPackage.vue';
+import AddOldCustomers from './Components/Customers/AddOldCustomers/AddOldCustomers.vue';
+import AddPackage from './Components/Packages/AddPackage/AddPackage.vue';
+import AddCustomers from './Components/Customers/AddCustomers/AddCustomers.vue';
 /*import Students from './Components/Students/Students.vue';
 import Companies from './Components/Companies/Companies.vue';
 import Packages from './Components/Packages/Packages.vue';
@@ -60,6 +64,10 @@ const router = new VueRouter({
         { path: '/EditUsersProfile', component: EditUsersProfile },
         { path: '/ChangePassword', component: ChangePassword },  
         { path: '/Customers', component: Customers },
+        { path: '/AddOldPackage', component: AddOldPackage },
+        { path: '/AddOldCustomers', component: AddOldCustomers },
+        { path: '/AddPackage', component: AddPackage },
+        { path: '/AddCustomers', component: AddCustomers },
         ]
 
 });

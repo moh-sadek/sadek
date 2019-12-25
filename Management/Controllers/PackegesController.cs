@@ -35,21 +35,24 @@ namespace Management.Controllers
                     PackegesInfo = from p in db.ShoortNumber where p.CustomerId==id select p;
                 }else if(searchType == 2)
                 {
-                    PackegesInfo = from p in db.ShoortNumber where p.Code == id select p;
+                    PackegesInfo = from p in db.ShoortNumber where p.Id == id select p;
                 }
                 else if (searchType == 3)
                 {
                    //id
-                   //1 Finshe
+                   //1 Finshe 
                    //2 Not Finsh
                    //3 All MostFinsh
                     if(id==1)
                     {
-                        PackegesInfo = from p in db.ShoortNumber where  DateTime.Now > p.To  select p;
+                        PackegesInfo = from p in db.ShoortNumber where  p.State==1 select p;
                     }
-                    else if(id == 1)
+                    else if(id == 2)
                     {
-                        PackegesInfo = from p in db.ShoortNumber where DateTime.Now <= p.To   select p;
+                        PackegesInfo = from p in db.ShoortNumber where p.State == 2 select p;
+                    }else  if(id==3)
+                    {
+                        PackegesInfo = from p in db.ShoortNumber where p.State == 3 select p;
                     }
                     
                 }
@@ -66,11 +69,13 @@ namespace Management.Controllers
                                        Service = p.Service,
                                        Amount = p.Amount,
                                        SMSCount = p.Smscount,
-                                       UsageSMS = p.UsageSms,
+                                       UsageSMS = p.UsageSms, 
                                        To = p.To,
                                        State = p.State,
                                        CustomerId = p.CustomerId,
                                        Id=p.Id,
+                                       RemindSMS= p.Smscount - p.UsageSms,
+                                       UsagePercentage = (100 * p.UsageSms) / p.Smscount,
                                    }).Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();
 
                 return Ok(new { Packeges = PackegesInfos, count = PackegesCount });
@@ -130,6 +135,38 @@ namespace Management.Controllers
                                      }).ToList();
 
                 return Ok(new { codes = CodesInfos });
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet("getPakegesInfo")]
+        public IActionResult getPakegesInfo()//type of id 
+        {
+            try
+            {
+                IQueryable<ShoortNumber> PackegesInfo = from p in db.ShoortNumber select p;
+
+
+                var PackegesCount = (from p in PackegesInfo
+                                     select p).Count();
+
+                var PackegeAmountsum = (from p in db.ShoortNumberActions select p.Amount).Sum();
+
+                var CustomorCounts = (from p in db.Cutomers where p.Status != 9 select p).Count();
+
+
+                var TopFiveAction = db.ShoortNumberActions
+                                   .GroupBy(q => q.Id)
+                                   .OrderByDescending(gp => gp.Count())
+                                   .Take(5)
+                                   .Select(g => g).ToList();
+
+                var LastStep = (from p in db.ShoortNumberActions select p).OrderByDescending(p=>p.Id).Take(5).ToList();
+
+                return Ok(new { LastSteps = LastStep, TopFiveActions = TopFiveAction, CustomorCountss= CustomorCounts, PackegeAmountsums= PackegeAmountsum, PackegesCounts= PackegesCount });
             }
             catch (Exception e)
             {

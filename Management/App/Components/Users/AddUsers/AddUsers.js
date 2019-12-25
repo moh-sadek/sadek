@@ -83,11 +83,8 @@
 
         },
         Back() {
-            this.$parent.UserType = 0;
-            this.$parent.GetUsers();
-            this.$parent.NID = '';
-            this.$parent.PermissionModale = '';
             this.$parent.state = 0;
+            this.$parent.getUser();
         },
 
 

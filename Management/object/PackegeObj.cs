@@ -12,9 +12,9 @@ namespace Management.objects
         public int code { get; set; }
         public int amount { get; set; }
         public int countMassage { get; set; }
+        public int countUseMassage { get; set; }
         public DateTime from { get; set; }
-        //public DateTime to { get; set; }
-        //public string discriptions { get; set; }
+        public DateTime to { get; set; }
 
     }
 }

@@ -67,7 +67,7 @@ export default {
     },
     methods: {
 
-
+         
 
         getUser(pageNo) {
             this.pageNo = pageNo;

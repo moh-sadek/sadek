@@ -171,7 +171,7 @@ namespace Management.Controllers
                     LoginName = cUser.LoginName,
                     DateOfBirth = cUser.BirthDate,
                     Email = cUser.Email,
-                    //Gender = cUser.Gender,
+                    Gender = cUser.Gender,
                     State = cUser.State,
                     Phone = cUser.Phone,
                     SecretKey = Guid.NewGuid()

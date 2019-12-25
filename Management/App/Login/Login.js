@@ -83,31 +83,7 @@ export default {
                     //this.SECRET_KEY = response.data.secretKey;
                     sessionStorage.setItem('SECRET_KEY', response.data.secretKey);
                     sessionStorage.setItem('currentUser', this.encrypt(response.data, response.data.secretKey));
-                    if (response.data.userType == 2) {
-                        window.location.href = '/Citizens';
-                    }
-                    else if (response.data.userType == 3) {
-                        window.location.href = '/Citizens';
-                    }
-                    else if (response.data.userType == 4) {
-                        window.location.href = '/Search';
-                    } else if (response.data.userType == 5) {
-                        if (response.data.deathEntryPrivilege == 1) {
-                            window.location.href = '/Death';
-                        } else if (response.data.deathInfoPrivilege == 1) {
-                            window.location.href = '/ViewDeath';
-                        }
-
-                        else {
-                            window.location.href = '/Security/Login';
-                        }
-
-                    } else if (response.data.userType == 6) {
-                        window.location.href = '/Reports';
-                    }
-                    else {
-                        window.location.href = '/';
-                    }
+                    window.location.href = '/';
 
 
                 })
