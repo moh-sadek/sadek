@@ -199,7 +199,7 @@ namespace Management.Controllers
                     return BadRequest("رقم الخدمة موجود مسبقا الرجاء إعادة الإدخال");
                 }
 
-                if (serviceInfo.from>= serviceInfo.to)
+                if (serviceInfo.from>= DateTime.Now)
                 {
                     return BadRequest("خطأ في الإدخال تاريخ البداية أصغر من تاريخ النهاية ");
                 }
@@ -210,9 +210,8 @@ namespace Management.Controllers
 
                 ShoortNumber.Code = serviceInfo.code;
                 ShoortNumber.Amount = serviceInfo.amount;
-                ShoortNumber.From = serviceInfo.from;
+                ShoortNumber.From = DateTime.Now;
                 ShoortNumber.To = serviceInfo.to;
-                ShoortNumber.To = DateTime.Now; 
                 ShoortNumber.Smscount = serviceInfo.countMassage;
                 ShoortNumber.UsageSms = 0;
                 ShoortNumber.Service = serviceInfo.serviceName;
@@ -314,7 +313,7 @@ namespace Management.Controllers
                 Cutomers.FullName = customersInfo.name;
                 Cutomers.Phone = customersInfo.phone;
                 Cutomers.BirthDate = customersInfo.date;
-                Cutomers.CompanyName = customersInfo.companyName;
+                Cutomers.CompanyName = customersInfo.companyName.Trim();
                 Cutomers.Email = customersInfo.email;
                 //Cutomers.Status = 0;
                 //Cutomers.CreatedBy = 0;//user dontforget
@@ -375,14 +374,23 @@ namespace Management.Controllers
         }
 
         [HttpGet("GetHistoryPackges")]
-        public IActionResult GetHistoryPackges(int pageNo, int pageSize, long custmorId)
+        public IActionResult GetHistoryPackges(int pageNo, int pageSize, long custmorId,int selectedHCodPack,int SearchType)
         {
             try
             {
 
                 IQueryable<ShoortNumberActions> PackegesInfo = from p in db.ShoortNumberActions where p.ShoortNumber.CustomerId == custmorId select p;
 
+                
+                if(SearchType!=0 && SearchType!=5 && SearchType != 6)
+                {
+                    PackegesInfo = from p in PackegesInfo where p.ActionType == SearchType select p;
+                }
 
+                if(selectedHCodPack!=0 && SearchType != 6)
+                {
+                    PackegesInfo = from p in PackegesInfo where p.ShoortNumberId==selectedHCodPack  select p;
+                }
 
 
 
@@ -661,6 +669,30 @@ namespace Management.Controllers
                                   }).ToList();
 
                 return Ok(new { CustomersPhone = CodesInfos });
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet("getHistoryCodesPackges")]
+        public IActionResult getHistoryCodesPackges(long id)//type of id 
+        {
+            try
+            {
+                IQueryable<ShoortNumber> CodesInfo = from p in db.ShoortNumber where p.State != 9 && p.CustomerId==id select p;
+
+
+                var CodesInfos = (from p in CodesInfo
+                                  orderby p.CreatedOn descending
+                                  select new
+                                  {
+                                      Id=p.Id,
+                                      Code=p.Code
+                                  }).ToList();
+
+                return Ok(new { historyCodesPackges = CodesInfos });
             }
             catch (Exception e)
             {

@@ -5,6 +5,9 @@ export default {
 
         
         this.custmor = this.$parent.selectedCustmor;
+        this.serviceCount = this.custmor.packgeCount;
+        this.countMassage = this.custmor.countsms;
+        this.remindMassage = this.custmor.remindsms;
         this.serviceInfo.custmorId = this.custmor.customerId;
         this.ReloadserviceInfo.customerId = this.custmor.customerId;
         this.customersInfo.name = this.custmor.fullName;
@@ -19,6 +22,36 @@ export default {
         this.getPakegeByState(1, 2);
         this.getPakegeByState(1, 3);
         this.getHistoryPackges();
+        this.getHistoryCodesPackges(this.custmor.customerId);
+
+        this.SearchType = [
+            {
+                id: 2,
+                name: "إعادة شحن الباقة"
+            },
+            {
+                id: 1,
+                name: "تجديد الباقة"
+            },
+            {
+                id: 3,
+                name: "إيقاف الباقة"
+            },
+            {
+                id: 4,
+                name: "إلغاء إيقاف الباقة"
+            },
+            {
+                id: 5,
+                name: 'رقم الباقة'
+            },
+            {
+                id: 6,
+                name: 'الكل'
+            }
+
+
+        ];
       
 
     },
@@ -65,9 +98,11 @@ export default {
                 countMassage: '',
                 from: '',
                 to: '',
-                discriptions: '',
             },
 
+            serviceCount: 0,
+            remindMassage: 0,
+            countMassage:0,
 
 
             customersInfo: {
@@ -93,13 +128,13 @@ export default {
 
 
             ActivePageNo: 1,
-            ActivePageSize: 4,
+            ActivePageSize: 2,
             ActivePages: 0,  
 
             activePackges: [],
 
             notActivePageNo: 1,
-            notActivePageSize: 10,
+            notActivePageSize: 2,
             notActivePages: 0,
 
             notactivePackges: [],
@@ -111,7 +146,7 @@ export default {
             stoppedPackges: [],
 
             historyPageNo: 1,
-            historyPageSize: 10,
+            historyPageSize: 5,
             historyPages: 0,
 
             historyPackges: [],
@@ -119,7 +154,12 @@ export default {
             stopResone:'',
             SMSstopResone:'لقد تم إيقاف الخدمة الخاصة بكم الرجاء مراجعة إدارة الخدمات بشركة المدار',
 
-            selectedPackege:[],
+            selectedPackege: [],
+
+            SearchTypeSelected: [],
+
+            historyCodesPackges: [],
+            selectedHCodPack: '',
 
 
         };
@@ -165,6 +205,8 @@ export default {
 
         addPackage()
         {
+            debugger
+            this.serviceInfo.to = this.serviceInfo.from;
             //this.to=this.from;
             this.$http.AddCustomorPackage(this.serviceInfo)
                 .then(response => {
@@ -174,6 +216,7 @@ export default {
                         message: response.data
                     });
                     this.$blockUI.Stop();
+                    this.resetForm('serviceInfo');
                 })
                 .catch((err) => {
                     this.$blockUI.Stop();
@@ -237,6 +280,11 @@ export default {
         },
 
         getPakegeByState(pageNo, state) {
+            //state
+            //1 active
+            //2 not active code
+            //3 stoped
+            //9 delete
             this.ActivePageNo = pageNo;
             if (this.ActivePageNo === undefined) {
                 this.ActivePageNo = 1;
@@ -265,13 +313,13 @@ export default {
 
         },
 
-        getHistoryPackges(pageNo) {
+        getHistoryPackges(pageNo, selectedHCodPack) {
             this.historyPageNo = pageNo;
             if (this.historyPageNo === undefined) {
                 this.historyPageNo = 1;
             }
             this.$blockUI.Start();
-            this.$http.GetHistoryPackges(this.historyPageNo, this.historyPageSize, this.custmor.customerId)//this.$parent.SuperPackageParent.superPackageId
+            this.$http.GetHistoryPackges(this.historyPageNo, this.historyPageSize, this.custmor.customerId, selectedHCodPack, this.SearchTypeSelected)//this.$parent.SuperPackageParent.superPackageId
                 .then(response => {
                     this.$blockUI.Stop();
                     this.historyPackges = response.data.packeges;
@@ -381,13 +429,13 @@ export default {
         //1 add pakege
         //2 edit customr info
         //3 recharge packge
-        submitForm(formName) {
+        submitForm(formName,operation) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    if (this.currentPage == 0) {
+                    if (operation == 1) {
                         this.editPersnalInfo();
 
-                    } else if (this.currentPage == 2) {
+                    } else if (operation== 2) {
                         this.addPackage();
                     } else if (formName = "ReloadserviceInfo") {
                         this.rechargeService();
@@ -404,6 +452,20 @@ export default {
 
         resetForm(formName) {
             this.$refs[formName].resetFields();
+        },
+
+        getHistoryCodesPackges(id) {
+            
+            this.$blockUI.Start();
+            this.$http.getHistoryCodesPackges(id)
+                .then(response => {
+                    this.$blockUI.Stop();
+                    this.historyCodesPackges = response.data.historyCodesPackges;
+                })
+                .catch((err) => {
+                    this.$blockUI.Stop();
+                    console.error(err);
+                });
         },
     }    
 }

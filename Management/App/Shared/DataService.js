@@ -73,9 +73,9 @@ export default {
         return axios.get(baseUrl + `/Admin/Customer/getPakegeByState?pageNo=${pageNo}&pagesize=${pageSize}&custmorId=${custmorId}&state=${state}`);
     },
 
-    GetHistoryPackges(pageNo, pageSize, custmorId) {
+    GetHistoryPackges(pageNo, pageSize, custmorId, selectedHCodPack, SearchTypeSelected) {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
-        return axios.get(baseUrl + `/Admin/Customer/GetHistoryPackges?pageNo=${pageNo}&pagesize=${pageSize}&custmorId=${custmorId}`);
+        return axios.get(baseUrl + `/Admin/Customer/GetHistoryPackges?pageNo=${pageNo}&pagesize=${pageSize}&custmorId=${custmorId}&selectedHCodPack=${selectedHCodPack}&SearchType=${SearchTypeSelected}`);
     },
 
     stopServeice(id, stopResone) {
@@ -147,6 +147,11 @@ export default {
     getPakegesInfo() {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
         return axios.get(baseUrl + `/Admin/Packeges/getPakegesInfo`);
+    },
+
+    getHistoryCodesPackges(id) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.get(baseUrl + `/Admin/Customer/getHistoryCodesPackges?id=${id}`);
     },
 
 

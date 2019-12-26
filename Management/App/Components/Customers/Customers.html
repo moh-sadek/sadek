@@ -67,7 +67,6 @@
                                 <th>عدد الباقات </th>
                                 <th>إجمالي عدد الرسائل </th>
                                 <th>الرسائل المتبقية </th>
-                                <th> تاريخ الميلاد </th>
                                 <th>إسم الشركة</th>
                                 <th>البريد الإلكتروني</th>
                                 <th class="disabled-sorting text-right">الإعدادات</th>
@@ -83,7 +82,6 @@
                                 <td v-if="item.countsms==null">0</td>
                                 <td v-if="item.remindsms!=null">{{item.remindsms}}</td>
                                 <td v-if="item.remindsms==null">0</td>
-                                <td>{{item.birthDate | moment}}</td>
                                 <td>{{item.companyName}}</td>
                                 <td>{{item.email}}</td>
 

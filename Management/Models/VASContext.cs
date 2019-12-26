@@ -31,9 +31,9 @@ namespace Management.Models
 
                 entity.Property(e => e.BirthDate).HasColumnType("datetime");
 
-                entity.Property(e => e.CompanyName).HasColumnType("nchar(50)");
-
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.CompanyName).HasMaxLength(50);
 
                 entity.Property(e => e.Email).HasMaxLength(50);
 

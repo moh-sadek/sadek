@@ -26,30 +26,29 @@
                                     <div class="row">
                                         <div class="col-lg-3 col-md-6 col-6 ml-auto">
                                             <h5>
-                                                12
+                                                {{serviceCount}}
                                                 <br>
-                                                <small>Files</small>
+                                                <small>عددد الباقات</small>
                                             </h5>
                                         </div>
                                         <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
                                             <h5>
-                                                2GB
+                                                {{countMassage}}
                                                 <br>
-                                                <small>Used</small>
+                                                <small>الرسائل </small>
                                             </h5>
                                         </div>
                                         <div class="col-lg-3 mr-auto">
                                             <h5>
-                                                24,6$
+                                                {{remindMassage}}
                                                 <br>
-                                                <small>Spent</small>
+                                                <small>الرسائل المتبقة</small>
                                             </h5>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <!--User info-->
                     <div class="col-md-8">
@@ -70,8 +69,8 @@
                                                                   :rules="[{required: true, message: 'الرجاء إدخال إسم العميل'} ]">
                                                         <el-input type="name"
                                                                   placeholder="إسم العميل"
-                                                                  v-model="customersInfo.name"
-                                                                  autocomplete="off" />
+                                                                  v-model="customersInfo.name" />
+                                                        <!--autocomplete="auto_complete"-->
                                                     </el-form-item>
                                                 </div>
                                             </div>
@@ -82,12 +81,11 @@
                                                 <div class="form-group">
                                                     <el-form-item prop="phone"
                                                                   label-width="0px"
-                                                                  :rules="[{required: true, message: 'الرجاء إدخال رقم الهاتف'}
-                                                   ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
+                                                                  :rules="[{required: true, message: 'الرجاء إدخال رقم الهاتف'}]">
                                                         <el-input type="phone"
                                                                   placeholder="رقم الهاتف"
-                                                                  v-model.number="customersInfo.phone"
-                                                                  autocomplete="off" />
+                                                                  v-model.number="customersInfo.phone" />
+                                                        <!--autocomplete="off"-->
                                                     </el-form-item>
                                                 </div>
                                             </div>
@@ -119,8 +117,8 @@
                                                                   :rules="[{required: true, message: 'الرجاء إدخال البريد الإلكتروني'} ]">
                                                         <el-input type="email"
                                                                   placeholder="البريد الإلكتروني"
-                                                                  v-model="customersInfo.email"
-                                                                  autocomplete="off" />
+                                                                  v-model="customersInfo.email" />
+                                                        <!--autocomplete="off"-->
                                                     </el-form-item>
                                                 </div>
                                             </div>
@@ -135,15 +133,15 @@
                                                               :rules="[{required: true, message: 'الرجاء إدخال إسم الشركة'} ]">
                                                     <el-input type="companyName"
                                                               placeholder="إسم الشركة"
-                                                              v-model="customersInfo.companyName"
-                                                              autocomplete="off" />
+                                                              v-model="customersInfo.companyName" />
+                                                    <!--autocomplete="off"-->
                                                 </el-form-item>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
 
                                             <div class="float-right" style="margin-top: 27px;">
-                                                <el-button class="btn btn-info" type="primary" @click="submitForm('customersInfo')">تعديل البيانات </el-button>
+                                                <el-button class="btn btn-info" type="primary" @click="submitForm('customersInfo',1)">تعديل البيانات </el-button>
                                             </div>
                                         </div>
                                     </div>
@@ -159,7 +157,6 @@
             </div>
 
         </div>
-
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
@@ -190,8 +187,8 @@
                                                                   ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
                                                                 <el-input type="code"
                                                                           placeholder="رقم الخدمة"
-                                                                          v-model.number="serviceInfo.code"
-                                                                          autocomplete="off" />
+                                                                          v-model.number="serviceInfo.code" />
+                                                                <!--autocomplete="off"-->
                                                             </el-form-item>
                                                         </div>
                                                     </div>
@@ -206,8 +203,8 @@
                                                                           :rules="[{required: true, message: 'الرجاء إدخال إسم الخدمة'} ]">
                                                                 <el-input type="serviceName"
                                                                           placeholder="إسم الخدمة"
-                                                                          v-model="serviceInfo.serviceName"
-                                                                          autocomplete="off" />
+                                                                          v-model="serviceInfo.serviceName" />
+                                                                <!--autocomplete="off"-->
                                                             </el-form-item>
                                                         </div>
                                                     </div>
@@ -224,8 +221,8 @@
                                                                   ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
                                                                 <el-input type="amount"
                                                                           placeholder="القيمة"
-                                                                          v-model.number="serviceInfo.amount"
-                                                                          autocomplete="off" />
+                                                                          v-model.number="serviceInfo.amount" />
+                                                                <!--autocomplete="off"-->
                                                             </el-form-item>
                                                         </div>
 
@@ -241,8 +238,8 @@
                                                                   ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
                                                                 <el-input type="countMassage"
                                                                           placeholder="عدد الرسائل"
-                                                                          v-model.number="serviceInfo.countMassage"
-                                                                          autocomplete="off" />
+                                                                          v-model.number="serviceInfo.countMassage" />
+                                                                <!--autocomplete="off"-->
                                                             </el-form-item>
                                                         </div>
                                                     </div>
@@ -268,7 +265,7 @@
                                                 <div class="col-sm-10">
 
                                                     <div class="float-right" style="margin-top: 27px;">
-                                                        <el-button class="btn btn-info" type="primary" @click="submitForm('serviceInfo')">إضافة الباقة</el-button>
+                                                        <el-button class="btn btn-info" type="primary" @click="submitForm('serviceInfo',2)">إضافة الباقة</el-button>
                                                     </div>
                                                 </div>
 
@@ -287,6 +284,39 @@
                             </div>
                             <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" style="">
                                 <div class="card-body">
+
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-3">
+
+                                            <el-select style="width: 100%;" filterable placeholder="البحت" v-model="SearchTypeSelected" @change="getHistoryPackges();">
+
+                                                <el-option v-for="item in SearchType"
+                                                           :key="item.id"
+                                                           :label="item.name"
+                                                           :value="item.id">
+                                                </el-option>
+
+                                            </el-select>
+                                        </div>
+
+                                        <div class="col-md-3" v-if="SearchTypeSelected==5">
+
+                                            <el-select style="width: 100%;" filterable placeholder="رقم الباقة" v-model="selectedHCodPack" @change="getHistoryPackges(1,selectedHCodPack);">
+
+                                                <el-option v-for="item in historyCodesPackges"
+                                                           :key="item.id"
+                                                           :label="item.code"
+                                                           :value="item.id">
+                                                </el-option>
+
+                                            </el-select>
+                                        </div>
+
+
+                                    </div>
+                                    <br />
+                                    <br />
                                     <!--History-->
                                     <div class="table-responsive" style="padding:10px;overflow: hidden;">
                                         <table class="table">
@@ -399,6 +429,10 @@
                             </div>
                             <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" style="">
                                 <div class="card-body">
+                                    <div v-if="activePackges==0">
+                                        <el-alert title="عفــوا! لاتوجد بيانات للباقات النشطة   " type="info" style="font-size: 19px;margin-right: 14px;line-height: 18px;">
+                                        </el-alert>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-6" v-for="item in activePackges" style="margin-top:10px">
                                             <div class="card ">
@@ -513,9 +547,9 @@
                                         </div>
                                     </div>
                                     <br />
-
+                                    <hr v-if="activePackges!=0" />
                                     <div class="row" dir="ltr" v-if="activePackges!=0">
-                                        <hr />
+
                                         <div class="col-sm-12 col-md-6">
 
                                             <div class="disabled-sorting text-right" id="datatable_info" role="status" aria-live="polite">Showing {{ActivePageNo}} to {{ActivePageSize}} of {{ActivePages}} entries</div>
@@ -533,7 +567,7 @@
                                                                :current-page="ActivePageNo"
                                                                :page-size="ActivePageSize"
                                                                :total="ActivePages"
-                                                               @current-change="getCustomers($event)">
+                                                               @current-change="getPakegeByState($event,1)">
                                                 </el-pagination>
 
                                             </div>
@@ -642,7 +676,7 @@
                                                 </div>
                                                 <div class="card-footer ">
                                                     <div class="legend">
-                                                        <i class="fa fa-circle text-info"></i> Active
+                                                        <i class="fa fa-circle text-danger"></i> Not Active
                                                     </div>
                                                     <hr>
                                                     <div class="row" style="padding-right:20px">
@@ -664,7 +698,7 @@
                                         </div>
                                     </div>
                                     <br />
-
+                                    <hr />
                                     <div class="row" dir="ltr" v-if="notactivePackges!=0">
                                         <hr />
                                         <div class="col-sm-12 col-md-6">
@@ -684,7 +718,7 @@
                                                                :current-page="notActivePageNo"
                                                                :page-size="notActivePageSize"
                                                                :total="notActivePages"
-                                                               @current-change="getCustomers($event)">
+                                                               @current-change="getPakegeByState($event,2)">
                                                 </el-pagination>
 
                                             </div>
@@ -848,11 +882,11 @@
         </div>
 
         <!--Stop SMS Service-->
-        <el-dialog :visible.sync="StopSMSServiceDialog" :modalAppendToBody="false" @visible-change="onVisible">
+        <el-dialog :visible.sync="StopSMSServiceDialog" :modalAppendToBody="false">
 
-            <div style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+            <div>
                 <div class="modal-header">
-                    <h5 class="modal-title" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serifs">أنت علي وشك القيام بإيقاف الخدمة الرجاء تعبئة البيانات  التالية</h5>
+                    <h5 class="modal-title">أنت علي وشك القيام بإيقاف الخدمة الرجاء تعبئة البيانات  التالية</h5>
                 </div>
                 <div class="modal-body">
                     <div class="instruction">
@@ -860,9 +894,9 @@
                             <div class="col-md-12">
                                 <h5> سبب الإيقاف</h5>
                                 <el-input type="textarea"
-                                            :rows="4"
-                                            placeholder=" الرجاء إدخال سبب الإيقاف"
-                                            v-model="stopResone">
+                                          :rows="4"
+                                          placeholder=" الرجاء إدخال سبب الإيقاف"
+                                          v-model="stopResone">
                                 </el-input>
                             </div>
                         </div>
@@ -875,8 +909,8 @@
                                 <h5>هل تريد إرسال رسالة للعميل توضح سبب إيقاف الخدمة</h5>
 
                                 <el-input type="textarea"
-                                            :rows="4"
-                                            v-model="SMSstopResone">
+                                          :rows="4"
+                                          v-model="SMSstopResone">
                                 </el-input>
                             </div>
                         </div>
@@ -896,1159 +930,1359 @@
             </div>
         </el-dialog>
 
+        <!--SMSInfo-->
+        <el-dialog :visible.sync="SMSInfoDialog" :modalAppendToBody="false">
+            <div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h5 class="modal-title" id="myModalLabel">متابعة الرسائل المرسلة من تاريخ الإشتراك بالباقة</h5>
+                </div>
+                <div class="table-responsive" style="overflow: hidden;">
+                    <table class="table">
+                        <thead class="text-primary">
+                            <tr>
+                                <th class="text-center">
+                                    #
+                                </th>
+                                <th>
+                                    التاريخ
+                                </th>
+                                <th>
+                                    الوقت
+                                </th>
+                                <th class="text-center">
+                                    الحالة
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">
+                                    1
+                                </td>
+                                <td>
+                                    Andrew Mike
+                                </td>
+                                <td>
+                                    Develop
+                                </td>
+                                <td class="text-center">
+                                    2013
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">
+                                    2
+                                </td>
+                                <td>
+                                    Andrew Mike
+                                </td>
+                                <td>
+                                    Develop
+                                </td>
+                                <td class="text-center">
+                                    2013
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">
+                                    3
+                                </td>
+                                <td>
+                                    Andrew Mike
+                                </td>
+                                <td>
+                                    Develop
+                                </td>
+                                <td class="text-center">
+                                    2013
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">
+                                    4
+                                </td>
+                                <td>
+                                    Andrew Mike
+                                </td>
+                                <td>
+                                    Develop
+                                </td>
+                                <td class="text-center">
+                                    2013
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-    <!--
-    <div class="col-md-10" style="margin-top: 1000px;">
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <br />
+                    <div class="row" style="direction:ltr;margin-top:15px">
+                        <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Showing 1 to 10 of 42 entries</div>
+                        </div>
+                        <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_paginate paging_full_numbers" id="datatable_paginate">
+                                <ul class="pagination">
+                                    <li class="paginate_button page-item active">
+                                        <a href="#" aria-controls="datatable" data-dt-idx="2" tabindex="0" class="page-link">
+                                            1
+                                        </a>
+                                    </li>
+                                    <li class="paginate_button page-item ">
+                                        <a href="#" aria-controls="datatable" data-dt-idx="3" tabindex="0" class="page-link">
+                                            2
+                                        </a>
+                                    </li>
+                                    <li class="paginate_button page-item ">
+                                        <a href="#" aria-controls="datatable" data-dt-idx="4" tabindex="0" class="page-link">
+                                            3
+                                        </a>
+                                    </li>
+                                    <li class="paginate_button page-item ">
+                                        <a href="#" aria-controls="datatable" data-dt-idx="5" tabindex="0" class="page-link">
+                                            4
+                                        </a>
+                                    </li>
+                                    <li class="paginate_button page-item ">
+                                        <a href="#" aria-controls="datatable" data-dt-idx="6" tabindex="0" class="page-link">
+                                            5
+                                        </a>
+                                    </li>
 
-        <div class="card card-wizard active" data-color="primary" id="wizardProfile">
-
-            <form>
-
-                <!--Hedar
-    <div class="card-header text-center">
-        <h3 class="card-title">
-            متابعة حركات العملاء والتقارير الخاصة بهم
-            <div class="pull-right" style="margin-left: 7px;">
-                <el-button class="btn btn-primary btn-round btn-icon" title="رجوع" @click.prevent="cansel()">
-                    <i class="nc-icon nc-minimal-left " style="padding-right: 3px;"></i>
-                </el-button>
-            </div>
-
-        </h3>
-        <h5 class="description">متابعة حركات العملاء والتقارير الخاصة بهم </h5>
-        <div class="wizard-navigation">
-            <ul class="nav nav-pills">
-                <li class="nav-item" style="width: 33.3333%;">
-                    <a class="nav-link active" href="#about" @click.prevent="ChangDivStyle(1)" data-toggle="tab" role="tab" aria-controls="about" aria-selected="true">
-                        <i class="nc-icon nc-single-02"></i> البيانات الشخصية
-                    </a>
-                </li>
-                <li class="nav-item" style="width: 33.3333%;">
-                    <a class="nav-link" href="#account" data-toggle="tab" @click.prevent="ChangDivStyle(2)" role="tab" aria-controls="account" aria-selected="true">
-                        <i class="nc-icon nc-layout-11"></i> الباقات
-                    </a>
-                </li>
-                <li class="nav-item" style="width: 33.3333%;">
-                    <a class="nav-link" href="#address" data-toggle="tab" @click.prevent="ChangDivStyle(3)" role="tab" aria-controls="address" aria-selected="true">
-                        <i class="nc-icon nc-simple-add"></i> إضافة باقة
-                    </a>
-                </li>
-            </ul>
-            <div class="moving-tab" v-bind:style="[baseStyles]">
-                <i :class=icons></i> {{iconsHont}}
-            </div>
-
-        </div>
-    </div>
-
-    <!--body
-    <div class="card-body">
-
-        <div class="tab-content">
-            <!--Tab pane Persnal Info -- Packges -- Add Packege-->
-        <!--Pesnal Info
-                    <div class="tab-pane show active" id="about">
-                        <el-form :model="customersInfo" ref="customersInfo">
-                            <h5 class="info-text"> </h5>
-                            <div class="row justify-content-center">
-                                <div class="col-sm-2">
-                                    <div class="picture-container">
-                                        <div class="picture">
-                                            <img src="/assets/img/default-avatar.png" class="picture-src" id="wizardPicturePreview" title="">
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-sm-7">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>إسم العميل</label>
-
-                                            <div class="form-group">
-                                                <el-form-item prop="name"
-                                                              label-width="0px"
-                                                              :rules="[{required: true, message: 'الرجاء إدخال إسم العميل'} ]">
-                                                    <el-input type="name"
-                                                              placeholder="إسم العميل"
-                                                              v-model="customersInfo.name"
-                                                              autocomplete="off"
-                                                              :disabled="EditInfo == 0" />
-                                                </el-form-item>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>رقم الهاتف</label>
-                                            <div class="form-group">
-                                                <el-form-item prop="phone"
-                                                              label-width="0px"
-                                                              :rules="[{required: true, message: 'الرجاء إدخال رقم الهاتف'}
-                                                       ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
-                                                    <el-input type="phone"
-                                                              placeholder="رقم الهاتف"
-                                                              v-model.number="customersInfo.phone"
-                                                              autocomplete="off"
-                                                              :disabled="EditInfo == 0" />
-                                                </el-form-item>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>تاريخ الميلاد</label>
-                                            <el-form-item prop="date"
-                                                          label-width="0px"
-                                                          :rules="[{ required: true, message: 'الرجاء إدخال تاريخ  الميلاد'} ]">
-
-                                                <el-date-picker style="width:100%"
-                                                                v-model="customersInfo.date"
-                                                                type="date"
-                                                                placeholder="الرجاء إدخال"
-                                                                :disabled="EditInfo == 0">
-                                                </el-date-picker>
-
-                                            </el-form-item>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>البريد الإلكتروني</label>
-                                            <div class="form-group">
-                                                <el-form-item prop="email"
-                                                              label-width="0px"
-                                                              :rules="[{required: true, message: 'الرجاء إدخال البريد الإلكتروني'} ]">
-                                                    <el-input type="email"
-                                                              placeholder="البريد الإلكتروني"
-                                                              v-model="customersInfo.email"
-                                                              autocomplete="off"
-                                                              :disabled="EditInfo == 0" />
-                                                </el-form-item>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>إسم الشركة</label>
-                                            <div class="form-group">
-                                                <el-form-item prop="companyName"
-                                                              label-width="0px"
-                                                              :rules="[{required: true, message: 'الرجاء إدخال إسم الشركة'} ]">
-                                                    <el-input type="companyName"
-                                                              placeholder="إسم الشركة"
-                                                              v-model="customersInfo.companyName"
-                                                              autocomplete="off"
-                                                              :disabled="EditInfo == 0" />
-                                                </el-form-item>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>عنوان الشركة</label>
-                                            <div class="form-group">
-                                                <el-form-item prop="companyAddress"
-                                                              label-width="0px"
-                                                              :rules="[{required: true, message: 'الرجاء إدخال عنوان الشركة'} ]">
-                                                    <el-input type="companyAddress"
-                                                              placeholder="عنوان الشركة"
-                                                              v-model="customersInfo.companyAddress"
-                                                              autocomplete="off"
-                                                              :disabled="EditInfo == 0" />
-                                                </el-form-item>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
+                                </ul>
                             </div>
-                        </el-form>
-                    </div>
-
-                    <!--Packege Info
-                    <div class="tab-pane" id="account">
-                        <h5 class="info-text"> الباقات الخاصة الخاصة بالعميل : أحمد طارق بن سليمان</h5>
-                        <div class="row justify-content-center">
-                            <div class="row">
-
-                            </div>
-
-                            <!--Tab bane // Active -- Not Active -- History
-                            <div class="col-lg-10" style="margin-bottom:70px">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <div class="choice" data-toggle="wizard-checkbox">
-
-                                            <div class="icon">
-                                                <a href="#about" @click.prevent="changeCurrentState(1)">
-
-                                                    <i class="nc-icon nc-ruler-pencil" style="color:black" v-if="currentState!=1" />
-                                                    <i class="nc-icon nc-ruler-pencil" v-if="currentState==1" />
-                                                </a>
-                                            </div>
-                                            <h6 style="color: powderblue" v-if="currentState==1">Active</h6>
-                                            <h6 v-if="currentState!=1">Active</h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="choice" data-toggle="wizard-checkbox">
-                                            <input type="checkbox" name="jobb" value="Code">
-                                            <div class="icon">
-                                                <a href="#about" @click.prevent="changeCurrentState(2)">
-                                                    <i class="nc-icon nc-laptop" style="color:black" v-if="currentState!=2"></i>
-                                                    <i class="nc-icon nc-laptop" v-if="currentState==2"></i>
-                                                </a>
-                                            </div>
-                                            <h6 style="color: powderblue" v-if="currentState==2">Not Active</h6>
-                                            <h6 v-if="currentState!=2">Not Active</h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="choice" data-toggle="wizard-checkbox">
-                                            <input type="checkbox" name="jobb" value="Code">
-                                            <div class="icon">
-                                                <a href="#about" @click.prevent="changeCurrentState(4)">
-                                                    <i class="nc-icon nc-laptop" style="color:black" v-if="currentState!=4"></i>
-                                                    <i class="nc-icon nc-laptop" v-if="currentState==4"></i>
-                                                </a>
-                                            </div>
-                                            <h6 style="color: powderblue" v-if="currentState==4">Stopped</h6>
-                                            <h6 v-if="currentState!=4">Stopped</h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="choice" data-toggle="wizard-checkbox">
-                                            <input type="checkbox" name="jobb" value="Develop">
-                                            <div class="icon">
-                                                <a href="#about" @click.prevent="changeCurrentState(3)">
-                                                    <i class="nc-icon nc-atom" style="color:black" v-if="currentState!=3"></i>
-                                                    <i class="nc-icon nc-atom" v-if="currentState==3"></i>
-                                                </a>
-                                            </div>
-                                            <h6 style="color: powderblue" v-if="currentState==3">History</h6>
-                                            <h6 v-if="currentState!=3">History</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!--Active
-                            <div class="col-md-10" v-if="currentState==1">
-                                <div class="table-responsive" style="overflow: hidden;">
-                                    <table class="table">
-                                        <thead class="text-primary">
-                                            <tr>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-for="item in activePackges">
-                                                <td>
-                                                    <div class="card ">
-                                                        <div class="card-header " style="margin-right:5%">
-                                                            <h5 class="card-title">
-                                                                {{item.code}}
-
-                                                                <el-button class="btn btn-success btn-round btn-icon btn"
-                                                                           style="float: left;margin-left:12px"
-                                                                           @click.prevent="showReloadDialog(item)"
-                                                                           title="تجديد الباقة">
-                                                                    <i class="nc-icon nc-refresh-69" style="padding: 2px;"></i>
-                                                                </el-button>
-                                                                <el-button class="btn btn-danger btn-round btn-icon btn"
-                                                                           style="float: left;margin-left:5px"
-                                                                           @click.prevent="showStopSMSDialog(item)"
-                                                                           title="إيقاف الخدمة">
-                                                                    <i class="nc-icon nc-button-pause" style="padding: 2px;"></i>
-                                                                </el-button>
-                                                                <el-button class="btn btn-warning btn-round btn-icon btn"
-                                                                           style="float: left;margin-left:5px"
-                                                                           @click.prevent="showSMSInfo"
-                                                                           title="عرض الرسائل">
-                                                                    <i class="nc-icon nc-alert-circle-i" style="padding: 2px;"></i>
-                                                                </el-button>
-
-
-                                                            </h5>
-
-
-                                                            <p class="card-category">{{item.service}}</p>
-                                                            <hr />
-                                                        </div>
-                                                        <div class="card-body ">
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-
-                                                                    <el-progress type="circle" :percentage="item.usagePercentage"></el-progress>
-                                                                </div>
-                                                                <div class="col-md-8">
-
-                                                                    <div class="row"
-                                                                         style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:lightslategrey">
-                                                                        <div class="col-md-7">
-                                                                            <div>
-                                                                                <h6>
-                                                                                    قيمة الإشتراك
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    القيمة المدفوعة
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    إجمـــالــي عــدد الرســائــل
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    الرسائل المستخدمة
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    الرسائل المتبقية
-                                                                                </h6>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-4">
-                                                                            <div>
-                                                                                <h6>
-                                                                                    {{item.amount}} دينار
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    {{item.amount}} دينار
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    {{item.smsCount}} رسالــة
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    {{item.usageSMS}} رسالــة
-                                                                                </h6>
-
-                                                                                <h6 style="margin-top:15px">
-                                                                                    {{item.remindSMS}} رسالــة
-                                                                                </h6>
-
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-footer ">
-                                                            <div class="legend">
-                                                                <i class="fa fa-circle text-info"></i> Active
-                                                            </div>
-                                                            <hr>
-                                                            <div class="row" style="padding-right:20px">
-                                                                <div class="stats">
-                                                                    تاريخ الإشتراك
-                                                                    <br />
-                                                                    <i class="fa fa-calendar"></i> {{item.from | moment}}
-                                                                    <br />
-                                                                </div>
-                                                                <div class="stats" style="/* FONT-WEIGHT: 500; */float: left;display: block;left: 20px;position: absolute;">
-                                                                    صلاحية الباقة
-                                                                    <br> <i class="fa fa-calendar"></i> {{item.to | moment}}
-                                                                    <br>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                                <br />
-                                <hr />
-                                <div class="row" dir="ltr">
-                                    <div class="col-sm-12 col-md-5">
-                                        <div class="disabled-sorting text-right" id="datatable_info" role="status" aria-live="polite">Showing {{ActivePageNo}} to {{ActivePageSize}} of {{ActivePages}} entries</div>
-                                    </div>
-
-                                    <div style="text-align: center; ">
-
-                                        <el-pagination background
-                                                       layout="prev, pager, next"
-                                                       :current-page="ActivePageNo"
-                                                       :page-size="ActivePageSize"
-                                                       :total="ActivePages"
-                                                       @current-change="getCustomers($event)">
-                                        </el-pagination>
-
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-
-                            <!--SMS Info
-                            <el-dialog :visible.sync="SMSInfoDialog" :modalAppendToBody="false" @visible-change="onVisible">
-                                <div>
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                        <h5 class="modal-title" id="myModalLabel">متابعة الرسائل المرسلة من تاريخ الإشتراك بالباقة</h5>
-                                    </div>
-                                    <div class="table-responsive" style="overflow: hidden;">
-                                        <table class="table">
-                                            <thead class="text-primary">
-                                                <tr>
-                                                    <th class="text-center">
-                                                        #
-                                                    </th>
-                                                    <th>
-                                                        التاريخ
-                                                    </th>
-                                                    <th>
-                                                        الوقت
-                                                    </th>
-                                                    <th class="text-center">
-                                                        الحالة
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="text-center">
-                                                        1
-                                                    </td>
-                                                    <td>
-                                                        Andrew Mike
-                                                    </td>
-                                                    <td>
-                                                        Develop
-                                                    </td>
-                                                    <td class="text-center">
-                                                        2013
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center">
-                                                        2
-                                                    </td>
-                                                    <td>
-                                                        Andrew Mike
-                                                    </td>
-                                                    <td>
-                                                        Develop
-                                                    </td>
-                                                    <td class="text-center">
-                                                        2013
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center">
-                                                        3
-                                                    </td>
-                                                    <td>
-                                                        Andrew Mike
-                                                    </td>
-                                                    <td>
-                                                        Develop
-                                                    </td>
-                                                    <td class="text-center">
-                                                        2013
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-center">
-                                                        4
-                                                    </td>
-                                                    <td>
-                                                        Andrew Mike
-                                                    </td>
-                                                    <td>
-                                                        Develop
-                                                    </td>
-                                                    <td class="text-center">
-                                                        2013
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                    <div class="modal-footer justify-content-center">
-                                        <br />
-                                        <div class="row" style="direction:ltr;margin-top:15px">
-                                            <div class="col-sm-12 col-md-5">
-                                                <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Showing 1 to 10 of 42 entries</div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-5">
-                                                <div class="dataTables_paginate paging_full_numbers" id="datatable_paginate">
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button page-item active">
-                                                            <a href="#" aria-controls="datatable" data-dt-idx="2" tabindex="0" class="page-link">
-                                                                1
-                                                            </a>
-                                                        </li>
-                                                        <li class="paginate_button page-item ">
-                                                            <a href="#" aria-controls="datatable" data-dt-idx="3" tabindex="0" class="page-link">
-                                                                2
-                                                            </a>
-                                                        </li>
-                                                        <li class="paginate_button page-item ">
-                                                            <a href="#" aria-controls="datatable" data-dt-idx="4" tabindex="0" class="page-link">
-                                                                3
-                                                            </a>
-                                                        </li>
-                                                        <li class="paginate_button page-item ">
-                                                            <a href="#" aria-controls="datatable" data-dt-idx="5" tabindex="0" class="page-link">
-                                                                4
-                                                            </a>
-                                                        </li>
-                                                        <li class="paginate_button page-item ">
-                                                            <a href="#" aria-controls="datatable" data-dt-idx="6" tabindex="0" class="page-link">
-                                                                5
-                                                            </a>
-                                                        </li>
-
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </el-dialog>
-
-                            <!--Reload SMS Service
-                            <el-dialog :visible.sync="ReloadServiceDialog" :modalAppendToBody="false" @visible-change="onVisible">
-                                <div class="modal-header">
-
-                                    <h5 class="modal-title" id="myModalLabel">إعادة الإشتراك بالباقة</h5>
-                                </div>
-                                <br />
-                                <br />
-                                <el-form :model="ReloadserviceInfo" ref="ReloadserviceInfo">
-                                    <div class="tab-pane active show" id="address">
-                                        <div class="row justify-content-center">
-
-                                            <div class="col-sm-7">
-                                                <div class="form-group">
-                                                    <label>عدد الرسائل</label>
-                                                    <el-form-item prop="countMassage"
-                                                                  label-width="0px"
-                                                                  :rules="[{required: true, message: 'الرجاء إدخال عدد الرسائل'}
-                                                                      ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
-                                                        <el-input type="countMassage"
-                                                                  placeholder="عدد الرسائل"
-                                                                  v-model.number="ReloadserviceInfo.countMassage"
-                                                                  autocomplete="off" />
-                                                    </el-form-item>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="form-group">
-                                                    <label>القيمة</label>
-                                                    <el-form-item prop="amount"
-                                                                  label-width="0px"
-                                                                  :rules="[{required: true, message: 'الرجاء إدخال القيمة'}
-                                                                      ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
-                                                        <el-input type="amount"
-                                                                  placeholder="القيمة"
-                                                                  v-model.number="ReloadserviceInfo.amount"
-                                                                  autocomplete="off" />
-                                                    </el-form-item>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <div class="form-group">
-                                                    <label>تاريخ إنتهاء الصلاحية</label>
-                                                    <el-form-item prop="to"
-                                                                  label-width="0px"
-                                                                  :rules="[{ required: true, message: 'الرجاء إدخال تاريخ  '} ]">
-
-                                                        <el-date-picker style="width:100%"
-                                                                        v-model="ReloadserviceInfo.to"
-                                                                        type="date"
-                                                                        placeholder="من">
-                                                        </el-date-picker>
-
-                                                    </el-form-item>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <div class="form-group select-wizard" style="float:left ;">
-                                                    <el-button class="btn btn-twitter" @click="submitForm('ReloadserviceInfo')"
-                                                               style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
-                                                        تجديد الباقة
-                                                    </el-button>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </el-form>
-                            </el-dialog>
-
-                            <!--Stop SMS Service
-                            <el-dialog :visible.sync="StopSMSServiceDialog" :modalAppendToBody="false" @visible-change="onVisible">
-
-                                <div style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serifs">أنت علي وشك القيام بإيقاف الخدمة الرجاء تعبئة البيانات  التالية</h5>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="instruction">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <h5> سبب الإيقاف</h5>
-                                                    <el-input type="textarea"
-                                                              :rows="4"
-                                                              placeholder=" الرجاء إدخال سبب الإيقاف"
-                                                              v-model="stopResone">
-                                                    </el-input>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <br />
-                                        <br />
-                                        <div class="instruction">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <h5>هل تريد إرسال رسالة للعميل توضح سبب إيقاف الخدمة</h5>
-
-                                                    <el-input type="textarea"
-                                                              :rows="4"
-                                                              v-model="SMSstopResone">
-                                                    </el-input>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p>في حال لم تقم بتعديل نص الرسالة سيتم إرسال الرسالة للتوضيح</p>
-                                    </div>
-                                    <div class="modal-footer justify-content-center">
-                                        <el-button class="btn btn-danger" @click="canselStoped()">
-                                            إلغاء العملية
-                                        </el-button>
-                                        <el-button class="btn btn-twitter" @click="stopServeice">
-                                            إيقاف الخدمة
-                                        </el-button>
-
-
-                                    </div>
-                                </div>
-                            </el-dialog>
-
-                            <!--Not Active
-                            <div class="col-md-10" v-if="currentState==2">
-                                <div class="table-responsive" style="overflow: hidden;">
-                                    <table class="table">
-                                        <thead class="text-primary">
-                                            <tr>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-for="item in notactivePackges">
-                                                <td>
-                                                    <div class="card ">
-                                                        <div class="card-header " style="margin-right:5%">
-                                                            <h5 class="card-title">
-                                                                {{item.code}}
-
-                                                                <el-button class="btn btn-success btn-round btn-icon btn"
-                                                                           style="float: left;margin-left:12px"
-                                                                           @click.prevent="showReloadDialog(item)"
-                                                                           title="تجديد الباقة">
-                                                                    <i class="nc-icon nc-refresh-69" style="padding: 2px;"></i>
-                                                                </el-button>
-                                                                <!--
-                                                                <el-button class="btn btn-danger btn-round btn-icon btn"
-                                                                           style="float: left;margin-left:5px"
-                                                                           @click.prevent="showStopSMSDialog(item)"
-                                                                           title="إيقاف الخدمة">
-                                                                    <i class="nc-icon nc-button-pause" style="padding: 2px;"></i>
-                                                                </el-button>
-                                                                <el-button class="btn btn-warning btn-round btn-icon btn"
-                                                                           style="float: left;margin-left:5px"
-                                                                           @click.prevent="showSMSInfo"
-                                                                           title="عرض الرسائل">
-                                                                    <i class="nc-icon nc-alert-circle-i" style="padding: 2px;"></i>
-                                                                </el-button>
-
-
-                                                            </h5>
-
-
-                                                            <p class="card-category">{{item.service}}</p>
-                                                            <hr />
-                                                        </div>
-                                                        <div class="card-body ">
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-
-                                                                    <el-progress type="circle" :percentage="item.usagePercentage" color="#f56c6c" status="exception"></el-progress>
-                                                                </div>
-                                                                <div class="col-md-8">
-
-                                                                    <div class="row"
-                                                                         style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:lightslategrey">
-                                                                        <div class="col-md-7">
-                                                                            <div>
-                                                                                <h6>
-                                                                                    قيمة الإشتراك
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    القيمة المدفوعة
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    إجمـــالــي عــدد الرســائــل
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    الرسائل المستخدمة
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    الرسائل المتبقية
-                                                                                </h6>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-4">
-                                                                            <div>
-                                                                                <h6>
-                                                                                    {{item.amount}} دينار
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    {{item.amount}} دينار
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    {{item.smsCount}} رسالــة
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    {{item.usageSMS}} رسالــة
-                                                                                </h6>
-
-                                                                                <h6 style="margin-top:15px">
-                                                                                    {{item.remindSMS}} رسالــة
-                                                                                </h6>
-
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-footer ">
-                                                            <div class="legend">
-                                                                <i class="fa fa-circle text-danger"></i> Not Active
-                                                            </div>
-                                                            <hr>
-                                                            <div class="row" style="padding-right:20px">
-                                                                <div class="stats">
-                                                                    تاريخ الإشتراك
-                                                                    <br />
-                                                                    <i class="fa fa-calendar"></i> {{item.from | moment}}
-                                                                    <br />
-                                                                </div>
-                                                                <div class="stats" style="/* FONT-WEIGHT: 500; */float: left;display: block;left: 20px;position: absolute;">
-                                                                    صلاحية الباقة
-                                                                    <br> <i class="fa fa-calendar"></i> {{item.to | moment}}
-                                                                    <br>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                                <br />
-                                <hr />
-                                <div class="row" dir="ltr">
-                                    <div class="col-sm-12 col-md-5">
-                                        <div class="disabled-sorting text-right" id="datatable_info" role="status" aria-live="polite">Showing {{notActivePageNo}} to {{notActivePageSize}} of {{notActivePages}} entries</div>
-                                    </div>
-
-                                    <div style="text-align: center; ">
-
-                                        <el-pagination background
-                                                       layout="prev, pager, next"
-                                                       :current-page="notActivePageNo"
-                                                       :page-size="notActivePageSize"
-                                                       :total="notActivePages"
-                                                       @current-change="getCustomers($event)">
-                                        </el-pagination>
-
-                                    </div>
-
-                                </div>
-                                <br />
-                                <hr />
-                                <br />
-                            </div>
-
-                            <!--Stopped
-                            <div class="col-md-10" v-if="currentState==4 && stoppedPackges!=0">
-                                <div class="table-responsive" style="overflow: hidden;">
-                                    <table class="table">
-                                        <thead class="text-primary">
-                                            <tr>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-for="item in stoppedPackges">
-                                                <td>
-                                                    <div class="card ">
-                                                        <div class="card-header " style="margin-right:5%">
-                                                            <h5 class="card-title">
-                                                                {{item.code}}
-
-                                                                <el-button class="btn btn-danger btn-round btn-icon btn"
-                                                                           style="float: left;margin-left:12px"
-                                                                           @click.prevent="backService(item)"
-                                                                           title="إيرجاع الخدمة">
-                                                                    <i class="nc-icon nc-button-play" style="padding: 2px;"></i>
-                                                                </el-button>
-
-
-                                                            </h5>
-
-
-                                                            <p class="card-category">{{item.service}}</p>
-                                                            <hr />
-                                                        </div>
-                                                        <div class="card-body ">
-                                                            <div class="row">
-                                                                <div class="col-md-4">
-
-                                                                    <el-progress type="circle" :percentage="item.usagePercentage" color="#f56c6c" status="exception"></el-progress>
-                                                                </div>
-                                                                <div class="col-md-8">
-
-                                                                    <div class="row"
-                                                                         style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:lightslategrey">
-                                                                        <div class="col-md-7">
-                                                                            <div>
-                                                                                <h6>
-                                                                                    قيمة الإشتراك
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    القيمة المدفوعة
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    إجمـــالــي عــدد الرســائــل
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    الرسائل المستخدمة
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    الرسائل المتبقية
-                                                                                </h6>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-4">
-                                                                            <div>
-                                                                                <h6>
-                                                                                    {{item.amount}} دينار
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    {{item.amount}} دينار
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    {{item.smsCount}} رسالــة
-                                                                                </h6>
-                                                                                <h6 style="margin-top:15px">
-                                                                                    {{item.usageSMS}} رسالــة
-                                                                                </h6>
-
-                                                                                <h6 style="margin-top:15px">
-                                                                                    {{item.remindSMS}} رسالــة
-                                                                                </h6>
-
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-footer ">
-                                                            <div class="legend">
-                                                                <i class="fa fa-circle text-danger"></i> Stopped
-                                                            </div>
-                                                            <hr>
-                                                            <div class="row" style="padding-right:20px">
-                                                                <div class="stats">
-                                                                    تاريخ الإشتراك
-                                                                    <br />
-                                                                    <i class="fa fa-calendar"></i> {{item.from | moment}}
-                                                                    <br />
-                                                                </div>
-                                                                <div class="stats" style="/* FONT-WEIGHT: 500; */float: left;display: block;left: 20px;position: absolute;">
-                                                                    صلاحية الباقة
-                                                                    <br> <i class="fa fa-calendar"></i> {{item.to | moment}}
-                                                                    <br>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                                <br />
-                                <hr />
-                                <div class="row" dir="ltr" v-if="stoppedPackges!=0">
-                                    <div class="col-sm-12 col-md-5">
-                                        <div class="disabled-sorting text-right" id="datatable_info" role="status" aria-live="polite">Showing {{stoppedPageNo}} to {{stoppedPageSize}} of {{stoppedPages}} entries</div>
-                                    </div>
-
-                                    <div style="text-align: center; ">
-
-                                        <el-pagination background
-                                                       layout="prev, pager, next"
-                                                       :current-page="stoppedPageNo"
-                                                       :page-size="stoppedPageSize"
-                                                       :total="stoppedPages"
-                                                       @current-change="getCustomers($event)">
-                                        </el-pagination>
-
-                                    </div>
-
-                                </div>
-
-
-                                <br />
-                                <hr />
-                                <br />
-                            </div>
-
-                            <!--History
-                            <div class="table-responsive" style="padding:10px;overflow: hidden;" v-if="currentState==3">
-                                <table class="table">
-                                    <thead class="">
-                                        <tr style="text-align:center" class="text-primary">
-                                            <th>
-                                                #
-                                            </th>
-                                            <th>
-                                                رقم الخدمة
-                                            </th>
-                                            <th>
-                                                الحركة
-                                            </th>
-                                            <th>
-                                                القيمة
-                                            </th>
-                                            <th>
-                                                عدد الرسائل
-                                            </th>
-                                            <th>
-                                                من
-                                            </th>
-                                            <th>
-                                                إلي
-                                            </th>
-                                            <th>
-                                                المستخدم
-                                            </th>
-                                            <th>
-                                                التوقيت
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="item,index in historyPackges" style="text-align:center">
-                                            <td>
-                                                {{index+1 }}
-                                            </td>
-                                            <td>
-                                                {{item.code }}
-                                            </td>
-                                            <td>
-                                                {{item.actionDescription }}
-                                            </td>
-                                            <td>
-                                                {{item.amount }}
-                                            </td>
-                                            <td>
-                                                {{item.smsCount }}
-                                            </td>
-                                            <td>
-                                                {{item.from }}
-                                            </td>
-                                            <td>
-                                                {{item.to }}
-                                            </td>
-                                            <td>
-                                                {{item.createdBy}}
-                                            </td>
-                                            <td>
-                                                {{item.createcdOn | moment}}
-                                            </td>
-
-                                        </tr>
-                                    </tbody>
-
-                                </table>
-
-                                <hr />
-                                <br />
-                                <div class="row" dir="ltr">
-                                    <div class="col-sm-12 col-md-5">
-                                        <div class="disabled-sorting text-right" id="datatable_info" role="status" aria-live="polite">Showing {{historyPageNo}} to {{historyPageSize}} of {{historyPages}} entries</div>
-                                    </div>
-
-                                    <div style="text-align: center; ">
-
-                                        <el-pagination background
-                                                       layout="prev, pager, next"
-                                                       :current-page="historyPageNo"
-                                                       :page-size="historyPageSize"
-                                                       :total="historyPages"
-                                                       @current-change="getHistoryPackges($event)">
-                                        </el-pagination>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <!--Add Packege
-                    <div class="tab-pane" id="address">
-                        <el-form :model="serviceInfo" ref="serviceInfo">
-                            <div class="row justify-content-center">
-                                <div class="col-sm-12">
-                                    <h5 class="info-text"> Are you living in a nice area? </h5>
-                                </div>
-                                <div class="col-sm-7">
+        </el-dialog>
 
-                                    <div class="form-group">
-                                        <label>إسم الخدمة</label>
-                                        <div class="form-group">
-                                            <el-form-item prop="serviceName"
-                                                          label-width="0px"
-                                                          :rules="[{required: true, message: 'الرجاء إدخال إسم الخدمة'} ]">
-                                                <el-input type="serviceName"
-                                                          placeholder="إسم الخدمة"
-                                                          v-model="serviceInfo.serviceName"
-                                                          autocomplete="off" />
-                                            </el-form-item>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>رقم الخدمة</label>
-                                        <div class="form-group">
-                                            <el-form-item prop="code"
-                                                          label-width="0px"
-                                                          :rules="[{required: true, message: 'الرجاء إدخال رقم الخدمة'}
-                                                                      ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
-                                                <el-input type="code"
-                                                          placeholder="رقم الخدمة"
-                                                          v-model.number="serviceInfo.code"
-                                                          autocomplete="off" />
-                                            </el-form-item>
-                                        </div>
-                                    </div>
-                                </div>
+        <!--Reload SMS Service-->
+        <el-dialog :visible.sync="ReloadServiceDialog" :modalAppendToBody="false">
+            <div class="modal-header">
 
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>القيمة</label>
-                                        <div class="form-group">
-                                            <el-form-item prop="amount"
-                                                          label-width="0px"
-                                                          :rules="[{required: true, message: 'الرجاء إدخال القيمة'}
-                                                                      ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
-                                                <el-input type="amount"
-                                                          placeholder="القيمة"
-                                                          v-model.number="serviceInfo.amount"
-                                                          autocomplete="off" />
-                                            </el-form-item>
-                                        </div>
+                <h5 class="modal-title" id="myModalLabel">إعادة الإشتراك بالباقة</h5>
+            </div>
+            <br />
+            <br />
+            <el-form :model="ReloadserviceInfo" ref="ReloadserviceInfo">
+                <div class="tab-pane active show" id="address">
+                    <div class="row justify-content-center">
 
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>عدد الرسائل</label>
-                                        <div class="form-group">
-                                            <el-form-item prop="countMassage"
-                                                          label-width="0px"
-                                                          :rules="[{required: true, message: 'الرجاء إدخال عدد الرسائل'}
-                                                                      ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
-                                                <el-input type="countMassage"
-                                                          placeholder="عدد الرسائل"
-                                                          v-model.number="serviceInfo.countMassage"
-                                                          autocomplete="off" />
-                                            </el-form-item>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label>تاريخ صلايحة الباقة </label>
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <label>عدد الرسائل</label>
+                                <el-form-item prop="countMassage"
+                                              label-width="0px"
+                                              :rules="[{required: true, message: 'الرجاء إدخال عدد الرسائل'}
+                                                    ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
+                                    <el-input type="countMassage"
+                                              placeholder="عدد الرسائل"
+                                              v-model.number="ReloadserviceInfo.countMassage" />
+                                    <!--autocomplete="off"-->
+                                </el-form-item>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label>القيمة</label>
+                                <el-form-item prop="amount"
+                                              label-width="0px"
+                                              :rules="[{required: true, message: 'الرجاء إدخال القيمة'}
+                                                    ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
+                                    <el-input type="amount"
+                                              placeholder="القيمة"
+                                              v-model.number="ReloadserviceInfo.amount" />
+                                    <!--autocomplete="off"-->
+                                </el-form-item>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <label>تاريخ إنتهاء الصلاحية</label>
+                                <el-form-item prop="to"
+                                              label-width="0px"
+                                              :rules="[{ required: true, message: 'الرجاء إدخال تاريخ  '} ]">
 
-                                        <el-form-item prop="from"
-                                                      label-width="0px"
-                                                      :rules="[{ required: true, message: 'الرجاء إدخال تاريخ  '} ]">
+                                    <el-date-picker style="width:100%"
+                                                    v-model="ReloadserviceInfo.to"
+                                                    type="date"
+                                                    placeholder="من">
+                                    </el-date-picker>
 
-                                            <el-date-picker style="width:100%"
-                                                            v-model="serviceInfo.from"
-                                                            type="date"
-                                                            placeholder="">
-                                            </el-date-picker>
-
-                                        </el-form-item>
-                                    </div>
-                                </div>
-                                <div class="col-sm-10">
-                                    <div class="form-group">
-                                        <label>وصف توضيحي للخدمة</label>
-                                        <input type="text" class="form-control" v-model="serviceInfo.discriptions"
-                                               placeholder="وصف توضيحي للخدمة">
-                                    </div>
-                                </div>
+                                </el-form-item>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="form-group select-wizard" style="float:left ;">
+                                <el-button class="btn btn-twitter" @click="submitForm('ReloadserviceInfo')"
+                                           style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+                                    تجديد الباقة
+                                </el-button>
 
                             </div>
-                        </el-form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </el-form>
+        </el-dialog>
 
-            <!--footer
-            <div class="card-footer">
-                <div class="pull-right">
-
-
-                    <el-button class="btn btn-next btn-fill btn-rose btn-wd" style="font-size:14px" type="primary" @click="allowEdit" v-if="EditInfo==0 && currentPage==0">تعديل البيانات</el-button>
-                    <el-button class="btn btn-next btn-fill btn-rose btn-wd" type="primary" @click="submitForm('customersInfo')" v-if="EditInfo==1 && currentPage==0"
-                               style="font-size:14px">حفظ التعديل</el-button>
-                    <el-button style="font-size:14px" class="btn btn-next btn-fill btn-rose btn-wd" type="primary" @click="submitForm('serviceInfo')" v-if="currentPage==2">إضافة الباقة</el-button>
-                </div>
-
-                <div class="pull-left">
-                    <el-button class="btn btn-danger" style="font-size:14px" type="danger" @click="canselEdit()" v-if="EditInfo==1 && currentPage==0">إلغاء التعديل</el-button>
-                </div>
-                <div class="pull-left">
-                    <input type="button" style="font-size:14px" class="btn btn-previous btn-fill btn-default btn-wd disabled" name="previous" value="Previous">
-                </div>
-                <div class="clearfix"></div>
-            </div>
-
-
-
-            </form>
-
-        </div>
-
-    </div>-->
 
     </div>
 
 </div>
+
+<!--
+<div class="col-md-10" style="margin-top: 1000px;">
+
+    <div class="card card-wizard active" data-color="primary" id="wizardProfile">
+
+        <form>
+
+            <!--Hedar
+<div class="card-header text-center">
+    <h3 class="card-title">
+        متابعة حركات العملاء والتقارير الخاصة بهم
+        <div class="pull-right" style="margin-left: 7px;">
+            <el-button class="btn btn-primary btn-round btn-icon" title="رجوع" @click.prevent="cansel()">
+                <i class="nc-icon nc-minimal-left " style="padding-right: 3px;"></i>
+            </el-button>
+        </div>
+
+    </h3>
+    <h5 class="description">متابعة حركات العملاء والتقارير الخاصة بهم </h5>
+    <div class="wizard-navigation">
+        <ul class="nav nav-pills">
+            <li class="nav-item" style="width: 33.3333%;">
+                <a class="nav-link active" href="#about" @click.prevent="ChangDivStyle(1)" data-toggle="tab" role="tab" aria-controls="about" aria-selected="true">
+                    <i class="nc-icon nc-single-02"></i> البيانات الشخصية
+                </a>
+            </li>
+            <li class="nav-item" style="width: 33.3333%;">
+                <a class="nav-link" href="#account" data-toggle="tab" @click.prevent="ChangDivStyle(2)" role="tab" aria-controls="account" aria-selected="true">
+                    <i class="nc-icon nc-layout-11"></i> الباقات
+                </a>
+            </li>
+            <li class="nav-item" style="width: 33.3333%;">
+                <a class="nav-link" href="#address" data-toggle="tab" @click.prevent="ChangDivStyle(3)" role="tab" aria-controls="address" aria-selected="true">
+                    <i class="nc-icon nc-simple-add"></i> إضافة باقة
+                </a>
+            </li>
+        </ul>
+        <div class="moving-tab" v-bind:style="[baseStyles]">
+            <i :class=icons></i> {{iconsHont}}
+        </div>
+
+    </div>
+</div>
+
+<!--body
+<div class="card-body">
+
+    <div class="tab-content">
+        <!--Tab pane Persnal Info -- Packges -- Add Packege-->
+<!--Pesnal Info
+                <div class="tab-pane show active" id="about">
+                    <el-form :model="customersInfo" ref="customersInfo">
+                        <h5 class="info-text"> </h5>
+                        <div class="row justify-content-center">
+                            <div class="col-sm-2">
+                                <div class="picture-container">
+                                    <div class="picture">
+                                        <img src="/assets/img/default-avatar.png" class="picture-src" id="wizardPicturePreview" title="">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>إسم العميل</label>
+
+                                        <div class="form-group">
+                                            <el-form-item prop="name"
+                                                          label-width="0px"
+                                                          :rules="[{required: true, message: 'الرجاء إدخال إسم العميل'} ]">
+                                                <el-input type="name"
+                                                          placeholder="إسم العميل"
+                                                          v-model="customersInfo.name"
+                                                          autocomplete="off"
+                                                          :disabled="EditInfo == 0" />
+                                            </el-form-item>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>رقم الهاتف</label>
+                                        <div class="form-group">
+                                            <el-form-item prop="phone"
+                                                          label-width="0px"
+                                                          :rules="[{required: true, message: 'الرجاء إدخال رقم الهاتف'}
+                                                   ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
+                                                <el-input type="phone"
+                                                          placeholder="رقم الهاتف"
+                                                          v-model.number="customersInfo.phone"
+                                                          autocomplete="off"
+                                                          :disabled="EditInfo == 0" />
+                                            </el-form-item>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>تاريخ الميلاد</label>
+                                        <el-form-item prop="date"
+                                                      label-width="0px"
+                                                      :rules="[{ required: true, message: 'الرجاء إدخال تاريخ  الميلاد'} ]">
+
+                                            <el-date-picker style="width:100%"
+                                                            v-model="customersInfo.date"
+                                                            type="date"
+                                                            placeholder="الرجاء إدخال"
+                                                            :disabled="EditInfo == 0">
+                                            </el-date-picker>
+
+                                        </el-form-item>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>البريد الإلكتروني</label>
+                                        <div class="form-group">
+                                            <el-form-item prop="email"
+                                                          label-width="0px"
+                                                          :rules="[{required: true, message: 'الرجاء إدخال البريد الإلكتروني'} ]">
+                                                <el-input type="email"
+                                                          placeholder="البريد الإلكتروني"
+                                                          v-model="customersInfo.email"
+                                                          autocomplete="off"
+                                                          :disabled="EditInfo == 0" />
+                                            </el-form-item>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>إسم الشركة</label>
+                                        <div class="form-group">
+                                            <el-form-item prop="companyName"
+                                                          label-width="0px"
+                                                          :rules="[{required: true, message: 'الرجاء إدخال إسم الشركة'} ]">
+                                                <el-input type="companyName"
+                                                          placeholder="إسم الشركة"
+                                                          v-model="customersInfo.companyName"
+                                                          autocomplete="off"
+                                                          :disabled="EditInfo == 0" />
+                                            </el-form-item>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>عنوان الشركة</label>
+                                        <div class="form-group">
+                                            <el-form-item prop="companyAddress"
+                                                          label-width="0px"
+                                                          :rules="[{required: true, message: 'الرجاء إدخال عنوان الشركة'} ]">
+                                                <el-input type="companyAddress"
+                                                          placeholder="عنوان الشركة"
+                                                          v-model="customersInfo.companyAddress"
+                                                          autocomplete="off"
+                                                          :disabled="EditInfo == 0" />
+                                            </el-form-item>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </el-form>
+                </div>
+
+                <!--Packege Info
+                <div class="tab-pane" id="account">
+                    <h5 class="info-text"> الباقات الخاصة الخاصة بالعميل : أحمد طارق بن سليمان</h5>
+                    <div class="row justify-content-center">
+                        <div class="row">
+
+                        </div>
+
+                        <!--Tab bane // Active -- Not Active -- History
+                        <div class="col-lg-10" style="margin-bottom:70px">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="choice" data-toggle="wizard-checkbox">
+
+                                        <div class="icon">
+                                            <a href="#about" @click.prevent="changeCurrentState(1)">
+
+                                                <i class="nc-icon nc-ruler-pencil" style="color:black" v-if="currentState!=1" />
+                                                <i class="nc-icon nc-ruler-pencil" v-if="currentState==1" />
+                                            </a>
+                                        </div>
+                                        <h6 style="color: powderblue" v-if="currentState==1">Active</h6>
+                                        <h6 v-if="currentState!=1">Active</h6>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="choice" data-toggle="wizard-checkbox">
+                                        <input type="checkbox" name="jobb" value="Code">
+                                        <div class="icon">
+                                            <a href="#about" @click.prevent="changeCurrentState(2)">
+                                                <i class="nc-icon nc-laptop" style="color:black" v-if="currentState!=2"></i>
+                                                <i class="nc-icon nc-laptop" v-if="currentState==2"></i>
+                                            </a>
+                                        </div>
+                                        <h6 style="color: powderblue" v-if="currentState==2">Not Active</h6>
+                                        <h6 v-if="currentState!=2">Not Active</h6>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="choice" data-toggle="wizard-checkbox">
+                                        <input type="checkbox" name="jobb" value="Code">
+                                        <div class="icon">
+                                            <a href="#about" @click.prevent="changeCurrentState(4)">
+                                                <i class="nc-icon nc-laptop" style="color:black" v-if="currentState!=4"></i>
+                                                <i class="nc-icon nc-laptop" v-if="currentState==4"></i>
+                                            </a>
+                                        </div>
+                                        <h6 style="color: powderblue" v-if="currentState==4">Stopped</h6>
+                                        <h6 v-if="currentState!=4">Stopped</h6>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="choice" data-toggle="wizard-checkbox">
+                                        <input type="checkbox" name="jobb" value="Develop">
+                                        <div class="icon">
+                                            <a href="#about" @click.prevent="changeCurrentState(3)">
+                                                <i class="nc-icon nc-atom" style="color:black" v-if="currentState!=3"></i>
+                                                <i class="nc-icon nc-atom" v-if="currentState==3"></i>
+                                            </a>
+                                        </div>
+                                        <h6 style="color: powderblue" v-if="currentState==3">History</h6>
+                                        <h6 v-if="currentState!=3">History</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Active
+                        <div class="col-md-10" v-if="currentState==1">
+                            <div class="table-responsive" style="overflow: hidden;">
+                                <table class="table">
+                                    <thead class="text-primary">
+                                        <tr>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="item in activePackges">
+                                            <td>
+                                                <div class="card ">
+                                                    <div class="card-header " style="margin-right:5%">
+                                                        <h5 class="card-title">
+                                                            {{item.code}}
+
+                                                            <el-button class="btn btn-success btn-round btn-icon btn"
+                                                                       style="float: left;margin-left:12px"
+                                                                       @click.prevent="showReloadDialog(item)"
+                                                                       title="تجديد الباقة">
+                                                                <i class="nc-icon nc-refresh-69" style="padding: 2px;"></i>
+                                                            </el-button>
+                                                            <el-button class="btn btn-danger btn-round btn-icon btn"
+                                                                       style="float: left;margin-left:5px"
+                                                                       @click.prevent="showStopSMSDialog(item)"
+                                                                       title="إيقاف الخدمة">
+                                                                <i class="nc-icon nc-button-pause" style="padding: 2px;"></i>
+                                                            </el-button>
+                                                            <el-button class="btn btn-warning btn-round btn-icon btn"
+                                                                       style="float: left;margin-left:5px"
+                                                                       @click.prevent="showSMSInfo"
+                                                                       title="عرض الرسائل">
+                                                                <i class="nc-icon nc-alert-circle-i" style="padding: 2px;"></i>
+                                                            </el-button>
+
+
+                                                        </h5>
+
+
+                                                        <p class="card-category">{{item.service}}</p>
+                                                        <hr />
+                                                    </div>
+                                                    <div class="card-body ">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+
+                                                                <el-progress type="circle" :percentage="item.usagePercentage"></el-progress>
+                                                            </div>
+                                                            <div class="col-md-8">
+
+                                                                <div class="row"
+                                                                     style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:lightslategrey">
+                                                                    <div class="col-md-7">
+                                                                        <div>
+                                                                            <h6>
+                                                                                قيمة الإشتراك
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                القيمة المدفوعة
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                إجمـــالــي عــدد الرســائــل
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                الرسائل المستخدمة
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                الرسائل المتبقية
+                                                                            </h6>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div>
+                                                                            <h6>
+                                                                                {{item.amount}} دينار
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                {{item.amount}} دينار
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                {{item.smsCount}} رسالــة
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                {{item.usageSMS}} رسالــة
+                                                                            </h6>
+
+                                                                            <h6 style="margin-top:15px">
+                                                                                {{item.remindSMS}} رسالــة
+                                                                            </h6>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer ">
+                                                        <div class="legend">
+                                                            <i class="fa fa-circle text-info"></i> Active
+                                                        </div>
+                                                        <hr>
+                                                        <div class="row" style="padding-right:20px">
+                                                            <div class="stats">
+                                                                تاريخ الإشتراك
+                                                                <br />
+                                                                <i class="fa fa-calendar"></i> {{item.from | moment}}
+                                                                <br />
+                                                            </div>
+                                                            <div class="stats" style="/* FONT-WEIGHT: 500; */float: left;display: block;left: 20px;position: absolute;">
+                                                                صلاحية الباقة
+                                                                <br> <i class="fa fa-calendar"></i> {{item.to | moment}}
+                                                                <br>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <br />
+                            <hr />
+                            <div class="row" dir="ltr">
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="disabled-sorting text-right" id="datatable_info" role="status" aria-live="polite">Showing {{ActivePageNo}} to {{ActivePageSize}} of {{ActivePages}} entries</div>
+                                </div>
+
+                                <div style="text-align: center; ">
+
+                                    <el-pagination background
+                                                   layout="prev, pager, next"
+                                                   :current-page="ActivePageNo"
+                                                   :page-size="ActivePageSize"
+                                                   :total="ActivePages"
+                                                   @current-change="getCustomers($event)">
+                                    </el-pagination>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <!--SMS Info
+                        <el-dialog :visible.sync="SMSInfoDialog" :modalAppendToBody="false" @visible-change="onVisible">
+                            <div>
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h5 class="modal-title" id="myModalLabel">متابعة الرسائل المرسلة من تاريخ الإشتراك بالباقة</h5>
+                                </div>
+                                <div class="table-responsive" style="overflow: hidden;">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                            <tr>
+                                                <th class="text-center">
+                                                    #
+                                                </th>
+                                                <th>
+                                                    التاريخ
+                                                </th>
+                                                <th>
+                                                    الوقت
+                                                </th>
+                                                <th class="text-center">
+                                                    الحالة
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">
+                                                    1
+                                                </td>
+                                                <td>
+                                                    Andrew Mike
+                                                </td>
+                                                <td>
+                                                    Develop
+                                                </td>
+                                                <td class="text-center">
+                                                    2013
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    2
+                                                </td>
+                                                <td>
+                                                    Andrew Mike
+                                                </td>
+                                                <td>
+                                                    Develop
+                                                </td>
+                                                <td class="text-center">
+                                                    2013
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    3
+                                                </td>
+                                                <td>
+                                                    Andrew Mike
+                                                </td>
+                                                <td>
+                                                    Develop
+                                                </td>
+                                                <td class="text-center">
+                                                    2013
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    4
+                                                </td>
+                                                <td>
+                                                    Andrew Mike
+                                                </td>
+                                                <td>
+                                                    Develop
+                                                </td>
+                                                <td class="text-center">
+                                                    2013
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="modal-footer justify-content-center">
+                                    <br />
+                                    <div class="row" style="direction:ltr;margin-top:15px">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info" id="datatable_info" role="status" aria-live="polite">Showing 1 to 10 of 42 entries</div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_paginate paging_full_numbers" id="datatable_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item active">
+                                                        <a href="#" aria-controls="datatable" data-dt-idx="2" tabindex="0" class="page-link">
+                                                            1
+                                                        </a>
+                                                    </li>
+                                                    <li class="paginate_button page-item ">
+                                                        <a href="#" aria-controls="datatable" data-dt-idx="3" tabindex="0" class="page-link">
+                                                            2
+                                                        </a>
+                                                    </li>
+                                                    <li class="paginate_button page-item ">
+                                                        <a href="#" aria-controls="datatable" data-dt-idx="4" tabindex="0" class="page-link">
+                                                            3
+                                                        </a>
+                                                    </li>
+                                                    <li class="paginate_button page-item ">
+                                                        <a href="#" aria-controls="datatable" data-dt-idx="5" tabindex="0" class="page-link">
+                                                            4
+                                                        </a>
+                                                    </li>
+                                                    <li class="paginate_button page-item ">
+                                                        <a href="#" aria-controls="datatable" data-dt-idx="6" tabindex="0" class="page-link">
+                                                            5
+                                                        </a>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </el-dialog>
+
+                        <!--Reload SMS Service
+                        <el-dialog :visible.sync="ReloadServiceDialog" :modalAppendToBody="false" @visible-change="onVisible">
+                            <div class="modal-header">
+
+                                <h5 class="modal-title" id="myModalLabel">إعادة الإشتراك بالباقة</h5>
+                            </div>
+                            <br />
+                            <br />
+                            <el-form :model="ReloadserviceInfo" ref="ReloadserviceInfo">
+                                <div class="tab-pane active show" id="address">
+                                    <div class="row justify-content-center">
+
+                                        <div class="col-sm-7">
+                                            <div class="form-group">
+                                                <label>عدد الرسائل</label>
+                                                <el-form-item prop="countMassage"
+                                                              label-width="0px"
+                                                              :rules="[{required: true, message: 'الرجاء إدخال عدد الرسائل'}
+                                                                  ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
+                                                    <el-input type="countMassage"
+                                                              placeholder="عدد الرسائل"
+                                                              v-model.number="ReloadserviceInfo.countMassage"
+                                                              autocomplete="off" />
+                                                </el-form-item>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>القيمة</label>
+                                                <el-form-item prop="amount"
+                                                              label-width="0px"
+                                                              :rules="[{required: true, message: 'الرجاء إدخال القيمة'}
+                                                                  ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
+                                                    <el-input type="amount"
+                                                              placeholder="القيمة"
+                                                              v-model.number="ReloadserviceInfo.amount"
+                                                              autocomplete="off" />
+                                                </el-form-item>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="form-group">
+                                                <label>تاريخ إنتهاء الصلاحية</label>
+                                                <el-form-item prop="to"
+                                                              label-width="0px"
+                                                              :rules="[{ required: true, message: 'الرجاء إدخال تاريخ  '} ]">
+
+                                                    <el-date-picker style="width:100%"
+                                                                    v-model="ReloadserviceInfo.to"
+                                                                    type="date"
+                                                                    placeholder="من">
+                                                    </el-date-picker>
+
+                                                </el-form-item>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="form-group select-wizard" style="float:left ;">
+                                                <el-button class="btn btn-twitter" @click="submitForm('ReloadserviceInfo')"
+                                                           style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+                                                    تجديد الباقة
+                                                </el-button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </el-form>
+                        </el-dialog>
+
+                        <!--Stop SMS Service
+                        <el-dialog :visible.sync="StopSMSServiceDialog" :modalAppendToBody="false" @visible-change="onVisible">
+
+                            <div style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serifs">أنت علي وشك القيام بإيقاف الخدمة الرجاء تعبئة البيانات  التالية</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="instruction">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h5> سبب الإيقاف</h5>
+                                                <el-input type="textarea"
+                                                          :rows="4"
+                                                          placeholder=" الرجاء إدخال سبب الإيقاف"
+                                                          v-model="stopResone">
+                                                </el-input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div class="instruction">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h5>هل تريد إرسال رسالة للعميل توضح سبب إيقاف الخدمة</h5>
+
+                                                <el-input type="textarea"
+                                                          :rows="4"
+                                                          v-model="SMSstopResone">
+                                                </el-input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p>في حال لم تقم بتعديل نص الرسالة سيتم إرسال الرسالة للتوضيح</p>
+                                </div>
+                                <div class="modal-footer justify-content-center">
+                                    <el-button class="btn btn-danger" @click="canselStoped()">
+                                        إلغاء العملية
+                                    </el-button>
+                                    <el-button class="btn btn-twitter" @click="stopServeice">
+                                        إيقاف الخدمة
+                                    </el-button>
+
+
+                                </div>
+                            </div>
+                        </el-dialog>
+
+                        <!--Not Active
+                        <div class="col-md-10" v-if="currentState==2">
+                            <div class="table-responsive" style="overflow: hidden;">
+                                <table class="table">
+                                    <thead class="text-primary">
+                                        <tr>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="item in notactivePackges">
+                                            <td>
+                                                <div class="card ">
+                                                    <div class="card-header " style="margin-right:5%">
+                                                        <h5 class="card-title">
+                                                            {{item.code}}
+
+                                                            <el-button class="btn btn-success btn-round btn-icon btn"
+                                                                       style="float: left;margin-left:12px"
+                                                                       @click.prevent="showReloadDialog(item)"
+                                                                       title="تجديد الباقة">
+                                                                <i class="nc-icon nc-refresh-69" style="padding: 2px;"></i>
+                                                            </el-button>
+                                                            <!--
+                                                            <el-button class="btn btn-danger btn-round btn-icon btn"
+                                                                       style="float: left;margin-left:5px"
+                                                                       @click.prevent="showStopSMSDialog(item)"
+                                                                       title="إيقاف الخدمة">
+                                                                <i class="nc-icon nc-button-pause" style="padding: 2px;"></i>
+                                                            </el-button>
+                                                            <el-button class="btn btn-warning btn-round btn-icon btn"
+                                                                       style="float: left;margin-left:5px"
+                                                                       @click.prevent="showSMSInfo"
+                                                                       title="عرض الرسائل">
+                                                                <i class="nc-icon nc-alert-circle-i" style="padding: 2px;"></i>
+                                                            </el-button>
+
+
+                                                        </h5>
+
+
+                                                        <p class="card-category">{{item.service}}</p>
+                                                        <hr />
+                                                    </div>
+                                                    <div class="card-body ">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+
+                                                                <el-progress type="circle" :percentage="item.usagePercentage" color="#f56c6c" status="exception"></el-progress>
+                                                            </div>
+                                                            <div class="col-md-8">
+
+                                                                <div class="row"
+                                                                     style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:lightslategrey">
+                                                                    <div class="col-md-7">
+                                                                        <div>
+                                                                            <h6>
+                                                                                قيمة الإشتراك
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                القيمة المدفوعة
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                إجمـــالــي عــدد الرســائــل
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                الرسائل المستخدمة
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                الرسائل المتبقية
+                                                                            </h6>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div>
+                                                                            <h6>
+                                                                                {{item.amount}} دينار
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                {{item.amount}} دينار
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                {{item.smsCount}} رسالــة
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                {{item.usageSMS}} رسالــة
+                                                                            </h6>
+
+                                                                            <h6 style="margin-top:15px">
+                                                                                {{item.remindSMS}} رسالــة
+                                                                            </h6>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer ">
+                                                        <div class="legend">
+                                                            <i class="fa fa-circle text-danger"></i> Not Active
+                                                        </div>
+                                                        <hr>
+                                                        <div class="row" style="padding-right:20px">
+                                                            <div class="stats">
+                                                                تاريخ الإشتراك
+                                                                <br />
+                                                                <i class="fa fa-calendar"></i> {{item.from | moment}}
+                                                                <br />
+                                                            </div>
+                                                            <div class="stats" style="/* FONT-WEIGHT: 500; */float: left;display: block;left: 20px;position: absolute;">
+                                                                صلاحية الباقة
+                                                                <br> <i class="fa fa-calendar"></i> {{item.to | moment}}
+                                                                <br>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <br />
+                            <hr />
+                            <div class="row" dir="ltr">
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="disabled-sorting text-right" id="datatable_info" role="status" aria-live="polite">Showing {{notActivePageNo}} to {{notActivePageSize}} of {{notActivePages}} entries</div>
+                                </div>
+
+                                <div style="text-align: center; ">
+
+                                    <el-pagination background
+                                                   layout="prev, pager, next"
+                                                   :current-page="notActivePageNo"
+                                                   :page-size="notActivePageSize"
+                                                   :total="notActivePages"
+                                                   @current-change="getCustomers($event)">
+                                    </el-pagination>
+
+                                </div>
+
+                            </div>
+                            <br />
+                            <hr />
+                            <br />
+                        </div>
+
+                        <!--Stopped
+                        <div class="col-md-10" v-if="currentState==4 && stoppedPackges!=0">
+                            <div class="table-responsive" style="overflow: hidden;">
+                                <table class="table">
+                                    <thead class="text-primary">
+                                        <tr>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="item in stoppedPackges">
+                                            <td>
+                                                <div class="card ">
+                                                    <div class="card-header " style="margin-right:5%">
+                                                        <h5 class="card-title">
+                                                            {{item.code}}
+
+                                                            <el-button class="btn btn-danger btn-round btn-icon btn"
+                                                                       style="float: left;margin-left:12px"
+                                                                       @click.prevent="backService(item)"
+                                                                       title="إيرجاع الخدمة">
+                                                                <i class="nc-icon nc-button-play" style="padding: 2px;"></i>
+                                                            </el-button>
+
+
+                                                        </h5>
+
+
+                                                        <p class="card-category">{{item.service}}</p>
+                                                        <hr />
+                                                    </div>
+                                                    <div class="card-body ">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+
+                                                                <el-progress type="circle" :percentage="item.usagePercentage" color="#f56c6c" status="exception"></el-progress>
+                                                            </div>
+                                                            <div class="col-md-8">
+
+                                                                <div class="row"
+                                                                     style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:lightslategrey">
+                                                                    <div class="col-md-7">
+                                                                        <div>
+                                                                            <h6>
+                                                                                قيمة الإشتراك
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                القيمة المدفوعة
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                إجمـــالــي عــدد الرســائــل
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                الرسائل المستخدمة
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                الرسائل المتبقية
+                                                                            </h6>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div>
+                                                                            <h6>
+                                                                                {{item.amount}} دينار
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                {{item.amount}} دينار
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                {{item.smsCount}} رسالــة
+                                                                            </h6>
+                                                                            <h6 style="margin-top:15px">
+                                                                                {{item.usageSMS}} رسالــة
+                                                                            </h6>
+
+                                                                            <h6 style="margin-top:15px">
+                                                                                {{item.remindSMS}} رسالــة
+                                                                            </h6>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer ">
+                                                        <div class="legend">
+                                                            <i class="fa fa-circle text-danger"></i> Stopped
+                                                        </div>
+                                                        <hr>
+                                                        <div class="row" style="padding-right:20px">
+                                                            <div class="stats">
+                                                                تاريخ الإشتراك
+                                                                <br />
+                                                                <i class="fa fa-calendar"></i> {{item.from | moment}}
+                                                                <br />
+                                                            </div>
+                                                            <div class="stats" style="/* FONT-WEIGHT: 500; */float: left;display: block;left: 20px;position: absolute;">
+                                                                صلاحية الباقة
+                                                                <br> <i class="fa fa-calendar"></i> {{item.to | moment}}
+                                                                <br>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <br />
+                            <hr />
+                            <div class="row" dir="ltr" v-if="stoppedPackges!=0">
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="disabled-sorting text-right" id="datatable_info" role="status" aria-live="polite">Showing {{stoppedPageNo}} to {{stoppedPageSize}} of {{stoppedPages}} entries</div>
+                                </div>
+
+                                <div style="text-align: center; ">
+
+                                    <el-pagination background
+                                                   layout="prev, pager, next"
+                                                   :current-page="stoppedPageNo"
+                                                   :page-size="stoppedPageSize"
+                                                   :total="stoppedPages"
+                                                   @current-change="getCustomers($event)">
+                                    </el-pagination>
+
+                                </div>
+
+                            </div>
+
+
+                            <br />
+                            <hr />
+                            <br />
+                        </div>
+
+                        <!--History
+                        <div class="table-responsive" style="padding:10px;overflow: hidden;" v-if="currentState==3">
+                            <table class="table">
+                                <thead class="">
+                                    <tr style="text-align:center" class="text-primary">
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            رقم الخدمة
+                                        </th>
+                                        <th>
+                                            الحركة
+                                        </th>
+                                        <th>
+                                            القيمة
+                                        </th>
+                                        <th>
+                                            عدد الرسائل
+                                        </th>
+                                        <th>
+                                            من
+                                        </th>
+                                        <th>
+                                            إلي
+                                        </th>
+                                        <th>
+                                            المستخدم
+                                        </th>
+                                        <th>
+                                            التوقيت
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="item,index in historyPackges" style="text-align:center">
+                                        <td>
+                                            {{index+1 }}
+                                        </td>
+                                        <td>
+                                            {{item.code }}
+                                        </td>
+                                        <td>
+                                            {{item.actionDescription }}
+                                        </td>
+                                        <td>
+                                            {{item.amount }}
+                                        </td>
+                                        <td>
+                                            {{item.smsCount }}
+                                        </td>
+                                        <td>
+                                            {{item.from }}
+                                        </td>
+                                        <td>
+                                            {{item.to }}
+                                        </td>
+                                        <td>
+                                            {{item.createdBy}}
+                                        </td>
+                                        <td>
+                                            {{item.createcdOn | moment}}
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+
+                            </table>
+
+                            <hr />
+                            <br />
+                            <div class="row" dir="ltr">
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="disabled-sorting text-right" id="datatable_info" role="status" aria-live="polite">Showing {{historyPageNo}} to {{historyPageSize}} of {{historyPages}} entries</div>
+                                </div>
+
+                                <div style="text-align: center; ">
+
+                                    <el-pagination background
+                                                   layout="prev, pager, next"
+                                                   :current-page="historyPageNo"
+                                                   :page-size="historyPageSize"
+                                                   :total="historyPages"
+                                                   @current-change="getHistoryPackges($event)">
+                                    </el-pagination>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--Add Packege
+                <div class="tab-pane" id="address">
+                    <el-form :model="serviceInfo" ref="serviceInfo">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-12">
+                                <h5 class="info-text"> Are you living in a nice area? </h5>
+                            </div>
+                            <div class="col-sm-7">
+
+                                <div class="form-group">
+                                    <label>إسم الخدمة</label>
+                                    <div class="form-group">
+                                        <el-form-item prop="serviceName"
+                                                      label-width="0px"
+                                                      :rules="[{required: true, message: 'الرجاء إدخال إسم الخدمة'} ]">
+                                            <el-input type="serviceName"
+                                                      placeholder="إسم الخدمة"
+                                                      v-model="serviceInfo.serviceName"
+                                                      autocomplete="off" />
+                                        </el-form-item>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>رقم الخدمة</label>
+                                    <div class="form-group">
+                                        <el-form-item prop="code"
+                                                      label-width="0px"
+                                                      :rules="[{required: true, message: 'الرجاء إدخال رقم الخدمة'}
+                                                                  ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
+                                            <el-input type="code"
+                                                      placeholder="رقم الخدمة"
+                                                      v-model.number="serviceInfo.code"
+                                                      autocomplete="off" />
+                                        </el-form-item>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>القيمة</label>
+                                    <div class="form-group">
+                                        <el-form-item prop="amount"
+                                                      label-width="0px"
+                                                      :rules="[{required: true, message: 'الرجاء إدخال القيمة'}
+                                                                  ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
+                                            <el-input type="amount"
+                                                      placeholder="القيمة"
+                                                      v-model.number="serviceInfo.amount"
+                                                      autocomplete="off" />
+                                        </el-form-item>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>عدد الرسائل</label>
+                                    <div class="form-group">
+                                        <el-form-item prop="countMassage"
+                                                      label-width="0px"
+                                                      :rules="[{required: true, message: 'الرجاء إدخال عدد الرسائل'}
+                                                                  ,{ type: 'number', message: 'يجب أن يكون الحقل أرقام فقط'}]">
+                                            <el-input type="countMassage"
+                                                      placeholder="عدد الرسائل"
+                                                      v-model.number="serviceInfo.countMassage"
+                                                      autocomplete="off" />
+                                        </el-form-item>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>تاريخ صلايحة الباقة </label>
+
+                                    <el-form-item prop="from"
+                                                  label-width="0px"
+                                                  :rules="[{ required: true, message: 'الرجاء إدخال تاريخ  '} ]">
+
+                                        <el-date-picker style="width:100%"
+                                                        v-model="serviceInfo.from"
+                                                        type="date"
+                                                        placeholder="">
+                                        </el-date-picker>
+
+                                    </el-form-item>
+                                </div>
+                            </div>
+                            <div class="col-sm-10">
+                                <div class="form-group">
+                                    <label>وصف توضيحي للخدمة</label>
+                                    <input type="text" class="form-control" v-model="serviceInfo.discriptions"
+                                           placeholder="وصف توضيحي للخدمة">
+                                </div>
+                            </div>
+
+                        </div>
+                    </el-form>
+                </div>
+            </div>
+        </div>
+
+        <!--footer
+        <div class="card-footer">
+            <div class="pull-right">
+
+
+                <el-button class="btn btn-next btn-fill btn-rose btn-wd" style="font-size:14px" type="primary" @click="allowEdit" v-if="EditInfo==0 && currentPage==0">تعديل البيانات</el-button>
+                <el-button class="btn btn-next btn-fill btn-rose btn-wd" type="primary" @click="submitForm('customersInfo')" v-if="EditInfo==1 && currentPage==0"
+                           style="font-size:14px">حفظ التعديل</el-button>
+                <el-button style="font-size:14px" class="btn btn-next btn-fill btn-rose btn-wd" type="primary" @click="submitForm('serviceInfo')" v-if="currentPage==2">إضافة الباقة</el-button>
+            </div>
+
+            <div class="pull-left">
+                <el-button class="btn btn-danger" style="font-size:14px" type="danger" @click="canselEdit()" v-if="EditInfo==1 && currentPage==0">إلغاء التعديل</el-button>
+            </div>
+            <div class="pull-left">
+                <input type="button" style="font-size:14px" class="btn btn-previous btn-fill btn-default btn-wd disabled" name="previous" value="Previous">
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+
+
+        </form>
+
+    </div>
+
+</div>-->
