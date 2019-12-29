@@ -140,7 +140,7 @@ export default {
             notactivePackges: [],
 
             stoppedPageNo: 1,
-            stoppedPageSize: 10,
+            stoppedPageSize: 2,
             stoppedPages: 0,
 
             stoppedPackges: [],
@@ -205,7 +205,6 @@ export default {
 
         addPackage()
         {
-            debugger
             this.serviceInfo.to = this.serviceInfo.from;
             //this.to=this.from;
             this.$http.AddCustomorPackage(this.serviceInfo)
@@ -217,6 +216,7 @@ export default {
                     });
                     this.$blockUI.Stop();
                     this.resetForm('serviceInfo');
+                    this.getPakegeByState(1, 1);
                 })
                 .catch((err) => {
                     this.$blockUI.Stop();
@@ -334,6 +334,7 @@ export default {
         },
 
         rechargeService() {
+            this.$blockUI.Start();
             this.$http.rechargeService(this.selectedPackege.id, this.ReloadserviceInfo)
                 .then(response => {
                     //this.$parent.state = 0;
@@ -344,6 +345,7 @@ export default {
                     this.$blockUI.Stop();
                     this.getPakegeByState(1, 1);
                     this.getPakegeByState(1, 2);
+                    this.getHistoryPackges();
                     this.ReloadServiceDialog = false;
                 })
                 .catch((err) => {

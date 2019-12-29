@@ -42,16 +42,16 @@
         },
 
         addCustomor() {
-
+            this.customersInfo.from = this.customersInfo.to;
+            this.$blockUI.Start();
             this.$http.AddCustomor(this.customersInfo)
                 .then(response => {
-                    this.$parent.state = 0;
                     this.$message({
                         type: 'info',
                         message: response.data
                     });
                     this.$blockUI.Stop();
-                    this.$parent.state = 0;
+                    this.resetForm('customersInfo');
                 })
                 .catch((err) => {
                     this.$blockUI.Stop();

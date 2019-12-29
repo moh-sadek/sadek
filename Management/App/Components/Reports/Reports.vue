@@ -1,6 +1,6 @@
-﻿<template src="./Packages.html"></template>
+﻿<template src="./Reports.html"></template>
 
-<script src="./Packages.js"></script>
+<script src="./Reports.js"></script>
 
 <style type="text/css">
     .el-pagination.is-background .el-pager li.active {

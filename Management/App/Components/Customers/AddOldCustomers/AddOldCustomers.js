@@ -43,7 +43,7 @@
         },
 
         addCustomor() {
-
+            this.$blockUI.Start();
             this.$http.AddOldCustomor(this.customersInfo)
                 .then(response => {
                     this.$parent.state = 0;
@@ -52,7 +52,7 @@
                         message: response.data
                     });
                     this.$blockUI.Stop();
-                    this.$parent.state = 0;
+                    this.resetForm('customersInfo');
                 })
                 .catch((err) => {
                     this.$blockUI.Stop();

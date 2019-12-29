@@ -42,7 +42,6 @@ export default {
     methods: {
         CheckLoginStatus() {
             try {
-                debugger
                 this.loginDetails = this.decrypt(sessionStorage.getItem('currentUser'), sessionStorage.getItem('SECRET_KEY'));
                 if (this.loginDetails != null) {
                     this.form.FullName = this.loginDetails.fullName;

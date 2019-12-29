@@ -17,6 +17,7 @@ import AddOldPackage from './Components/Packages/AddOldPackage/AddOldPackage.vue
 import AddOldCustomers from './Components/Customers/AddOldCustomers/AddOldCustomers.vue';
 import AddPackage from './Components/Packages/AddPackage/AddPackage.vue';
 import AddCustomers from './Components/Customers/AddCustomers/AddCustomers.vue';
+import Reports from './Components/Reports/Reports.vue';
 /*import Students from './Components/Students/Students.vue';
 import Companies from './Components/Companies/Companies.vue';
 import Packages from './Components/Packages/Packages.vue';
@@ -68,6 +69,7 @@ const router = new VueRouter({
         { path: '/AddOldCustomers', component: AddOldCustomers },
         { path: '/AddPackage', component: AddPackage },
         { path: '/AddCustomers', component: AddCustomers },
+        { path: '/Reports', component: Reports },
         ]
 
 });

@@ -82,6 +82,32 @@ namespace Management.Controllers
                     return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
                 }
 
+                var NameExist = (from p in db.Cutomers where p.FullName == customer.name  select p).SingleOrDefault();
+                if (NameExist != null)
+                {
+                    return BadRequest("الإسم موجود مسبقا الرجاءإعادة الإدخال");
+                }
+
+                var PhoneExist = (from p in db.Cutomers where p.Phone == customer.phone select p).SingleOrDefault();
+                if (PhoneExist != null)
+                {
+                    return BadRequest("رقم الهاتف موجود مسبقا الرجاء التأكد من الإدخال");
+                }
+
+                var shortNumbersCode = (from p in db.ShoortNumber where p.Code == customer.code select p).SingleOrDefault();
+
+                if (shortNumbersCode != null)
+                {
+                    return BadRequest("رقم الخدمة موجود مسبقا الرجاء إعادة الإدخال");
+                }
+
+                if (customer.from <= DateTime.Now)
+                {
+                    return BadRequest("خطأ في الإدخال الرجاء التحقق من التاريخ ");
+                }
+
+
+
 
 
                 var Cutomers = new Cutomers();
@@ -199,7 +225,7 @@ namespace Management.Controllers
                     return BadRequest("رقم الخدمة موجود مسبقا الرجاء إعادة الإدخال");
                 }
 
-                if (serviceInfo.from>= DateTime.Now)
+                if (serviceInfo.from>= DateTime.Now || serviceInfo.to >= DateTime.Now)
                 {
                     return BadRequest("خطأ في الإدخال تاريخ البداية أصغر من تاريخ النهاية ");
                 }
@@ -379,7 +405,12 @@ namespace Management.Controllers
             try
             {
 
-                IQueryable<ShoortNumberActions> PackegesInfo = from p in db.ShoortNumberActions where p.ShoortNumber.CustomerId == custmorId select p;
+                IQueryable<ShoortNumberActions> PackegesInfo = from p in db.ShoortNumberActions select p;
+
+                if(custmorId!=0)
+                {
+                    PackegesInfo = from p in db.ShoortNumberActions where p.ShoortNumber.CustomerId == custmorId select p;
+                }
 
                 
                 if(SearchType!=0 && SearchType!=5 && SearchType != 6)
@@ -681,8 +712,12 @@ namespace Management.Controllers
         {
             try
             {
-                IQueryable<ShoortNumber> CodesInfo = from p in db.ShoortNumber where p.State != 9 && p.CustomerId==id select p;
+                IQueryable<ShoortNumber> CodesInfo = from p in db.ShoortNumber where p.State != 9  select p;
 
+                if(id!=0)
+                {
+                    CodesInfo = from p in db.ShoortNumber where p.State != 9 && p.CustomerId == id select p;
+                }
 
                 var CodesInfos = (from p in CodesInfo
                                   orderby p.CreatedOn descending
@@ -693,6 +728,52 @@ namespace Management.Controllers
                                   }).ToList();
 
                 return Ok(new { historyCodesPackges = CodesInfos });
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet("getHistoryPackge")]
+        public IActionResult getHistoryPackge(int pageNo, int pageSize,long id, int SearchType)
+        {
+            try
+            {
+
+                IQueryable<ShoortNumberActions> PackegesInfo = from p in db.ShoortNumberActions  select p;
+
+                if(id!=0)
+                {
+                    PackegesInfo = from p in db.ShoortNumberActions where p.ShoortNumberId == id select p;
+                }
+
+                if (SearchType != 0 && SearchType != 6)
+                {
+                    PackegesInfo = from p in PackegesInfo where p.ActionType == SearchType select p;
+                }
+
+
+                var PackegesCount = (from p in PackegesInfo
+                                     select p).Count();
+
+                var PackegesInfos = (from p in PackegesInfo
+                                     orderby p.CreatecdOn descending
+                                     select new
+                                     {
+                                         code = p.ShoortNumber.Code,
+                                         ActionDescription = p.ActionDescription,
+                                         Amount = p.Amount,
+                                         SMSCount = p.Smscount,
+                                         From = p.From,
+                                         To = p.To,
+                                         CreatedBy = p.CreatedBy,
+                                         CreatecdOn = p.CreatecdOn,
+                                         Id = p.ShoortNumberId,
+
+                                     }).Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();
+
+                return Ok(new { Packeges = PackegesInfos, count = PackegesCount });
             }
             catch (Exception e)
             {
