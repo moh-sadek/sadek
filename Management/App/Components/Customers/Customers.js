@@ -22,6 +22,10 @@ export default {
         this.getCustomers(1,0);
         this.getCodes();
         this.getCustomersPhone();
+
+
+
+        this.PackagesCheck();
         
 
         //console.log(this.$route.params.SuperPackageId)
@@ -166,6 +170,18 @@ export default {
                         });
                     });
             });
+        },
+
+        PackagesCheck() {
+            this.$blockUI.Start();
+            this.$http.PackagesCheck()
+                .then(response => {
+                    this.$blockUI.Stop();
+                })
+                .catch((err) => {
+                    this.$blockUI.Stop();
+                });
+
         },
     }    
 }

@@ -8,9 +8,13 @@ namespace Management.Models
     {
         public virtual DbSet<Cutomers> Cutomers { get; set; }
         public virtual DbSet<SentSms> SentSms { get; set; }
+        public virtual DbSet<SentSmsActions> SentSmsActions { get; set; }
         public virtual DbSet<ShoortNumber> ShoortNumber { get; set; }
         public virtual DbSet<ShoortNumberActions> ShoortNumberActions { get; set; }
+        public virtual DbSet<UnknownNumber> UnknownNumber { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+
+        public VASContext(DbContextOptions<VASContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,8 +25,6 @@ namespace Management.Models
             }
         }
 
-        public VASContext(DbContextOptions<VASContext> options) : base(options) { }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Cutomers>(entity =>
@@ -31,9 +33,9 @@ namespace Management.Models
 
                 entity.Property(e => e.BirthDate).HasColumnType("datetime");
 
-                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
-
                 entity.Property(e => e.CompanyName).HasMaxLength(50);
+
+                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
                 entity.Property(e => e.Email).HasMaxLength(50);
 
@@ -51,6 +53,13 @@ namespace Management.Models
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
             });
 
+            modelBuilder.Entity<SentSmsActions>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<ShoortNumber>(entity =>
             {
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
@@ -61,7 +70,7 @@ namespace Management.Models
 
                 entity.Property(e => e.Smscount).HasColumnName("SMSCount");
 
-                entity.Property(e => e.State).HasDefaultValueSql("((0))");
+                entity.Property(e => e.State).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.To).HasColumnType("datetime");
 
@@ -91,6 +100,11 @@ namespace Management.Models
                     .HasConstraintName("FK_ShoortNumberActions_ShoortNumber");
             });
 
+            modelBuilder.Entity<UnknownNumber>(entity =>
+            {
+                entity.Property(e => e.CreatecdOn).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<Users>(entity =>
             {
                 entity.HasKey(e => e.UserId);
@@ -101,11 +115,11 @@ namespace Management.Models
 
                 entity.Property(e => e.Email).HasMaxLength(50);
 
+                entity.Property(e => e.LastLoginOn).HasColumnType("datetime");
+
                 entity.Property(e => e.LoginName).HasMaxLength(50);
 
                 entity.Property(e => e.LoginTryAttemptDate).HasColumnType("datetime");
-
-                entity.Property(e => e.LastLoginOn).HasColumnType("datetime");
 
                 entity.Property(e => e.Name).HasMaxLength(50);
 

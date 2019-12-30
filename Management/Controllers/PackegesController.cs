@@ -173,6 +173,89 @@ namespace Management.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        //SMS Joup
+        [HttpGet("PackagesCheck")]
+        public IActionResult PackagesCheck()
+        {
+            try
+            {
+                IQueryable<Temp> SmsInfo = from p in db.SentSms group p by p.ShortCode into g select new Temp { code = g.Key, count = g.Count() };
+
+                var SmsInfoCount = (from p in SmsInfo select p).Count();
+
+                foreach (Temp item in SmsInfo)
+                {
+                    ShoortNumber PackgeInfo = new ShoortNumber();
+                    PackgeInfo = (from p in db.ShoortNumber where p.Code == item.code select p).SingleOrDefault();
+
+                    if(PackgeInfo==null)
+                    {
+                        UnknownNumber unknown = new UnknownNumber();
+                        unknown.Code = item.code;
+                        unknown.Count = item.count;
+                        unknown.CreatecdOn = DateTime.Now;
+                        db.UnknownNumber.Add(unknown);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        int remind = PackgeInfo.UsageSms.GetValueOrDefault() - PackgeInfo.Smscount.GetValueOrDefault();
+
+                        if (item.count <= remind)
+                        {
+                            PackgeInfo.UsageSms += item.count;
+
+                            int nespa = (PackgeInfo.UsageSms.GetValueOrDefault() / PackgeInfo.Smscount.GetValueOrDefault()) * 100;
+
+                            if (nespa >= 90 && nespa <= 100)
+                            {
+                                PackgeInfo.State = 2;//al most done 
+                            }
+                        }
+                        else
+                        {
+                            PackgeInfo.UsageSms += item.count;
+                            PackgeInfo.State = 4;
+                        }
+
+                        db.SaveChanges();
+                    }
+
+
+
+                }
+
+
+
+                //IQueryable<ShoortNumber> SmsInfo = from p in db.SentSms select p;
+
+
+
+
+                //var PackegesCount = (from p in PackegesInfo
+                //                     select p).Count();
+
+                //var PackegeAmountsum = (from p in db.ShoortNumberActions select p.Amount).Sum();
+
+                //var CustomorCounts = (from p in db.Cutomers where p.Status != 9 select p).Count();
+
+
+                //var TopFiveAction = db.ShoortNumberActions
+                //                   .GroupBy(q => q.Id)
+                //                   .OrderByDescending(gp => gp.Count())
+                //                   .Take(5)
+                //                   .Select(g => g).ToList();
+
+                //var LastStep = (from p in db.ShoortNumberActions select p).OrderByDescending(p => p.Id).Take(5).ToList();
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
     
 }

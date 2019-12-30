@@ -159,5 +159,10 @@ export default {
         return axios.get(baseUrl + `/Admin/Customer/getHistoryPackge?pageNo=${pageNo}&pagesize=${pageSize}&id=${id}&SearchType=${SearchType}`);
     },
 
+    PackagesCheck() {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.get(baseUrl + `/Admin/Packeges/PackagesCheck`);
+    },
+
 
 }
