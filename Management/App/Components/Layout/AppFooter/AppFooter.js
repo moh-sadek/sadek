@@ -1,15 +1,28 @@
-﻿export default {
+﻿import moment from 'moment';
+export default {
     name: 'AppFooter',    
     created() { 
-        
+        this.getDate();
+        setInterval(() => this.getDate(), 10000);   
     },
     data() {
         return {            
             loginDetails: null,
-            active:1
+            active: 1,
+            date:'',
         };
     },
-  
+
+    filters: {
+        moment: function (date) {
+            if (date === null) {
+                return "فارغ";
+            }
+            // return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+            return moment(date).format('MMMM Do YYYY');
+        }
+    },
+
     methods: {
         OpenDropDown() {
             var root = document.getElementById("DropDown");
@@ -37,9 +50,13 @@
             } else if (root.getAttribute('class') == 'dropdown') {
                 root.setAttribute('class', 'dropdown open');
             }
-        }
+        },
         //****************************************************************
 
+        getDate() {
+            var d = new Date();
+            this.date = d;
+        }
       
     }    
 }

@@ -11,7 +11,7 @@ namespace Management.Models
         }
 
         public long Id { get; set; }
-        public int? Code { get; set; }
+        public string Code { get; set; }
         public int? Amount { get; set; }
         public DateTime? From { get; set; }
         public DateTime? To { get; set; }

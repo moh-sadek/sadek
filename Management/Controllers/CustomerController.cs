@@ -94,7 +94,7 @@ namespace Management.Controllers
                     return BadRequest("رقم الهاتف موجود مسبقا الرجاء التأكد من الإدخال");
                 }
 
-                var shortNumbersCode = (from p in db.ShoortNumber where p.Code == customer.code select p).SingleOrDefault();
+                var shortNumbersCode = (from p in db.ShoortNumber where p.Code == customer.code.ToString() || p.Service == customer.serviceName select p).SingleOrDefault();
 
                 if (shortNumbersCode != null)
                 {
@@ -123,7 +123,7 @@ namespace Management.Controllers
                 Cutomers.CreatedOn = DateTime.Now;
                 db.Cutomers.Add(Cutomers);
 
-                ShoortNumber.Code = customer.code;
+                ShoortNumber.Code = customer.code.ToString();
                 ShoortNumber.Amount = customer.amount;
                 ShoortNumber.From = customer.from;
                 ShoortNumber.To = customer.to;
@@ -135,6 +135,21 @@ namespace Management.Controllers
                 ShoortNumber.CustomerId = Cutomers.CustomerId;
 
                 db.ShoortNumber.Add(ShoortNumber);
+
+                var shoortNumberActions = new ShoortNumberActions();
+
+                shoortNumberActions.ShoortNumberId = ShoortNumber.Id;
+                shoortNumberActions.ActionType = 1;
+                shoortNumberActions.ActionDescription = "إشتراك جديد";
+                shoortNumberActions.Smscount = customer.countMassage;
+                shoortNumberActions.Amount = customer.amount;
+                shoortNumberActions.From = customer.from;
+                shoortNumberActions.To = customer.to;
+                shoortNumberActions.CreatedBy = userId;
+                shoortNumberActions.CreatecdOn = DateTime.Now;
+
+                db.ShoortNumberActions.Add(shoortNumberActions);
+
 
                 db.SaveChanges();
 
@@ -150,7 +165,7 @@ namespace Management.Controllers
         public IActionResult AddOldCustomor([FromBody] CustomersObj customer)
         {
             try
-            {
+            { 
 
                 if (customer == null)
                 {
@@ -164,6 +179,36 @@ namespace Management.Controllers
                     return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
                 }
 
+                var shortNumber = (from p in db.ShoortNumber where p.Code == customer.code || p.Service == customer.serviceName select p).SingleOrDefault();
+                if (shortNumber != null)
+                {
+                    return StatusCode(401, "تم إضافة الباقة مسبقا لارجاء إعادة الإدخال");
+                }
+
+                var NameExist = (from p in db.Cutomers where p.FullName == customer.name select p).SingleOrDefault();
+                if (NameExist != null)
+                {
+                    return BadRequest("الإسم موجود مسبقا الرجاءإعادة الإدخال");
+                }
+
+                var PhoneExist = (from p in db.Cutomers where p.Phone == customer.phone select p).SingleOrDefault();
+                if (PhoneExist != null)
+                {
+                    return BadRequest("رقم الهاتف موجود مسبقا الرجاء التأكد من الإدخال");
+                }
+
+                var shortNumbersCode = (from p in db.ShoortNumber where p.Code == customer.code.ToString() || p.Service==customer.serviceName select p).SingleOrDefault();
+
+                if (shortNumbersCode != null)
+                {
+                    return BadRequest("رقم الخدمة موجود مسبقا الرجاء إعادة الإدخال");
+                }
+
+                //if (customer.from <= DateTime.Now)
+                //{
+                //    return BadRequest("خطأ في الإدخال الرجاء التحقق من التاريخ ");
+                //}
+
                 var Cutomers = new Cutomers();
                 var ShoortNumber = new ShoortNumber();
 
@@ -173,7 +218,7 @@ namespace Management.Controllers
                 Cutomers.CompanyName = customer.companyName;
                 Cutomers.Email = customer.email;
                 Cutomers.Status = 0;
-                Cutomers.CreatedBy = 0;//user dontforget
+                Cutomers.CreatedBy = userId;
                 Cutomers.CreatedOn = DateTime.Now;
                 db.Cutomers.Add(Cutomers);
 
@@ -189,6 +234,29 @@ namespace Management.Controllers
                 ShoortNumber.CustomerId = Cutomers.CustomerId;
 
                 db.ShoortNumber.Add(ShoortNumber);
+
+                var shoortNumberActions = new ShoortNumberActions();
+
+                shoortNumberActions.ShoortNumberId = ShoortNumber.Id;
+                shoortNumberActions.ActionType = 1;
+                shoortNumberActions.ActionDescription = "إشتراك جديد";
+                shoortNumberActions.Smscount = customer.countMassage;
+                shoortNumberActions.Amount = customer.amount;
+                shoortNumberActions.From = customer.from;
+                shoortNumberActions.To = customer.to;
+                shoortNumberActions.CreatedBy = userId;
+                shoortNumberActions.CreatecdOn = DateTime.Now;
+
+                db.ShoortNumberActions.Add(shoortNumberActions);
+
+                if (customer.UnknownNumberId != null)
+                {
+                    var unknownNumber = (from p in db.UnknownNumber where p.Id == customer.UnknownNumberId select p).SingleOrDefault();
+                    if (unknownNumber != null)
+                    {
+                        db.UnknownNumber.Remove(unknownNumber);
+                    }
+                }
 
                 db.SaveChanges();
 
@@ -225,10 +293,10 @@ namespace Management.Controllers
                     return BadRequest("رقم الخدمة موجود مسبقا الرجاء إعادة الإدخال");
                 }
 
-                if (serviceInfo.from>= DateTime.Now || serviceInfo.to >= DateTime.Now)
-                {
-                    return BadRequest("خطأ في الإدخال تاريخ البداية أصغر من تاريخ النهاية ");
-                }
+                //if (serviceInfo.from>= DateTime.Now || serviceInfo.to >= DateTime.Now)
+                //{
+                //    return BadRequest("خطأ في الإدخال تاريخ البداية أصغر من تاريخ النهاية ");
+                //}
 
 
                 var ShoortNumber = new ShoortNumber();
@@ -247,6 +315,20 @@ namespace Management.Controllers
                 ShoortNumber.State = 1;
 
                 db.ShoortNumber.Add(ShoortNumber);
+
+                var shoortNumberActions = new ShoortNumberActions();
+
+                shoortNumberActions.ShoortNumberId = ShoortNumber.Id;
+                shoortNumberActions.ActionType = 1;
+                shoortNumberActions.ActionDescription = "إشتراك جديد";
+                shoortNumberActions.Smscount = serviceInfo.countMassage;
+                shoortNumberActions.Amount = serviceInfo.amount;
+                shoortNumberActions.From = DateTime.Now;
+                shoortNumberActions.To = serviceInfo.to;
+                shoortNumberActions.CreatedBy = userId;
+                shoortNumberActions.CreatecdOn = DateTime.Now;
+
+                db.ShoortNumberActions.Add(shoortNumberActions);
 
                 db.SaveChanges();
 
@@ -271,29 +353,56 @@ namespace Management.Controllers
 
                 var userId = this.help.GetCurrentUser(HttpContext);
 
-                //if (userId <= 0)
-                //{
-                //    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
-                //}
+                if (userId <= 0)
+                {
+                    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
+                }
+
+                var shortNumber = (from p in db.ShoortNumber where p.Code == serviceInfo.code || p.Service == serviceInfo.serviceName select p).SingleOrDefault();
+                if(shortNumber!=null)
+                {
+                    return StatusCode(401, "تم إضافة الباقة مسبقا لارجاء إعادة الغدخال");
+                }
 
                 var ShoortNumber = new ShoortNumber();
-
 
                 ShoortNumber.Code = serviceInfo.code;
                 ShoortNumber.Amount = serviceInfo.amount;
                 ShoortNumber.From = serviceInfo.from;
+                ShoortNumber.To = serviceInfo.to;
                 ShoortNumber.UsageSms = serviceInfo.countUseMassage;
-                //ShoortNumber.To = package.to;
                 ShoortNumber.To = DateTime.Now;
                 ShoortNumber.Smscount = serviceInfo.countMassage;
                 ShoortNumber.Service = serviceInfo.serviceName;
-                //ShoortNumber.Description = serviceInfo.discriptions;
-                ShoortNumber.CreatedBy = userId;//user dontforget
+                ShoortNumber.CreatedBy = userId;
                 ShoortNumber.CreatedOn = DateTime.Now;
                 ShoortNumber.CustomerId = serviceInfo.custmorId;
                 ShoortNumber.State = 1;
 
                 db.ShoortNumber.Add(ShoortNumber);
+
+                var shoortNumberActions = new ShoortNumberActions();
+
+                shoortNumberActions.ShoortNumberId = ShoortNumber.Id;
+                shoortNumberActions.ActionType = 1;
+                shoortNumberActions.ActionDescription = "إشتراك جديد";
+                shoortNumberActions.Smscount = serviceInfo.countMassage;
+                shoortNumberActions.Amount = serviceInfo.amount;
+                shoortNumberActions.From = serviceInfo.from;
+                shoortNumberActions.To = serviceInfo.to;
+                shoortNumberActions.CreatedBy = userId;
+                shoortNumberActions.CreatecdOn = DateTime.Now;
+
+                db.ShoortNumberActions.Add(shoortNumberActions);
+
+                if (serviceInfo.UnknownNumberId!=null)
+                {
+                    var unknownNumber = (from p in db.UnknownNumber where p.Id == serviceInfo.UnknownNumberId select p).SingleOrDefault();
+                    if(unknownNumber!=null)
+                    {
+                        db.UnknownNumber.Remove(unknownNumber);
+                    }
+                }
 
                 db.SaveChanges();
 
@@ -438,7 +547,7 @@ namespace Management.Controllers
                                          SMSCount = p.Smscount,
                                          From = p.From,
                                          To = p.To,
-                                         CreatedBy = p.CreatedBy,
+                                         CreatedBy = db.Users.Where(x => x.UserId == p.CreatedBy).SingleOrDefault().Name ,
                                          CreatecdOn = p.CreatecdOn,
                                          Id=p.ShoortNumberId,
 
@@ -595,23 +704,28 @@ namespace Management.Controllers
                 //if state 1 you need to add becuse the packege is active 
                 //if state 2 you need to set as new packege 
 
-                if(shoortNumber.State==1)
-                {
-                    shoortNumber.Amount += ReloadserviceInfo.amount;
-                    shoortNumber.Smscount += ReloadserviceInfo.countMassage;
-                    shoortNumber.To = ReloadserviceInfo.to;
-                }
-                else if (shoortNumber.State == 2)
-                {
-                    shoortNumber.State = 1;//its active now !!
-                    shoortNumber.Amount = ReloadserviceInfo.amount;
-                    shoortNumber.Smscount = ReloadserviceInfo.countMassage;
-                    shoortNumber.From = ReloadserviceInfo.from;
-                    shoortNumber.To = ReloadserviceInfo.to;
-                    shoortNumber.UsageSms =0;
-                }
+                //if(shoortNumber.State==1)
+                //{
+                //    shoortNumber.Amount += ReloadserviceInfo.amount;
+                //    shoortNumber.Smscount += ReloadserviceInfo.countMassage;
+                //    shoortNumber.To = ReloadserviceInfo.to;
+                //}
+                //else if (shoortNumber.State == 2 || shoortNumber.State == 4)
+                //{
+                //    shoortNumber.State = 1;//its active now !!
+                //    shoortNumber.Amount = ReloadserviceInfo.amount;
+                //    shoortNumber.Smscount = ReloadserviceInfo.countMassage;
+                //    //shoortNumber.From = ReloadserviceInfo.from;
+                //    shoortNumber.To = ReloadserviceInfo.to;
+                //    shoortNumber.UsageSms =0;
+                //}
 
-                
+                shoortNumber.Amount += ReloadserviceInfo.amount;
+                shoortNumber.Smscount += ReloadserviceInfo.countMassage;
+                shoortNumber.To = ReloadserviceInfo.to;
+                shoortNumber.State = 1;
+
+
 
                 db.ShoortNumber.Update(shoortNumber);
 
@@ -623,7 +737,7 @@ namespace Management.Controllers
                 shoortNumberActions.ActionDescription = "إعادة شحن الباقة";
                 shoortNumberActions.Smscount = ReloadserviceInfo.countMassage;
                 shoortNumberActions.Amount = ReloadserviceInfo.amount;
-                shoortNumberActions.From = ReloadserviceInfo.to;
+                shoortNumberActions.From = DateTime.Now;
                 shoortNumberActions.To = ReloadserviceInfo.to;
                 shoortNumberActions.CreatedBy = userId;
                 shoortNumberActions.CreatecdOn = DateTime.Now;
@@ -654,10 +768,10 @@ namespace Management.Controllers
 
                 var userId = this.help.GetCurrentUser(HttpContext);
 
-                //if (userId <= 0)
-                //{
-                //    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
-                //}
+                if (userId <= 0)
+                {
+                    return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
+                }
 
                 var custmor = new Cutomers();
 

@@ -84,6 +84,13 @@
                                 <span class="sidebar-normal"> إشتراك جديد </span>
                             </a>
                         </li>
+                        
+                        <li @click="active = 8" :class="{'active':8 == active}">
+                            <a href="#" @click.prevent="href('/UnknownPackage')">
+                                <i class="nc-icon nc-layout-11" style="font-size:10px"></i>
+                                <span class="sidebar-normal"> <small style="margin-right:15px" class="badge badge-pill badge-danger">{{count}}</small> إشتراكات غير معروفة </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>

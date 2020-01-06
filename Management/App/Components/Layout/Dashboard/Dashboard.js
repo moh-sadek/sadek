@@ -3,12 +3,15 @@ export default {
     name: 'appHeader',    
     created() { 
         this.CheckLoginStatus();
+        this.getCount();
+        setInterval(() => this.getCount(), 10000);    
         
     },
     data() {
         return {            
             loginDetails: null,
-            active:1
+            active: 1,
+            count:0
         };
     },
   
@@ -81,6 +84,17 @@ export default {
             data = JSON.parse(data.toString(CryptoJS.enc.Utf8));
             return data;
         },
+
+        getCount() {
+
+            this.$http.getCount()
+                .then(response => {
+                    this.count = response.data.count;
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
       
     }    
 }

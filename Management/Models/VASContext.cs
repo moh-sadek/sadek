@@ -7,6 +7,8 @@ namespace Management.Models
     public partial class VASContext : DbContext
     {
         public virtual DbSet<Cutomers> Cutomers { get; set; }
+        public virtual DbSet<FileContent> FileContent { get; set; }
+        public virtual DbSet<Files> Files { get; set; }
         public virtual DbSet<SentSms> SentSms { get; set; }
         public virtual DbSet<SentSmsActions> SentSmsActions { get; set; }
         public virtual DbSet<ShoortNumber> ShoortNumber { get; set; }
@@ -44,6 +46,25 @@ namespace Management.Models
                 entity.Property(e => e.Phone).HasMaxLength(25);
             });
 
+            modelBuilder.Entity<FileContent>(entity =>
+            {
+                entity.Property(e => e.Code).HasMaxLength(50);
+
+                entity.Property(e => e.CreatecdOn).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Files)
+                    .WithMany(p => p.FileContent)
+                    .HasForeignKey(d => d.FilesId)
+                    .HasConstraintName("FK_FileContent_Files");
+            });
+
+            modelBuilder.Entity<Files>(entity =>
+            {
+                entity.Property(e => e.CreatecdOn).HasColumnType("datetime");
+
+                entity.Property(e => e.Name).HasMaxLength(150);
+            });
+
             modelBuilder.Entity<SentSms>(entity =>
             {
                 entity.ToTable("SentSMS");
@@ -51,6 +72,8 @@ namespace Management.Models
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.ShortCode).HasMaxLength(50);
             });
 
             modelBuilder.Entity<SentSmsActions>(entity =>
@@ -62,6 +85,8 @@ namespace Management.Models
 
             modelBuilder.Entity<ShoortNumber>(entity =>
             {
+                entity.Property(e => e.Code).HasMaxLength(50);
+
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
                 entity.Property(e => e.From).HasColumnType("datetime");
@@ -102,6 +127,8 @@ namespace Management.Models
 
             modelBuilder.Entity<UnknownNumber>(entity =>
             {
+                entity.Property(e => e.Code).HasMaxLength(50);
+
                 entity.Property(e => e.CreatecdOn).HasColumnType("datetime");
             });
 

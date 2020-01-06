@@ -32,11 +32,8 @@ export default {
 
             }, 
 
-            lastSteps:[],
-            topFiveActions:[],
-            customorCountss:[],
-            packegeAmountsums:[],
-            packegesCounts:[],
+            Detals:[],
+
         };
     },
     methods: {
@@ -69,21 +66,15 @@ export default {
         },
 
         getPakegesInfo() {
-
             this.$blockUI.Start();
-            this.$http.getPakegesInfo()//this.$parent.SuperPackageParent.superPackageId
+            this.$http.getPakegesInfo()
                 .then(response => {
                     this.$blockUI.Stop();
-                    this.lastSteps = response.data.lastSteps;
-                    this.topFiveActions = response.data.topFiveActions;
-                    this.customorCountss = response.data.customorCountss;
-                    this.packegeAmountsums = response.data.packegeAmountsums;
-                    this.packegesCounts = response.data.packegesCounts;
-                    
+                    this.Detals = response.data.detals;
                 })
                 .catch((err) => {
                     this.$blockUI.Stop();
-                    console.error(err);
+                    console.error(err.error);
                 });
 
         },

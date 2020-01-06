@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Authorization;
 using Management.Models;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Management;
 
 namespace Managegment
 {
@@ -38,6 +39,7 @@ namespace Managegment
         {
             services.AddDbContext<VASContext>(options => options.UseSqlServer(Configuration.GetConnectionString("VAS"), builder => builder.UseRowNumberForPaging()));
             //services.AddDbContext<Models.AppointmentsContext>(options => options.UseMySQL(Configuration.GetConnectionString("Appointment")));
+            services.Configure<Settings>(Configuration.GetSection("Settings"));
 
 
             services.AddCors(options =>

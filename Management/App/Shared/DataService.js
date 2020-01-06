@@ -164,5 +164,52 @@ export default {
         return axios.get(baseUrl + `/Admin/Packeges/PackagesCheck`);
     },
 
+    getUnkownPackage(pageNo, pageSize) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.get(baseUrl + `/Admin/Packeges/getUnkownPackage?pageNo=${pageNo}&pagesize=${pageSize}`);
+    },
+
+    deleteUnkownPackge(id) {
+        debugger
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.post(baseUrl + `/admin/Packeges/${id}/deleteUnkownPackge`);
+    },
+
+    //uknpwn count
+    getCount() {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.get(baseUrl + `/Admin/Packeges/getCount`);
+    },
+
+    getFiles() {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.get(baseUrl + `/Admin/Packeges/getFiles`);
+    },
+
+    getfileContent(pageNo, pageSize, Selectedfile) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.get(baseUrl + `/Admin/Packeges/getfileContent?pageNo=${pageNo}&pagesize=${pageSize}&id=${Selectedfile}`);
+    },
+
+    getVarbile() {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.get(baseUrl + `/Admin/Packeges/getVarbile`);
+    },
+
+    EditPaht(form) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.post(baseUrl + '/Admin/Packeges/EditPaht', form);
+    },
+
+    Editgrade(grad) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.post(baseUrl + `/admin/Packeges/${grad}/Editgrade`);
+    },
+
+    Editextensions(extensions) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + document.querySelector('meta[name="api-token"]').getAttribute('content');
+        return axios.post(baseUrl + `/admin/Packeges/${extensions}/Editextensions`);
+    },
+
 
 }

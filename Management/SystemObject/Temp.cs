@@ -7,7 +7,7 @@ namespace Management
 {
     public class Temp
     {
-        public int? code { get; set; }
+        public string code { get; set; }
         public int count { get; set; }
     }
 }
