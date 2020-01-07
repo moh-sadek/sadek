@@ -1,41 +1,26 @@
 ﻿export default {
     name: 'AddUser',
     created() {
-        this.SelectHospital();
 
-        var Father;
-        var familyname;
-        if (this.AllData["0"].arabicfathername != '') {
-            Father = ' ' + this.AllData["0"].arabicfathername;
-        }
-
-        if (this.AllData["0"].arabicfamilyname != '') {
-            familyname = ' ' + this.AllData["0"].arabicfamilyname
-        }
-        //console.log(this.$parent.persmissonLable);    
-        console.log(this.$parent.PermissionModale);
-        if (this.$parent.PermissionModale == 4) {
-            this.form.SearchByRegistryNumber = true;
-        }
-
-        this.form.FullName = this.AllData["0"].arabicfirstname + Father + familyname;
-        this.form.DateOfBirth = this.AllData["0"].dateOfBirth;
-        this.form.PersonId = this.AllData["0"].personId;
-
-
-        if (this.AllData["0"].gender == 'M') {
-
-            this.form.Gender = 1;
-        } else {
-            this.form.Gender = 2;
-        }
-
+        this.UserType = [
+            {
+                id: 1,
+                name: "مدير"
+            },
+            {
+                id: 2,
+                name: 'مستخدم'
+            }
+        ];
+         
     },
     data() {
         return {
             pageNo: 1,
             pageSize: 10,
             pages: 0,
+
+            UserType: [],
 
             form: {
                 LoginName: '',
@@ -68,20 +53,6 @@
         };
     },
     methods: {
-        SelectHospital() {
-            this.$http.SelectHospital()
-                .then(response => {
-                    this.Hospital = response.data.hospital;
-                })
-                .catch((err) => {
-                    this.$blockUI.Stop();
-                    this.$message({
-                        type: 'error',
-                        message: err.response.data
-                    });
-                });
-
-        },
         Back() {
             this.$parent.state = 0;
             this.$parent.getUser();
@@ -117,12 +88,6 @@
 
         Save() {
             this.$blockUI.Start();
-            this.form.UserType = this.$parent.PermissionModale;
-            if (this.form.UserType == 3) {
-                this.$blockUI.Stop();
-                this.form.OfficeId = this.$parent.Office;
-            }
-            this.form.NationalId = this.$parent.NID;
 
             if (!this.form.LoginName) {
                 this.$blockUI.Stop();

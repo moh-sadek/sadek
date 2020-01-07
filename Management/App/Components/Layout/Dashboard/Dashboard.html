@@ -88,7 +88,7 @@
                         <li @click="active = 8" :class="{'active':8 == active}">
                             <a href="#" @click.prevent="href('/UnknownPackage')">
                                 <i class="nc-icon nc-layout-11" style="font-size:10px"></i>
-                                <span class="sidebar-normal"> <small style="margin-right:15px" class="badge badge-pill badge-danger">{{count}}</small> إشتراكات غير معروفة </span>
+                                <span class="sidebar-normal"> <small style="margin-right:15px" class="badge badge-pill badge-danger">{{count}}</small> إشتراكات غير معرفة </span>
                             </a>
                         </li>
                     </ul>
@@ -128,7 +128,7 @@
                     <p>إدارة التقارير</p>
                 </a>
             </li>
-            <li @click="active = 7" :class="{'active':7 == active}">
+            <li @click="active = 7" :class="{'active':7 == active}" v-if="loginDetails.userType==1">
                 <a href="#" @click.prevent="href('/Users')">
                     <i class="nc-icon nc-badge"></i>
                     <p>إدارة المستخدمين</p>

@@ -1,11 +1,12 @@
-﻿export default {
+﻿import CryptoJS from 'crypto-js';
+export default {
     name: 'AppHeader',    
     created() { 
-        
+        this.CheckLoginStatus();
     },
     data() {
         return {            
-            loginDetails: null,
+            loginDetails: null, 
             active:1
         };
     },
@@ -37,8 +38,29 @@
             } else if (root.getAttribute('class') == 'dropdown') {
                 root.setAttribute('class', 'dropdown open');
             }
-        }
+        },
         //****************************************************************
+
+        CheckLoginStatus() {
+            try {
+                this.loginDetails = this.decrypt(sessionStorage.getItem('currentUser'), sessionStorage.getItem('SECRET_KEY'));
+                if (this.loginDetails == null) {
+                    window.location.href = '/Security/Login';
+                }
+            } catch (error) {
+                window.location.href = '/Security/Login';
+            }
+        },
+        encrypt: function encrypt(data, SECRET_KEY) {
+            var dataSet = CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY);
+            dataSet = dataSet.toString();
+            return dataSet;
+        },
+        decrypt: function decrypt(data, SECRET_KEY) {
+            data = CryptoJS.AES.decrypt(data, SECRET_KEY);
+            data = JSON.parse(data.toString(CryptoJS.enc.Utf8));
+            return data;
+        },
 
       
     }    

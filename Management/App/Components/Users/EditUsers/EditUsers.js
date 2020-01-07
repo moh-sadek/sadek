@@ -1,8 +1,6 @@
 ﻿export default {
     name: 'EditUser',    
     created() {
-        debugger
-        console.log(this.$parent.EditUsersObj);
         this.form.FullName = this.$parent.EditUsersObj.name;
         this.form.LoginName = this.$parent.EditUsersObj.loginName;
         this.form.Phone = this.$parent.EditUsersObj.phone;

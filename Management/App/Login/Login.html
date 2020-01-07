@@ -81,14 +81,14 @@
                                         </div>
                                     </div>
                                     <div class="card-body ">
-                                        <form class="form" v-if="!ForgetPassword">
+                                        <form class="form" v-if="!ForgetPassword" v-on:submit.prevent="Save()">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" style="padding: 10px 10px 10px 10px;">
                                                         <i class="nc-icon nc-single-02"></i>
                                                     </span>
                                                 </div>
-                                                <input type="email" v-model="form.Email" placeholder="you@example.com" class="form-control">
+                                                <input type="email" v-model="form.Email" placeholder="you@example.com" class="form-control" v-on:keyup.enter="Save()">
                                             </div>
                                             <div class="input-group">
 
@@ -103,7 +103,7 @@
                                                             <i class="nc-icon nc-key-25"></i>
                                                         </span>
                                                     </div>
-                                                    <input type="password" auto-complete="off" v-model="form.Password" placeholder="*************" class="form-control"/>
+                                                    <input type="password" auto-complete="off" v-model="form.Password" placeholder="*************" class="form-control" v-on:keyup.enter="Save()" /><!--v-on:keyup="Save()"-->
                                                 </div>
                                             </div>
 

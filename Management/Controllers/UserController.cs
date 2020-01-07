@@ -48,6 +48,7 @@ namespace Management.Controllers
                                          BirthDate = p.BirthDate,
                                          CreatedBy = p.CreatedBy,
                                          Image = p.Image,
+                                         UserType=p.UserType
                                      }).Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();
 
                 return Ok(new { users = UserInfo, count = UsersCount });
@@ -103,7 +104,7 @@ namespace Management.Controllers
 
 
                 }
-                
+                 
 
                 var cPhone = (from u in db.Users
                               where u.Phone == user.Phone
@@ -141,6 +142,7 @@ namespace Management.Controllers
                 cUser.CreatedOn = DateTime.Now;
                 cUser.Gender = (short)user.Gender;
                 cUser.LoginTryAttempts = 0;
+                cUser.UserType = user.UserType;
                 cUser.Password = Security.ComputeHash(user.Password, HashAlgorithms.SHA512, null);
                 if (user.Photo == null)
                 {

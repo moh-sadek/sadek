@@ -14,6 +14,7 @@
 
                             <br />
                             <br />
+                            <br />
 
                             <div class="disabled-sorting text-right" style="margin-top:-49px">
                                 <el-button class="btn btn-primary" type="primary" @click="addUser">إضافة مستخدم</el-button>
@@ -24,11 +25,13 @@
                         </div>
                         <br />
                         <br />
+
                         <table id="datatable" class="table table-striped table-bordered" cellspacing="0">
                             <thead>
                                 <tr class="text-primary">
                                     <th>#</th>
                                     <th>الإسم</th>
+                                    <th>الصفة الوظيفية</th>
                                     <th>إسم الدخول </th>
                                     <th>رقم الهاتف </th>
                                     <th>تاريخ الميلاد </th>
@@ -42,6 +45,8 @@
                                 <tr v-for="item,index in users" style="font-size:11.3pt;">
                                     <td>{{index+1 }} </td>
                                     <td>{{item.name }} </td>
+                                    <td v-if="item.userType==1">مدير</td>
+                                    <td v-if="item.userType==2">مستخدم </td>
                                     <td>{{item.loginName}}</td>
                                     <td>{{item.phone}}</td>
                                     <td>{{item.birthDate | moment}}</td>
@@ -62,7 +67,7 @@
 
                                         <a title="تفعيل الحساب" href="#" class="btn btn-info btn-link btn-icon btn-sm like"
                                            @click.prevent="ActivateUser(item.userId)"
-                                           v-if="item.state==2 || item.stat==0">
+                                           v-if="item.state==2 || item.state==0">
                                             <i class="fa fa-unlock" style="font-size:15px"></i>
                                         </a>
 
@@ -76,22 +81,34 @@
                                 </tr>
                             </tbody>
                         </table>
+
                         <div class="row" dir="ltr">
-                            <div class="col-sm-12 col-md-5">
+
+                            <div class="col-sm-12 col-md-6">
+
                                 <div class="disabled-sorting text-right" id="datatable_info" role="status" aria-live="polite">Showing {{pageNo}} to {{pageSize}} of {{pages}} entries</div>
-                            </div>
-
-                            <div style="text-align: center; ">
-
-                                <el-pagination background
-                                               layout="prev, pager, next"
-                                               :current-page="pageNo"
-                                               :page-size="pageSize"
-                                               :total="pages"
-                                               @current-change="getCustomers($event)">
-                                </el-pagination>
 
                             </div>
+                            <div class="col-sm-12 col-md-6">
+
+                                <div class="disabled-sorting text-left"
+                                     id="datatable_info"
+                                     aria-live="polite"
+                                     role="status">
+
+                                    <el-pagination background
+                                                   layout="prev, pager, next"
+                                                   :current-page="pageNo"
+                                                   :page-size="pageSize"
+                                                   :total="pages"
+                                                   @current-change="getUser($event)">
+                                    </el-pagination>
+
+                                </div>
+
+                            </div>
+
+
 
                         </div>
                     </div>

@@ -44,6 +44,8 @@ export default {
             data = data.toString(CryptoJS.enc.Utf8);
             return data;
         },
+        
+
         Send(form) {
             let $blockUI = this.$loading({
                 fullscreen: true,

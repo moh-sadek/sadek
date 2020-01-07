@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Managegment.Controllers;
 using Management;
 using Management.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -20,7 +21,7 @@ namespace Management.Controllers
         private readonly VASContext db;
         private Helper help;
         private Settings _settings;
-        public PackegesController(VASContext context,IOptions<Settings> setttings)
+        public PackegesController(VASContext context, IOptions<Settings> setttings)
         {
             this.db = context;
             help = new Helper();
@@ -40,7 +41,7 @@ namespace Management.Controllers
                     path = _settings.path,
                     extensions = _settings.extensions
                 };
-                return Ok(new { varbiles = varbileList});
+                return Ok(new { varbiles = varbileList });
             }
             catch (Exception e)
             {
@@ -133,62 +134,62 @@ namespace Management.Controllers
         }
 
         [HttpGet("GetPackges")]
-        public IActionResult GetPackges(int pageNo, int pageSize, int searchType,int id)//type of id 
+        public IActionResult GetPackges(int pageNo, int pageSize, int searchType, int id)//type of id 
         {
             try
             {
-                IQueryable<ShoortNumber> PackegesInfo= from p in db.ShoortNumber select p;
+                IQueryable<ShoortNumber> PackegesInfo = from p in db.ShoortNumber select p;
 
                 //searchType
                 //1 name
                 //2 code
-                if (searchType==1)
+                if (searchType == 1)
                 {
-                    PackegesInfo = from p in db.ShoortNumber where p.CustomerId==id select p;
-                }else if(searchType == 2)
+                    PackegesInfo = from p in db.ShoortNumber where p.CustomerId == id select p;
+                } else if (searchType == 2)
                 {
                     PackegesInfo = from p in db.ShoortNumber where p.Id == id select p;
                 }
                 else if (searchType == 3)
                 {
-                   //id
-                   //1 Finshe 
-                   //2 Not Finsh
-                   //3 All MostFinsh
-                    if(id==1)
+                    //id
+                    //1 Finshe 
+                    //2 Not Finsh
+                    //3 All MostFinsh
+                    if (id == 1)
                     {
-                        PackegesInfo = from p in db.ShoortNumber where  p.State==1 select p;
+                        PackegesInfo = from p in db.ShoortNumber where p.State == 1 select p;
                     }
-                    else if(id == 2)
+                    else if (id == 2)
                     {
                         PackegesInfo = from p in db.ShoortNumber where p.State == 2 select p;
-                    }else  if(id==3)
+                    } else if (id == 3)
                     {
                         PackegesInfo = from p in db.ShoortNumber where p.State == 3 select p;
                     }
-                    
+
                 }
 
                 var PackegesCount = (from p in PackegesInfo
-                                    select p).Count();
+                                     select p).Count();
 
                 var PackegesInfos = (from p in PackegesInfo
                                      orderby p.CreatedOn descending
-                                   select new
-                                   {
-                                       FullName = p.Customer.FullName,
-                                       Code = p.Code,
-                                       Service = p.Service,
-                                       Amount = p.Amount,
-                                       SMSCount = p.Smscount,
-                                       UsageSMS = p.UsageSms, 
-                                       To = p.To,
-                                       State = p.State,
-                                       CustomerId = p.CustomerId,
-                                       Id=p.Id,
-                                       RemindSMS= p.Smscount - p.UsageSms,
-                                       UsagePercentage = (100 * p.UsageSms) / p.Smscount,
-                                   }).Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();
+                                     select new
+                                     {
+                                         FullName = p.Customer.FullName,
+                                         Code = p.Code,
+                                         Service = p.Service,
+                                         Amount = p.Amount,
+                                         SMSCount = p.Smscount,
+                                         UsageSMS = p.UsageSms,
+                                         To = p.To,
+                                         State = p.State,
+                                         CustomerId = p.CustomerId,
+                                         Id = p.Id,
+                                         RemindSMS = p.Smscount - p.UsageSms,
+                                         UsagePercentage = (100 * p.UsageSms) / p.Smscount,
+                                     }).Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();
 
                 return Ok(new { Packeges = PackegesInfos, count = PackegesCount });
             }
@@ -203,7 +204,7 @@ namespace Management.Controllers
         {
             try
             {
-                IQueryable<Cutomers> CustmorsInfo = from p in db.Cutomers where p.Status!=9 select p;
+                IQueryable<Cutomers> CustmorsInfo = from p in db.Cutomers where p.Status != 9 select p;
 
 
                 var CustmorsInfos = (from p in CustmorsInfo
@@ -212,16 +213,16 @@ namespace Management.Controllers
                                      {
                                          CustomerId = p.CustomerId,
                                          FullName = p.FullName,
-                                         Phone=p.Phone,
-                                         BirthDate=p.BirthDate,
-                                         CompanyName=p.CompanyName,
-                                         Email=p.Email,
-                                         Status=p.Status,
-                                         CreatedBy=p.CreatedBy,
-                                         CreatedOn=p.CreatedOn
+                                         Phone = p.Phone,
+                                         BirthDate = p.BirthDate,
+                                         CompanyName = p.CompanyName,
+                                         Email = p.Email,
+                                         Status = p.Status,
+                                         CreatedBy = p.CreatedBy,
+                                         CreatedOn = p.CreatedOn
                                      }).ToList();
 
-                return Ok(new { custmor = CustmorsInfos});
+                return Ok(new { custmor = CustmorsInfos });
             }
             catch (Exception e)
             {
@@ -234,17 +235,17 @@ namespace Management.Controllers
         {
             try
             {
-                IQueryable<ShoortNumber> CodesInfo = from p in db.ShoortNumber  select p;
+                IQueryable<ShoortNumber> CodesInfo = from p in db.ShoortNumber select p;
 
 
                 var CodesInfos = (from p in CodesInfo
-                                     orderby p.CreatedOn descending
-                                     select new
-                                     {
-                                         CustomerId = p.CustomerId,
-                                         Id = p.Id,
-                                         Code = p.Code
-                                     }).ToList();
+                                  orderby p.CreatedOn descending
+                                  select new
+                                  {
+                                      CustomerId = p.CustomerId,
+                                      Id = p.Id,
+                                      Code = p.Code
+                                  }).ToList();
 
                 return Ok(new { codes = CodesInfos });
             }
@@ -264,13 +265,13 @@ namespace Management.Controllers
                 var PackegesCount = (from p in PackegesInfo select p).Count();
                 var PackegeAmountsum = (from p in db.ShoortNumberActions select p.Amount).Sum();
                 var CustomorCounts = (from p in db.Cutomers where p.Status != 9 select p).Count();
-                var unkownPackage = (from p in db.UnknownNumber where p.Status!=9 select p).Count();
-                var Active = (from p in db.ShoortNumber where p.State==1 select p).Count();
+                var unkownPackage = (from p in db.UnknownNumber where p.Status != 9 select p).Count();
+                var Active = (from p in db.ShoortNumber where p.State == 1 select p).Count();
                 var NotActive = (from p in db.ShoortNumber where p.State == 2 select p).Count();
                 var Stopped = (from p in db.ShoortNumber where p.State == 3 select p).Count();
                 var Finsh = (from p in db.ShoortNumber where p.State == 4 select p).Count();
-                var LastStep = (from p in db.ShoortNumberActions select p).OrderByDescending(p=>p.Id).Select(x => new { code=x.ShoortNumber.Code, x.Amount,x.Smscount,x.ActionDescription}).Take(5).ToList();
-                var LastSubScribtions = (from p in db.ShoortNumber select p).OrderByDescending(p=>p.Id).Select(x => new { x.Code,x.Service, x.Amount, x.Smscount, x.UsageSms }).Take(5).ToList();
+                var LastStep = (from p in db.ShoortNumberActions select p).OrderByDescending(p => p.Id).Select(x => new { code = x.ShoortNumber.Code, x.Amount, x.Smscount, x.ActionDescription }).Take(5).ToList();
+                var LastSubScribtions = (from p in db.ShoortNumber select p).OrderByDescending(p => p.Id).Select(x => new { x.Code, x.Service, x.Amount, x.Smscount, x.UsageSms }).Take(5).ToList();
 
                 var Detalss = new
                 {
@@ -300,7 +301,7 @@ namespace Management.Controllers
         {
             try
             {
-                IQueryable<UnknownNumber> PackegesInfo = from p in db.UnknownNumber where p.Status!=9 select p;
+                IQueryable<UnknownNumber> PackegesInfo = from p in db.UnknownNumber where p.Status != 9 select p;
 
 
                 var PackegesCount = (from p in PackegesInfo
@@ -316,7 +317,7 @@ namespace Management.Controllers
                                          CreatecdOn = p.CreatecdOn,
                                      }).Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();
 
-                return Ok(new { unkownPackage = PackegesInfos, count=PackegesCount });
+                return Ok(new { unkownPackage = PackegesInfos, count = PackegesCount });
             }
             catch (Exception e)
             {
@@ -368,9 +369,9 @@ namespace Management.Controllers
         {
             try
             {
-                var PackegesCount = (from p in db.UnknownNumber where  p.Status == 1 select p).Count();
+                var PackegesCount = (from p in db.UnknownNumber where p.Status == 1 select p).Count();
 
-                return Ok(new {count = PackegesCount });
+                return Ok(new { count = PackegesCount });
             }
             catch (Exception e)
             {
@@ -385,11 +386,11 @@ namespace Management.Controllers
             {
                 var files = (from p in db.Files
                              orderby p.CreatecdOn descending
-                                  select new
-                                  {
-                                      Id = p.Id,
-                                      Name = p.Name,
-                                  }).ToList();
+                             select new
+                             {
+                                 Id = p.Id,
+                                 Name = p.Name,
+                             }).ToList();
 
                 return Ok(new { files = files });
             }
@@ -400,15 +401,15 @@ namespace Management.Controllers
         }
 
         [HttpGet("getfileContent")]
-        public IActionResult getfileContent(int pageNo, int pageSize,long id)//type of id 
+        public IActionResult getfileContent(int pageNo, int pageSize, long id)//type of id 
         {
             try
             {
                 IQueryable<FileContent> FileContent = from p in db.FileContent select p;
 
-                if(id!=0)
+                if (id != 0)
                 {
-                    FileContent = from p in db.FileContent where p.FilesId==id select p;
+                    FileContent = from p in db.FileContent where p.FilesId == id select p;
                 }
 
 
@@ -416,13 +417,13 @@ namespace Management.Controllers
 
                 var filesContent = (from p in FileContent
                                     orderby p.CreatecdOn descending
-                                     select new
-                                     {
-                                         id = p.Id,
-                                         Code = p.Code,
-                                         Count = p.Count,
-                                         CreatecdOn = p.CreatecdOn,
-                                     }).Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();
+                                    select new
+                                    {
+                                        id = p.Id,
+                                        Code = p.Code,
+                                        Count = p.Count,
+                                        CreatecdOn = p.CreatecdOn,
+                                    }).Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();
 
                 return Ok(new { filesContent = filesContent, FileCount = FileCount });
             }
@@ -433,6 +434,7 @@ namespace Management.Controllers
         }
 
         //SMS Joup
+        [AllowAnonymous]
         [HttpGet("PackagesCheck")]
         public IActionResult PackagesCheck()
         {

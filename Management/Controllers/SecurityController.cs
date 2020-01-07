@@ -174,6 +174,7 @@ namespace Management.Controllers
                     Gender = cUser.Gender,
                     State = cUser.State,
                     Phone = cUser.Phone,
+                    UserType=cUser.UserType,
                     SecretKey = Guid.NewGuid()
                     //OfficeState=cUser.Office.State        
                 };
