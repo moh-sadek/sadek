@@ -11,11 +11,12 @@ export default {
         return {            
             loginDetails: null,
             active: 1,
-            count:0
+            count: 0,
         };
     },
   
     methods: {
+
         pathChange(route) {
             if (route == "Companies") {
                 this.active = 2;

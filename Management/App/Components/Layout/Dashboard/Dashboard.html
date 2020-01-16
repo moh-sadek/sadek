@@ -1,358 +1,318 @@
-﻿
-<div class="sidebar" data-color="green" data-active-color="danger">
+﻿<div class="sidebar" data-color="rose" data-background-color="black" data-image="../../Contenar/assets/img/sidebar-1.jpg">
     <!--
-        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
-        -->
-    <div class="logo">
-        <a href="" class="simple-text logo-mini">
-            
-        </a>
-        <a href="" class="simple-text logo-normal">
-            VAS | System 
-        </a>
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
+        Tip 2: you can also add an image using data-image tag
+    -->
+    <div class="logo">
+        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+            CT
+        </a>
+        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+            Creative Tim
+        </a>
     </div>
     <div class="sidebar-wrapper">
         <div class="user">
             <div class="photo">
+                <!--<img src="../../../../Content/assets/img/faces/avatar.jpg" />-->
                 <img :src="'http://localhost:4810/Api/Admin/User/' + loginDetails.userId + '/image'" />
             </div>
-            <div class="info">
-                <a data-toggle="collapse" href="#collapseExample" class="collapsed">
+            <div class="user-info">
+                <a data-toggle="collapse" href="#collapseExample" class="username">
                     <span>
-                        {{loginDetails.fullName.slice(0,20)}}
+                        Tania Andrew
                         <b class="caret"></b>
                     </span>
                 </a>
-                <div class="clearfix"></div>
                 <div class="collapse" id="collapseExample">
                     <ul class="nav">
-                        <li>
-                            <a href="#" @click.prevent="href('/EditUsersProfile')">
-                                <span class="sidebar-mini-icon">MP</span>
-                                <span class="sidebar-normal">الصفحة الشخصية</span>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" @click.prevent="href('/EditUsersProfile')">
+                                <span class="sidebar-mini" > MP </span>
+                                <span class="sidebar-normal"> My Profile </span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#" @click.prevent="href('/ChangePassword')">
-                                <span class="sidebar-mini-icon">CP</span>
-                                <span class="sidebar-normal">تغير كلمة المرور</span>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="sidebar-mini"> EP </span>
+                                <span class="sidebar-normal"> Edit Profile </span>
                             </a>
                         </li>
-                        <li>
-                            <a href="/Security/Login">
-                                <span class="sidebar-mini-icon">LO</span>
-                                <span class="sidebar-normal">تسجيل الخروج</span>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="sidebar-mini"> S </span>
+                                <span class="sidebar-normal"> Settings </span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-
-
-
-        <ul class="nav" style="padding:0px">
-            <li @click="active = 1" :class="{'active':1 == active}">
-                <a href="#" @click.prevent="href('/home')">
-                    <i class="nc-icon nc-layout-11"></i>
-                    <p>الصفحة الرئيسية</p>
+        <ul class="nav">
+            <li @click="active= 1" :class="{'active':1 == active}">
+                <a class="nav-link" href="/">
+                    <i class="material-icons" style="color:white">dashboard</i>
+                    <p style="color:white"> Dashboard </p>
                 </a>
+
             </li>
-
-
-            <li :class="{'active':3 == active,'active':2 == active}">
-                <!--this line need to some ending so far as wall -->
-                <a data-toggle="collapse" href="#pagesExamples">
-                    <i class="nc-icon nc-bank"></i>
+            <li class="nav-item ">
+                <a class="nav-link" data-toggle="collapse" href="#pagesExamples">
+                    <i class="material-icons">image</i>
                     <p>
-                        إدارة الإشتراكات
+                        Pages
                         <b class="caret"></b>
                     </p>
                 </a>
-                <div class="collapse " id="pagesExamples">
-                    <ul class="nav" style="padding:0px">
-                        <li @click="active = 2" :class="{'active':2 == active}">
-                            <a href="#" @click.prevent="href('/Packages')">
-                                <i class="nc-icon nc-layout-11" style="font-size:10px"></i>
-                                <span class="sidebar-normal"> عرض الإشتراكات </span>
+                <div class="collapse" id="pagesExamples">
+                    <ul class="nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/pages/pricing.html">
+                                <span class="sidebar-mini"> P </span>
+                                <span class="sidebar-normal"> Pricing </span>
                             </a>
                         </li>
-                        <li @click="active = 3" :class="{'active':3 == active}">
-                            <a href="#" @click.prevent="href('/AddPackage')">
-                                <i class="nc-icon nc-layout-11" style="font-size:10px"></i>
-                                <span class="sidebar-normal"> إشتراك جديد </span>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/pages/rtl.html">
+                                <span class="sidebar-mini"> RS </span>
+                                <span class="sidebar-normal"> RTL Support </span>
                             </a>
                         </li>
-                        
-                        <li @click="active = 8" :class="{'active':8 == active}">
-                            <a href="#" @click.prevent="href('/UnknownPackage')">
-                                <i class="nc-icon nc-layout-11" style="font-size:10px"></i>
-                                <span class="sidebar-normal"> <small style="margin-right:15px" class="badge badge-pill badge-danger">{{count}}</small> إشتراكات غير معرفة </span>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/pages/timeline.html">
+                                <span class="sidebar-mini"> T </span>
+                                <span class="sidebar-normal"> Timeline </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/pages/login.html">
+                                <span class="sidebar-mini"> LP </span>
+                                <span class="sidebar-normal"> Login Page </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/pages/register.html">
+                                <span class="sidebar-mini"> RP </span>
+                                <span class="sidebar-normal"> Register Page </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/pages/lock.html">
+                                <span class="sidebar-mini"> LSP </span>
+                                <span class="sidebar-normal"> Lock Screen Page </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/pages/user.html">
+                                <span class="sidebar-mini"> UP </span>
+                                <span class="sidebar-normal"> User Profile </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/pages/error.html">
+                                <span class="sidebar-mini"> E </span>
+                                <span class="sidebar-normal"> Error Page </span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </li>
-
-            <li :class="{'active':4 == active,'active':4 == active}">
-                <a data-toggle="collapse" href="#componentsExamples">
-                    <i class="nc-icon nc-single-02"></i>
+            <li class="nav-item ">
+                <a class="nav-link" data-toggle="collapse" href="#componentsExamples">
+                    <i class="material-icons">apps</i>
                     <p>
-                        إدارة العملاء
+                        Components
                         <b class="caret"></b>
                     </p>
                 </a>
-                <div class="collapse " id="componentsExamples">
-                    <ul class="nav" style="padding:0px">
+                <div class="collapse" id="componentsExamples">
+                    <ul class="nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" data-toggle="collapse" href="#componentsCollapse">
+                                <span class="sidebar-mini"> MLT </span>
+                                <span class="sidebar-normal">
+                                    Multi Level Collapse
+                                    <b class="caret"></b>
+                                </span>
+                            </a>
+                            <div class="collapse" id="componentsCollapse">
+                                <ul class="nav">
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="#0">
+                                            <span class="sidebar-mini"> E </span>
+                                            <span class="sidebar-normal"> Example </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/components/buttons.html">
+                                <span class="sidebar-mini"> B </span>
+                                <span class="sidebar-normal"> Buttons </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/components/grid.html">
+                                <span class="sidebar-mini"> GS </span>
+                                <span class="sidebar-normal"> Grid System </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/components/panels.html">
+                                <span class="sidebar-mini"> P </span>
+                                <span class="sidebar-normal"> Panels </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/components/sweet-alert.html">
+                                <span class="sidebar-mini"> SA </span>
+                                <span class="sidebar-normal"> Sweet Alert </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/components/notifications.html">
+                                <span class="sidebar-mini"> N </span>
+                                <span class="sidebar-normal"> Notifications </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/components/icons.html">
+                                <span class="sidebar-mini"> I </span>
+                                <span class="sidebar-normal"> Icons </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/components/typography.html">
+                                <span class="sidebar-mini"> T </span>
+                                <span class="sidebar-normal"> Typography </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" data-toggle="collapse" href="#formsExamples">
+                    <i class="material-icons">content_paste</i>
+                    <p>
+                        Forms
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="formsExamples">
+                    <ul class="nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/forms/regular.html">
+                                <span class="sidebar-mini"> RF </span>
+                                <span class="sidebar-normal"> Regular Forms </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/forms/extended.html">
+                                <span class="sidebar-mini"> EF </span>
+                                <span class="sidebar-normal"> Extended Forms </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/forms/validation.html">
+                                <span class="sidebar-mini"> VF </span>
+                                <span class="sidebar-normal"> Validation Forms </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/forms/wizard.html">
+                                <span class="sidebar-mini"> W </span>
+                                <span class="sidebar-normal"> Wizard </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" data-toggle="collapse" href="#tablesExamples">
+                    <i class="material-icons">grid_on</i>
+                    <p>
+                        Tables
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="tablesExamples">
+                    <ul class="nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/tables/regular.html">
+                                <span class="sidebar-mini"> RT </span>
+                                <span class="sidebar-normal"> Regular Tables </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/tables/extended.html">
+                                <span class="sidebar-mini"> ET </span>
+                                <span class="sidebar-normal"> Extended Tables </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/tables/datatables.net.html">
+                                <span class="sidebar-mini"> DT </span>
+                                <span class="sidebar-normal"> DataTables.net </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" data-toggle="collapse" href="#mapsExamples">
+                    <i class="material-icons">people_alt</i>
+                    <p>
+                        إدارة المستخدمين
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="mapsExamples">
+                    <ul class="nav">
                         <li @click="active = 4" :class="{'active':4 == active}">
-                            <a href="#" @click.prevent="href('/Customers')">
-                                <i class="nc-icon nc-single-02" style="font-size:10px"></i>
-                                <span class="sidebar-normal"> عرض العملاء </span>
+                            <a class="nav-link" href="#" @click.prevent="href('/Users')">
+                                <span class="sidebar-mini"> VU </span>
+                                <span class="sidebar-normal" style="text-align:right"> عرض بيانات المستخدمين </span>
                             </a>
                         </li>
                         <li @click="active = 5" :class="{'active':5 == active}">
-                            <a href="#" @click.prevent="href('/AddCustomers')">
-                                <i class="nc-icon nc-single-02" style="font-size:10px"></i>
-                                <span class="sidebar-normal"> إضافة عميل </span>
+                            <a class="nav-link" href="#" @click.prevent="href('/AddUsers')">
+                                <span class="sidebar-mini"> AU </span>
+                                <span class="sidebar-normal" style="text-align:right"> إضافة مستخدم </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="../examples/maps/vector.html">
+                                <span class="sidebar-mini"> LP </span>
+                                <span class="sidebar-normal"> متابعة مستخدم </span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </li>
 
-
-            <li @click="active = 6" :class="{'active':6 == active}">
-                <a href="#" @click.prevent="href('/Reports')">
-                    <i class="nc-icon nc-single-copy-04"></i>
-                    <p>إدارة التقارير</p>
+            <li class="nav-item ">
+                <a class="nav-link" href="../examples/widgets.html">
+                    <i class="material-icons">widgets</i>
+                    <p> Widgets </p>
                 </a>
             </li>
-            <li @click="active = 7" :class="{'active':7 == active}" v-if="loginDetails.userType==1">
-                <a href="#" @click.prevent="href('/Users')">
-                    <i class="nc-icon nc-badge"></i>
-                    <p>إدارة المستخدمين</p>
+            <li class="nav-item ">
+                <a class="nav-link" href="../examples/charts.html">
+                    <i class="material-icons">timeline</i>
+                    <p> Charts </p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="../examples/calendar.html">
+                    <i class="material-icons">date_range</i>
+                    <p> Calendar </p>
                 </a>
             </li>
 
-            <!--Dashpord-->
-            <!--
-    <li>
-        <a data-toggle="collapse" href="#pagesExamples">
-            <i class="nc-icon nc-book-bookmark"></i>
-            <p>
-                Pages
-                <b class="caret"></b>
-            </p>
-        </a>
-        <div class="collapse " id="pagesExamples">
-            <ul class="nav">
-                <li>
-                    <a href="../examples/pages/timeline.html">
-                        <span class="sidebar-mini-icon">T</span>
-                        <span class="sidebar-normal"> Timeline </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/pages/login.html">
-                        <span class="sidebar-mini-icon">L</span>
-                        <span class="sidebar-normal"> Login </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/pages/register.html">
-                        <span class="sidebar-mini-icon">R</span>
-                        <span class="sidebar-normal"> Register </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/pages/lock.html">
-                        <span class="sidebar-mini-icon">LS</span>
-                        <span class="sidebar-normal"> Lock Screen </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/pages/user.html">
-                        <span class="sidebar-mini-icon">UP</span>
-                        <span class="sidebar-normal"> User Profile </span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li>
-        <a data-toggle="collapse" href="#componentsExamples">
-            <i class="nc-icon nc-layout-11"></i>
-            <p>
-                Components
-                <b class="caret"></b>
-            </p>
-        </a>
-        <div class="collapse " id="componentsExamples">
-            <ul class="nav">
-                <li>
-                    <a href="../examples/components/buttons.html">
-                        <span class="sidebar-mini-icon">B</span>
-                        <span class="sidebar-normal"> Buttons </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/components/grid.html">
-                        <span class="sidebar-mini-icon">G</span>
-                        <span class="sidebar-normal"> Grid System </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/components/panels.html">
-                        <span class="sidebar-mini-icon">P</span>
-                        <span class="sidebar-normal"> Panels </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/components/sweet-alert.html">
-                        <span class="sidebar-mini-icon">SA</span>
-                        <span class="sidebar-normal"> Sweet Alert </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/components/notifications.html">
-                        <span class="sidebar-mini-icon">N</span>
-                        <span class="sidebar-normal"> Notifications </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/components/icons.html">
-                        <span class="sidebar-mini-icon">I</span>
-                        <span class="sidebar-normal"> Icons </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/components/typography.html">
-                        <span class="sidebar-mini-icon">T</span>
-                        <span class="sidebar-normal"> Typography </span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li>
-        <a data-toggle="collapse" href="#formsExamples">
-            <i class="nc-icon nc-ruler-pencil"></i>
-            <p>
-                Forms
-                <b class="caret"></b>
-            </p>
-        </a>
-        <div class="collapse " id="formsExamples">
-            <ul class="nav">
-                <li>
-                    <a href="../examples/forms/regular.html">
-                        <span class="sidebar-mini-icon">RF</span>
-                        <span class="sidebar-normal"> Regular Forms </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/forms/extended.html">
-                        <span class="sidebar-mini-icon">EF</span>
-                        <span class="sidebar-normal"> Extended Forms </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/forms/validation.html">
-                        <span class="sidebar-mini-icon">V</span>
-                        <span class="sidebar-normal"> Validation Forms </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/forms/wizard.html">
-                        <span class="sidebar-mini-icon">W</span>
-                        <span class="sidebar-normal"> Wizard </span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li>
-        <a data-toggle="collapse" href="#tablesExamples">
-            <i class="nc-icon nc-single-copy-04"></i>
-            <p>
-                Tables
-                <b class="caret"></b>
-            </p>
-        </a>
-        <div class="collapse " id="tablesExamples">
-            <ul class="nav">
-                <li>
-                    <a href="../examples/tables/regular.html">
-                        <span class="sidebar-mini-icon">RT</span>
-                        <span class="sidebar-normal"> Regular Tables </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/tables/extended.html">
-                        <span class="sidebar-mini-icon">ET</span>
-                        <span class="sidebar-normal"> Extended Tables </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/tables/datatables.net.html">
-                        <span class="sidebar-mini-icon">DT</span>
-                        <span class="sidebar-normal"> DataTables.net </span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li>
-        <a data-toggle="collapse" href="#mapsExamples">
-            <i class="nc-icon nc-pin-3"></i>
-            <p>
-                Maps
-                <b class="caret"></b>
-            </p>
-        </a>
-        <div class="collapse " id="mapsExamples">
-            <ul class="nav">
-                <li>
-                    <a href="../examples/maps/google.html">
-                        <span class="sidebar-mini-icon">GM</span>
-                        <span class="sidebar-normal"> Google Maps </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/maps/fullscreen.html">
-                        <span class="sidebar-mini-icon">FSM</span>
-                        <span class="sidebar-normal"> Full Screen Map </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../examples/maps/vector.html">
-                        <span class="sidebar-mini-icon">VM</span>
-                        <span class="sidebar-normal"> Vector Map </span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li>
-        <a href="../examples/widgets.html">
-            <i class="nc-icon nc-box"></i>
-            <p>Widgets</p>
-        </a>
-    </li>
-    <li>
-        <a href="../examples/charts.html">
-            <i class="nc-icon nc-chart-bar-32"></i>
-            <p>Charts</p>
-        </a>
-    </li>
-    <li>
-        <a href="/home">
-            <i class="nc-icon nc-calendar-60"></i>
-            <p>Calendar</p>
-        </a>
-    </li>-->
+            
+
         </ul>
     </div>
 </div>
-<!--<div class="main-panel">-->

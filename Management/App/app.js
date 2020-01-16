@@ -11,6 +11,7 @@ import Courses from './Components/Courses/Courses.vue';
 import Packages from './Components/Packages/Packages.vue';
 import Customers from './Components/Customers/Customers.vue';
 import Users from './Components/Users/Users.vue';
+import AddUsers from './Components/Users/AddUsers/AddUsers.vue';
 import EditUsersProfile from './Components/Users/EditUsersProfile/EditUsersProfile.vue';
 import ChangePassword from './Components/Users/ChangePassword/ChangePassword.vue';
 import AddOldPackage from './Components/Packages/AddOldPackage/AddOldPackage.vue';
@@ -64,6 +65,7 @@ const router = new VueRouter({
         { path: '/home', component: Home },
         { path: '/Packages', component: Packages },
         { path: '/Users', component: Users },
+        { path: '/AddUsers', component: AddUsers },
         { path: '/EditUsersProfile', component: EditUsersProfile },
         { path: '/ChangePassword', component: ChangePassword },  
         { path: '/Customers', component: Customers },

@@ -1,5 +1,8 @@
-﻿@import "https://fonts.googleapis.com/css?family=Montserrat:400,700,200";
+﻿@import "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons";
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css";
-@import "../Content/assets/css/bootstrap.min.css";
-@import "../Content/assets/css/paper-dashboard.css";
 @import "../Content/assets/demo/demo.css";
+@import "../Content/assets/css/material-dashboard.css?v=2.1.0";
+@import "../Content/animate.css";
+
+
+

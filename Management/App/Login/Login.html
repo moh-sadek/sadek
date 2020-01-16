@@ -1,136 +1,122 @@
 ﻿
-
-
-
-
-
-
     <div>
 
-        <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent" style="
-    border: transparent;
-    margin-top: 25px;
-">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top text-white">
             <div class="container">
-                <div class="navbar-wrapper" style="
-">
-                    <div class="navbar-toggle"><button type="button" class="navbar-toggler"><span class="navbar-toggler-bar bar1"></span> <span class="navbar-toggler-bar bar2"></span> <span class="navbar-toggler-bar bar3"></span></button></div> <a href="#pablo" class="navbar-brand" style="
-    color: white;
-">Al-Madar Aljadid | VAS System</a>
-                </div> <button type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-bar navbar-kebab"></span> <span class="navbar-toggler-bar navbar-kebab"></span> <span class="navbar-toggler-bar navbar-kebab"></span></button>
+                <div class="navbar-wrapper">
+                    <a class="navbar-brand" href="#pablo">Login Page</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="../dashboard.html" class="nav-link">
+                                <i class="material-icons">dashboard</i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="../pages/register.html" class="nav-link">
+                                <i class="material-icons">person_add</i> Register
+                            </a>
+                        </li>
+                        <li class="nav-item  active ">
+                            <a href="../pages/login.html" class="nav-link">
+                                <i class="material-icons">fingerprint</i> Login
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="../pages/lock.html" class="nav-link">
+                                <i class="material-icons">lock_open</i> Lock
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
+        <!-- End Navbar -->
+        <div class="wrapper wrapper-full-page">
+            <div class="page-header login-page header-filter" filter-color="black" style="background-image: url('../../assets/img/login.jpg'); background-size: cover; background-position: top center;">
+                <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
 
+                            <el-form :model="form" :rules="rules" ref="ruleForm" label-position="top" label-width="120px" class="demo-ruleForm">
 
+                                <div class="card card-login animated fadeInDown delay-1s">
+                                <!--<div :class=ClassContenar>-->
 
-
-        <div class="wrapper wrapper-full-page ">
-            <div class="full-page register-page section-image" filter-color="black" data-image="../../assets/img/bg/jan-sendereks.jpg">
-                <div class="content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-5 col-md-5 ml-auto">
-                                <div class="info-area info-horizontal mt-5">
-                                    <div class="icon icon-primary">
-                                        <i class="nc-icon nc-tv-2"></i>
-                                    </div>
-                                    <div class="description">
-                                        <h5 class="info-title">Monitoring </h5>
-                                        <p class="description">
-                                            We've created the marketing campaign of the website. It was a very interesting collaboration.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="info-area info-horizontal">
-                                    <div class="icon icon-primary">
-                                        <i class="nc-icon nc-html5"></i>
-                                    </div>
-                                    <div class="description">
-                                        <h5 class="info-title">Statistic Info</h5>
-                                        <p class="description">
-                                            We've developed the website with HTML5 and CSS3. The client has access to the code using GitHub.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="info-area info-horizontal">
-                                    <div class="icon icon-info">
-                                        <i class="nc-icon nc-atom"></i>
-                                    </div>
-                                    <div class="description">
-                                        <h5 class="info-title">Built Audience</h5>
-                                        <p class="description">
-                                            There is also a Fully Customizable CMS Admin Dashboard for this product.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 mr-auto">
-                                <div class="card card-signup text-center">
-                                    <div class="card-header ">
-
-                                        <div class="social">
-                                            <div class="photo">
-                                                <img src="/assets/img/bg/Almadar-logo.jpg" style="
-    margin-top: -15px;
-    height: 150px;
-    display: block;
-    margin-left: 40px;
-">
-                                            </div>
-                                            <div style="height:30px"></div>
+                                    <div class="card-header card-header-rose text-center">
+                                        <h4 class="card-title">Login</h4>
+                                        <div class="social-line">
+                                            <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                                                <i class="fa fa-facebook-square"></i>
+                                            </a>
+                                            <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                            <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                                                <i class="fa fa-google-plus"></i>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="card-body ">
-                                        <form class="form" v-if="!ForgetPassword" v-on:submit.prevent="Save()">
+                                        <p class="card-description text-center">Or Be Classical</p>
+                                        <span class="bmd-form-group">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text" style="padding: 10px 10px 10px 10px;">
-                                                        <i class="nc-icon nc-single-02"></i>
+                                                    <span class="input-group-text">
+                                                        <i class="material-icons">face</i>
                                                     </span>
                                                 </div>
-                                                <input type="email" v-model="form.Email" placeholder="you@example.com" class="form-control" v-on:keyup.enter="Save()">
+                                                <input type="text" class="form-control" v-on:keyup.enter="Save()" v-model="form.Email" placeholder="First Name...">
                                             </div>
+                                        </span>
+                                        <!--<span class="bmd-form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="material-icons">email</i>
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" v-on:keyup.enter="login()" v-model="form.Email" placeholder="First Name...">
+                </div>
+            </span>-->
+                                        <span class="bmd-form-group">
                                             <div class="input-group">
-
-                                            </div>
-                                            <div class="input-group">
-
-                                            </div>
-                                            <div class="input-group">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text" style="padding: 10px 10px 10px 10px;">
-                                                            <i class="nc-icon nc-key-25"></i>
-                                                        </span>
-                                                    </div>
-                                                    <input type="password" auto-complete="off" v-model="form.Password" placeholder="*************" class="form-control" v-on:keyup.enter="Save()" /><!--v-on:keyup="Save()"-->
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="material-icons">lock_outline</i>
+                                                    </span>
                                                 </div>
+                                                <input type="password" class="form-control" v-on:keyup.enter="Save()" placeholder="Password..." v-model="form.Password" />
                                             </div>
-
-                                        </form>
+                                        </span>
                                     </div>
-                                    <div class="card-footer " style="margin-top:0px">
-                                        <el-button class="btn btn " style="width: 50%;    background-color: #4b7521;" @click.prevent="Save()">Login</el-button>
+                                    <div class="card-footer justify-content-center">
+                                        <a href="#pablo" class="btn btn-rose btn-link btn-lg" @click.prevent="Save()">Lets Go</a>
                                     </div>
                                 </div>
-                            </div>
+                            </el-form>
                         </div>
+
                     </div>
                 </div>
-                <footer class="footer footer-black  footer-white ">
-                    <div class="container-fluid">
-                        <div class="row" style="margin-left:10px">
-                            <div class="pull-left">
-                                <span class="copyright">
-                                    ©
-                                    Created By <i class="nc-icon nc-planet heart" style="color:aliceblue"></i>
-                                    Almadar Aljadid Company
-                                </span>
-                            </div>
-                        </div>
+                <footer class="footer">
+                    <div class="container">
+                        <!--<div class="copyright float-right">
+
+
+                    <a href="https://www.linkedin.com/in/ahmed-bensuliman-6aa004131/" target="_blank">&copy; Made by AhmedTareck</a>
+                </div>-->
                     </div>
                 </footer>
-                <div class="full-page-background" style="background-image: url(../../assets/img/bg/jan-sendereks.jpg) "></div>
             </div>
         </div>
-    </div>
+        </div>

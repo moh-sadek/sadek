@@ -440,7 +440,6 @@ namespace Management.Controllers
         {
             try
             {
-                Console.WriteLine(DateTime.Now);
                 String FolderPath = _settings.path;
                 string[] filePaths = Directory.GetFiles(FolderPath, "*" + _settings.extensions);
 
@@ -487,7 +486,6 @@ namespace Management.Controllers
                     db.SaveChanges();
 
                     System.IO.File.Delete(Path.Combine(FolderPath, item));
-                    Console.WriteLine(DateTime.Now);
                 }
 
                 return Ok();
@@ -564,6 +562,31 @@ namespace Management.Controllers
 
 
 
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet("CheckDate")]
+        public IActionResult CheckDate()
+        {
+            try
+            {
+                var packege = (from p in db.ShoortNumber where p.State == 1 select p).ToList();
+
+                foreach (ShoortNumber item in packege)
+                {
+                    if(item.To>=DateTime.Now)
+                    {
+                        item.State = 2;
+                    }
+                    db.SaveChanges();
+                }
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
             }
         }
     }

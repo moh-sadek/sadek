@@ -1,8 +1,17 @@
-﻿@import "https://fonts.googleapis.com/css?family=Montserrat:400,700,200";
+﻿@import "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons";
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css";
-@import "../Content/assets/css/bootstrap.min.rtl.css";
+@import "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css";
+
+/*@import "https://fonts.googleapis.com/css?family=Montserrat:400,700,200";
+@import "https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css";*/
+
+/*@import "../Content/assets/css/bootstrap.min.rtl.css";
 @import "../Content/assets/css/paper-dashboard.rtl.css";
+@import "../Content/assets/demo/demo.rtl.css";*/
 @import "../Content/assets/demo/demo.rtl.css";
+@import "../Content/assets/css/material-dashboard.rtl.css";
+@import "../Content/assets/css/material-dashboard.min.rtl.css";
+
 @font-face {
     font-family: 'DroidArabicKufiRegular';
     src: url('fonts/DroidKufi-Regular.eot') format('embedded-opentype'), url('fonts/DroidKufi-Regular.woff') format('woff'), url('fonts/DroidKufi-Regular.ttf') format('truetype');
@@ -10,6 +19,29 @@
     font-style: normal;
 }
 
+.is-focused {
+    text-align:right!important;
+}
+
 * {
     font-family: 'DroidArabicKufiRegular';
 }
+
+
+/*.is-focused .bmd-label-floating, .is-filled .bmd-label-floating {
+    right: 0!important;
+}
+
+.inputStylePlaceHolderRTL {
+    text-align: right!important;
+}
+
+.bmd-form-group .bmd-label-static {
+    top: 0.35rem;
+    position: relative;
+    font-size: 0.875rem;
+    float: right;
+}*/
+
+
+
