@@ -14,7 +14,7 @@
  */
 
 /*     brand Colors              */
-
+/**comment*/
 .card {
   font-size: .875rem;
 }
@@ -19205,7 +19205,7 @@ a .material-icons {
   width: 64px;
   background: rgba(0, 0, 0, 0.3);
   z-index: 1031;
-  border-radius: 8px 8px 0 8px;
+  border-radius: 8px 0 0 8px;
   text-align: center;
 }
 

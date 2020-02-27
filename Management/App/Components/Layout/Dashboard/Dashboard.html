@@ -25,7 +25,7 @@
                         <b class="caret"></b>
                     </span>
                 </a>
-                <div class="collapse" id="collapseExample">
+                <div class="collapse" id="collapseExample" style="left: 68px;">    <!--width: 100%;-->
                     <ul class="nav">
                         <li class="nav-item">
                             <a class="nav-link" href="#" @click.prevent="href('/EditUsersProfile')">
@@ -36,7 +36,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <span class="sidebar-mini"> EP </span>
-                                <span class="sidebar-normal"> Edit Profile </span>
+                                <span class="sidebar-normal"> تغير كلمة المرور </span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -260,7 +260,7 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-item ">
+            <li :class="{'active':4 == active}">
                 <a class="nav-link" data-toggle="collapse" href="#mapsExamples">
                     <i class="material-icons">people_alt</i>
                     <p>

@@ -8,9 +8,9 @@
 /*@import "../Content/assets/css/bootstrap.min.rtl.css";
 @import "../Content/assets/css/paper-dashboard.rtl.css";
 @import "../Content/assets/demo/demo.rtl.css";*/
-@import "../Content/assets/demo/demo.rtl.css";
+/*@import "../Content/assets/demo/demo.rtl.css";*/
 @import "../Content/assets/css/material-dashboard.rtl.css";
-@import "../Content/assets/css/material-dashboard.min.rtl.css";
+/*@import "../Content/assets/css/material-dashboard.min.rtl.css";*/
 
 @font-face {
     font-family: 'DroidArabicKufiRegular';
@@ -23,8 +23,37 @@
     text-align:right!important;
 }
 
+
 * {
     font-family: 'DroidArabicKufiRegular';
+}
+
+.sidebar .nav p {
+   
+    color: white !important;
+}
+
+.sidebar .sidebar-wrapper > .nav [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal, .sidebar .sidebar-wrapper .user .user-info [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal {
+    margin: 0;
+    position: relative;
+    transform: translateX(0px);
+    opacity: 1;
+    white-space: nowrap;
+    display: block;
+    color: white;
+}
+
+
+.sidebar .sidebar-wrapper > .nav [data-toggle="collapse"] ~ div > ul > li > a .sidebar-mini, .sidebar .sidebar-wrapper .user .user-info [data-toggle="collapse"] ~ div > ul > li > a .sidebar-mini {
+    text-transform: uppercase;
+    width: 30px;
+    margin-left: 15px;
+    text-align: center;
+    letter-spacing: 1px;
+    position: relative;
+    float: right;
+    display: inherit;
+    color: white;
 }
 
 
