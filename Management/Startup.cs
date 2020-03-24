@@ -37,7 +37,7 @@ namespace Managegment
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<VASContext>(options => options.UseSqlServer(Configuration.GetConnectionString("VAS"), builder => builder.UseRowNumberForPaging()));
+            services.AddDbContext<SmartEducationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SmartEducation"), builder => builder.UseRowNumberForPaging()));
             //services.AddDbContext<Models.AppointmentsContext>(options => options.UseMySQL(Configuration.GetConnectionString("Appointment")));
             services.Configure<Settings>(Configuration.GetSection("Settings"));
 

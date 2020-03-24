@@ -16,10 +16,10 @@ namespace Management.Models
         public string Phone { get; set; }
         public DateTime? BirthDate { get; set; }
         public short? State { get; set; }
-        public short? UserType { get; set; }
         public DateTime? LoginTryAttemptDate { get; set; }
         public short? LoginTryAttempts { get; set; }
         public DateTime? LastLoginOn { get; set; }
         public short? Gender { get; set; }
+        public short? UserType { get; set; }
     }
 }

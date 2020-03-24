@@ -30,9 +30,9 @@ namespace Management.Controllers
         [TempData]
         public string ErrorMessage { get; set; }
         private Helper help;
-        private readonly VASContext db;
+        private readonly SmartEducationContext db;
         private IConfiguration Configuration { get; }
-        public SecurityController(VASContext context, IConfiguration configuration)
+        public SecurityController(SmartEducationContext context, IConfiguration configuration)
         {
             this.db = context;
             help = new Helper();

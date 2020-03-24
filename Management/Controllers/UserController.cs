@@ -14,9 +14,9 @@ namespace Management.Controllers
     [Route("Api/Admin/User")]
     public class UserController : Controller
     {
-        private readonly VASContext db;
+        private readonly SmartEducationContext db;
         private Helper help;
-        public UserController(VASContext context)
+        public UserController(SmartEducationContext context)
         {
             this.db = context;
             help = new Helper();
