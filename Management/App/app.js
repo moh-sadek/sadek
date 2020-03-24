@@ -8,19 +8,19 @@ import BlockUIService from './Shared/BlockUIService.js';
 import Layout from './Components/Layout/Layout.vue';
 import Home from './Components/Home/Home.vue';
 import Courses from './Components/Courses/Courses.vue';
-import Packages from './Components/Packages/Packages.vue';
+//import Packages from './Components/Packages/Packages.vue';
 import Customers from './Components/Customers/Customers.vue';
 import Users from './Components/Users/Users.vue';
 import AddUsers from './Components/Users/AddUsers/AddUsers.vue';
 import EditUsersProfile from './Components/Users/EditUsersProfile/EditUsersProfile.vue';
 import ChangePassword from './Components/Users/ChangePassword/ChangePassword.vue';
-import AddOldPackage from './Components/Packages/AddOldPackage/AddOldPackage.vue';
+//import AddOldPackage from './Components/Packages/AddOldPackage/AddOldPackage.vue';
 import AddOldCustomers from './Components/Customers/AddOldCustomers/AddOldCustomers.vue';
-import AddPackage from './Components/Packages/AddPackage/AddPackage.vue';
+//import AddPackage from './Components/Packages/AddPackage/AddPackage.vue';
 import AddCustomers from './Components/Customers/AddCustomers/AddCustomers.vue';
 import Reports from './Components/Reports/Reports.vue';
 import Seting from './Components/Seting/Seting.vue';
-import UnknownPackage from './Components/Packages/UnknownPackage/UnknownPackage.vue';
+//import UnknownPackage from './Components/Packages/UnknownPackage/UnknownPackage.vue';
 /*import Students from './Components/Students/Students.vue';
 import Companies from './Components/Companies/Companies.vue';
 import Packages from './Components/Packages/Packages.vue';
@@ -63,18 +63,18 @@ const router = new VueRouter({
         { path: '/', component: Home },
         { path: '/Courses', component: Courses },
         { path: '/home', component: Home },
-        { path: '/Packages', component: Packages },
+        //{ path: '/Packages', component: Packages },
         { path: '/Users', component: Users },
         { path: '/AddUsers', component: AddUsers },
         { path: '/EditUsersProfile', component: EditUsersProfile },
         { path: '/ChangePassword', component: ChangePassword },  
         { path: '/Customers', component: Customers },
-        { path: '/AddOldPackage', component: AddOldPackage },
+        //{ path: '/AddOldPackage', component: AddOldPackage },
         { path: '/AddOldCustomers', component: AddOldCustomers },
-        { path: '/AddPackage', component: AddPackage },
+        //{ path: '/AddPackage', component: AddPackage },
         { path: '/AddCustomers', component: AddCustomers },
         { path: '/Reports', component: Reports },
-        { path: '/UnknownPackage', component: UnknownPackage },
+        //{ path: '/UnknownPackage', component: UnknownPackage },
         { path: '/Seting', component: Seting },
         ]
 
