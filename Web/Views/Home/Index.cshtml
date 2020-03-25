@@ -1,0 +1,84 @@
+﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+<!DOCTYPE html>
+<html class="ltr">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="ABDULLAH ELAMEIR - WEB DEVELOPMENT | MOBAIL APPS DEVELOPMENT">
+    <meta name="csrf-token" content="@GetAntiXsrfRequestToken()">
+    <meta name="api-token" content="@TempData["token"]">
+    <meta name="current-user" content="">
+    <link rel="shortcut icon" href="~/img/favicon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- Nucleo Icons -->
+    <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <link href="./assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="./assets/css/argon-design-system.css?v=1.0.2" rel="stylesheet" />
+    <title>وزارة التربية والتعليم </title>
+    <link rel="stylesheet" id="vueui" href="~/css/vueui.css" asp-append-version="true" />
+    <link rel="stylesheet" id="main" href="~/css/main.css" asp-append-version="true" />
+</head>
+<body class="presentation-page">
+    <div id="app"></div>
+    <script src="~/js/manifest.js" asp-append-version="true"></script>
+    <script src="~/js/vendor.js" asp-append-version="true"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
+
+    <script src="~/assets/js/core/jquery.min.js" type="application/javascript"></script>
+    <script src="~/assets/js/core/popper.min.js" type="application/javascript"></script>
+    <script src="~/assets/js/core/bootstrap.min.js" type="application/javascript"></script>
+    <script src="~/assets/js/plugins/perfect-scrollbar.jquery.min.js" type="application/javascript"></script>
+    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+    <script src="~/assets/js/plugins/bootstrap-switch.js" type="application/javascript"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="~/assets/js/plugins/nouislider.min.js" type="application/javascript"></script>
+    <!--  Plugin for the Carousel, full documentation here: http://jedrzejchalubek.com/ -->
+    <script src="~/assets/js/plugins/glide.js" type="application/javascript"></script>
+    <!--  Plugin for the DatePicker, full documentation here: https://flatpickr.js.org/ -->
+    <script src="~/assets/js/plugins/moment.min.js" type="application/javascript"></script>
+    <!--	Plugin for Select, full documentation here: https://joshuajohnson.co.uk/Choices/ -->
+    <script src="~/assets/js/plugins/choices.min.js" type="application/javascript"></script>
+    <!--  Plugin for the DateTimePicker, full documentation here: https://flatpickr.js.org/ -->
+    <script src="~/assets/js/plugins/datetimepicker.js" type="application/javascript">
+    <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+    <script src="~/assets/js/plugins/jasny-bootstrap.min.js" type="application/javascript"></script>
+    <!-- Plugin for Headrom, full documentation here: https://wicky.nillia.ms/headroom.js/ -->
+    <script src="~/assets/js/plugins/headroom.min.js" type="application/javascript"></script>
+    <!-- Control Center for Argon UI Kit: parallax effects, scripts for the example pages etc -->
+    <!--  Google Maps Plugin    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE" type="application/javascript"></script>
+    <script src="~/assets/js/argon-design-system.min.js?v=1.0.2" type="application/javascript"></script>
+    <script type="application/javascript">
+        // Carousel
+        new Glide('.presentation-cards', {
+            type: 'carousel',
+            startAt: 0,
+            focusAt: 2,
+            perTouch: 1,
+            perView: 5
+        }).mount();
+    </script>
+    <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+    <script type="application/javascript">
+        window.TrackJS &&
+            TrackJS.install({
+                token: "ee6fab19c5a04ac1a32a645abde4613a",
+                application: "argon-design-system-pro"
+            });
+    </script>
+</body>
+</html>
+
