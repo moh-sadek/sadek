@@ -1,0 +1,199 @@
+﻿
+
+    <body class="login-page">
+       
+        <div class="section-shaped my-0 skew-separator skew-mini">
+            <div class="page-header page-header-small header-filter" style="background-image: url('/assets/img/hero-bg.webp'); background-repeat: repeat;">
+                <div class="page-header-image" >
+                </div>
+                <div class="container">
+                    <div class="header-body text-center mb-7">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-5 col-lg-6 col-md-8 px-5">
+                                <br />
+                                <br />
+                                <h1 class="text-white">تسجيل بيانات طبيب</h1>
+                                <p class="text-lead text-white">قم بتعبئة البيانات ادناه وستم التواصل معكم للتحقق من البيانات</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="upper" >
+            <div class="container">
+                <div class="col-lg-12 col-md-12 mx-auto">
+                    <div class="card bg-secondary shadow border-0">
+                        <div class="card-header bg-white pb-5">
+                            <div class="text-muted text-center mb-3">
+                                <h4>إنشاء حساب طبيب داخل النظام</h4>
+                            </div>
+                        </div>
+                        <div class="card-body px-lg-5 py-lg-5">
+                            <div class="text-center text-muted mb-4">
+                            </div>
+                            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="top" label-width="120px" class="js-validate text-right" dir="rtl">
+
+                                <!--User Name / Login Name-->
+                                <el-row class="row">
+
+                                    <el-col class="col-md-6">
+
+
+
+                                        <el-form-item label="الاسم التلاثي" prop="FullName">
+                                            <el-input placeholder="الاسم التلاثي" v-model="ruleForm.FullName"></el-input>
+                                        </el-form-item>
+
+
+                                    </el-col>
+
+                                    <el-col class="col-md-6">
+
+
+
+
+                                        <el-form-item label="اسم الدخول" prop="LoginName">
+                                            <el-input placeholder="اسم الدخول" v-model="ruleForm.LoginName"></el-input>
+                                        </el-form-item>
+
+
+                                    </el-col>
+
+                                </el-row>
+
+                                <el-row class="row">
+
+                                    <el-col class="col-md-4">
+
+
+                                        <el-form-item label="البريد الإلكتروني" prop="Email">
+                                            <el-input placeholder="البريد الإلكتروني" v-model="ruleForm.Email"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+
+                                    <el-col class="col-md-4">
+
+
+                                        <el-form-item label="رقم الهاتف" prop="Phone">
+                                            <el-input placeholder="رقم الهاتف" v-model="ruleForm.Phone"></el-input>
+                                        </el-form-item>
+                                    </el-col>
+
+                                    <el-col class="col-md-4">
+
+
+                                        <el-form-item label="البلدية" prop="MunicipalitysId">
+                                            <el-select style="width: 100%;" v-model="ruleForm.MunicipalitysId" filterable placeholder="البلدية">
+
+                                                <el-option v-for="item in Municipalitys"
+                                                           :key="item.id"
+                                                           :label="item.name"
+                                                           :value="item.id">
+                                                </el-option>
+
+                                            </el-select>
+
+                                        </el-form-item>
+
+
+                                    </el-col>
+
+                                </el-row>
+
+                                <el-row class="row">
+
+
+                                    <el-col class="col-md-6">
+
+                                        <el-form-item label="تاريخ الميلاد" prop="DateOfBirth">
+                                            <el-date-picker type="date"
+                                                            v-model="ruleForm.DateOfBirth"
+                                                            style="width:100%"
+                                                            placeholder="تاريخ الميلاد">
+                                            </el-date-picker>
+
+                                        </el-form-item>
+
+
+                                    </el-col>
+
+                                    <el-col class="col-md-6">
+                                        <el-form-item label="الجنس" prop="Gender">
+                                            <el-select style="width: 100%;" v-model="ruleForm.Gender" filterable placeholder="الجنس">
+
+                                                <el-option v-for="item in [{id:1,Gender:'ذكـر'},{id:2,Gender:'انـثي'}]"
+                                                           :key="item.id"
+                                                           :label="item.Gender"
+                                                           :value="item.id">
+                                                </el-option>
+
+                                            </el-select>
+
+                                        </el-form-item>
+                                    </el-col>
+
+                                </el-row>
+
+                                <el-row class="row">
+
+                                    <el-col class="col-md-6">
+
+
+                                        <el-form-item label="الرقم السري" prop="Password">
+                                            <el-input placeholder="الرقم السري" v-model="ruleForm.Password" type="password"></el-input>
+                                        </el-form-item>
+
+
+                                    </el-col>
+
+                                    <el-col class="col-md-6">
+
+
+                                        <el-form-item label="تأكيد الرقم السري" prop="ConfimPassword">
+                                            <el-input placeholder="تأكيد الرقم السري" v-model="ruleForm.ConfimPassword" type="password"></el-input>
+
+                                        </el-form-item>
+                                    </el-col>
+
+                                    
+
+                                </el-row>
+
+                                <!--Permations-->
+                                <el-row class="row">
+                                    <el-col class="col-md-11">
+
+
+
+                                    </el-col>
+
+                                </el-row>
+
+
+
+
+                            </el-form>
+                            <br />
+                            <br />
+                            <div class="d-flex justify-content-center">
+                                <div class="col-md-2">
+                                    <el-button class="btn btn-info btn-fill pull-right"
+                                               type="primary"
+                                               @click.prevent="Save('ruleForm')">
+                                        التسحيل داخل النظام
+
+                                    </el-button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+
+
+
+    </body>

@@ -7,7 +7,7 @@ export default {
     },
     created() {  
         this.CheckLoginStatus();  
-        this.getPakegesInfo();
+        this.GetDashpordInfo();
     },
     data() {
         return {
@@ -65,9 +65,9 @@ export default {
             return data;
         },
 
-        getPakegesInfo() {
+        GetDashpordInfo() {
             this.$blockUI.Start();
-            this.$http.getPakegesInfo()
+            this.$http.GetDashpordInfo()
                 .then(response => {
                     this.$blockUI.Stop();
                     this.Detals = response.data.detals;

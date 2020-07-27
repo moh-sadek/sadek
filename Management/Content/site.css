@@ -33,6 +33,52 @@
     color: white !important;
 }
 
+.el-form-item__error {
+    color: #f56c6c;
+    font-size: 12px;
+    text-align: right;
+    line-height: 1;
+    padding-top: 4px;
+    position: absolute;
+    top: 100%;
+    /* left: 0; */
+}
+
+.el-form--label-top .el-form-item__label {
+    float: right;
+    display: inline-block;
+    text-align: left;
+    padding: 0 0 0px;
+}
+
+.title {
+    margin-top: 30px;
+    margin-bottom: 25px;
+    min-height: 32px;
+    font-family: 'DroidArabicKufiRegular';
+}
+
+.card .card-header.card-header-icon .card-title, .card .card-header.card-header-text .card-title {
+    margin-top: 15px;
+    color: #3C4858;
+    font-family: 'DroidArabicKufiRegular';
+}
+
+dropdown__item.hover, .el-select-dropdown__item:hover {
+    background-color: #f5f7fa;
+    margin-right: 5px;
+}
+
+.el-form-item__error {
+    color: #f56c6c;
+    font-size: 12px;
+    line-height: 1;
+    padding-top: 4px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+}
+
 .sidebar .sidebar-wrapper > .nav [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal, .sidebar .sidebar-wrapper .user .user-info [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal {
     margin: 0;
     position: relative;
@@ -54,6 +100,27 @@
     float: right;
     display: inherit;
     color: white;
+}
+
+.el-alert__title {
+    font-size: 32px;
+    line-height: 18px;
+}
+
+.el-message-box__status.el-icon-warning {
+    color: #e6a23c;
+    left: 23px;
+}
+
+.el-message-box__message p {
+    margin: 0;
+    line-height: 24px;
+    margin-left: 11px;
+}
+
+.el-pagination.is-background .el-pager li.active {
+    background-color: deeppink !important;
+    color: #fff;
 }
 
 

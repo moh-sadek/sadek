@@ -3,8 +3,8 @@ export default {
     name: 'appHeader',    
     created() { 
         this.CheckLoginStatus();
-        this.getCount();
-        setInterval(() => this.getCount(), 10000);    
+        //this.getCount();
+        //setInterval(() => this.getCount(), 10000);    
         
     },
     data() {

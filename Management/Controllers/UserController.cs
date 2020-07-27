@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Common;
+﻿using Common;
 using Managegment.Controllers;
 using Management.Models;
 using Management.objects;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
 
 namespace Management.Controllers
 {
@@ -14,9 +12,9 @@ namespace Management.Controllers
     [Route("Api/Admin/User")]
     public class UserController : Controller
     {
-        private readonly SmartEducationContext db;
+        private readonly CSORContext db;
         private Helper help;
-        public UserController(SmartEducationContext context)
+        public UserController(CSORContext context)
         {
             this.db = context;
             help = new Helper();
@@ -27,29 +25,30 @@ namespace Management.Controllers
         {
             try
             {
-                IQueryable<Users> Users = from p in db.Users where p.State != 9 select p;
+                IQueryable<Users> Users = from p in db.Users where p.State != 9 && p.State != 6 && p.UserType != 3 && p.UserType != 4 && p.UserType != 5 select p;
 
                 var UsersCount = (from p in Users
                                   select p).Count();
 
 
                 var UserInfo = (from p in Users
-                                     orderby p.CreatedOn descending
-                                     select new
-                                     {
-                                         UserId = p.UserId,
-                                         Name = p.Name,
-                                         LoginName = p.LoginName,
-                                         State = p.State,
-                                         Email = p.Email,
-                                         Password = p.Password,
-                                         CreatedOn = p.CreatedOn,
-                                         Phone = p.Phone,
-                                         BirthDate = p.BirthDate,
-                                         CreatedBy = p.CreatedBy,
-                                         Image = p.Image,
-                                         UserType=p.UserType
-                                     }).Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();
+                                orderby p.CreatedOn descending
+                                select new
+                                {
+                                    UserId = p.Id,
+                                    Name = p.Name,
+                                    LoginName = p.LoginName,
+                                    State = p.State,
+                                    Email = p.Email,
+                                    Password = p.Password,
+                                    CreatedOn = p.CreatedOn,
+                                    Phone = p.Phone,
+                                    gender = p.Gender,
+                                    BirthDate = p.BirthDate,
+                                    CreatedBy = p.CreatedBy,
+                                    Image = p.Image,
+                                    UserType = p.UserType
+                                }).Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();
 
                 return Ok(new { users = UserInfo, count = UsersCount });
             }
@@ -104,7 +103,7 @@ namespace Management.Controllers
 
 
                 }
-                 
+
 
                 var cPhone = (from u in db.Users
                               where u.Phone == user.Phone
@@ -188,7 +187,7 @@ namespace Management.Controllers
                 }
 
                 var Users = (from p in db.Users
-                             where p.UserId == user.UserId
+                             where p.Id == user.UserId
                              && (p.State != 9)
                              select p).SingleOrDefault();
 
@@ -205,9 +204,6 @@ namespace Management.Controllers
                     if (cPhone != null)
                     {
                         return BadRequest(" رقم الهاتف موجود مسبقا");
-
-
-
 
                     }
 
@@ -230,13 +226,14 @@ namespace Management.Controllers
                         }
                     }
                 }
-                // Users.LoginName = user.LoginName;
-                // Users.FullName = user.FullName;
+                Users.LoginName = user.LoginName;
+                Users.Name = user.FullName;
                 Users.Phone = user.Phone;
                 Users.Email = user.Email;
                 Users.BirthDate = user.DateOfBirth;
-                //Users.Gender = user.Gender;
-                //User
+                Users.Gender = user.Gender;
+                Users.Email = user.Email;
+                Users.UserType = user.UserType;
 
 
                 db.SaveChanges();
@@ -261,7 +258,7 @@ namespace Management.Controllers
                 }
 
                 var User = (from p in db.Users
-                            where p.UserId == UserId && p.State != 9
+                            where p.Id == UserId && p.State != 9
                             select p).SingleOrDefault();
 
                 if (User == null)
@@ -292,7 +289,7 @@ namespace Management.Controllers
                 }
 
                 var User = (from p in db.Users
-                            where p.UserId == UserId && p.State != 9
+                            where p.Id == UserId && p.State != 9
                             select p).SingleOrDefault();
 
                 if (User == null)
@@ -323,7 +320,7 @@ namespace Management.Controllers
                 }
 
                 var User = (from p in db.Users
-                            where p.UserId == UserId && p.State != 9
+                            where p.Id == UserId && p.State != 9
                             select p).SingleOrDefault();
 
                 if (User == null)
@@ -347,7 +344,7 @@ namespace Management.Controllers
             try
             {
                 var UserImage = (from p in db.Users
-                                 where p.UserId == UserId
+                                 where p.Id == UserId
                                  select p.Image).SingleOrDefault();
 
                 if (UserImage == null)
@@ -373,7 +370,7 @@ namespace Management.Controllers
                 return StatusCode(401, "الرجاء الـتأكد من أنك قمت بتسجيل الدخول");
             }
             var Users = (from p in db.Users
-                         where p.UserId == user.UserId
+                         where p.Id == user.UserId
                          && (p.State == 1 || p.State == 2)
                          select p).SingleOrDefault();
 
@@ -403,7 +400,7 @@ namespace Management.Controllers
                 }
 
                 var Users = (from p in db.Users
-                             where p.UserId == userId
+                             where p.Id == userId
                              && (p.State != 9)
                              select p).SingleOrDefault();
 

@@ -94,7 +94,9 @@ module.exports = (env) => {
                 //        safe: true
                 //    }
                 //}),
-                new webpack.optimize.UglifyJsPlugin(),
+                new webpack.optimize.UglifyJsPlugin({
+                    sourceMap: false
+                }),
                 new ExtractTextPlugin('css/[name].css')
                 
                 //new PurifyCSSPlugin({

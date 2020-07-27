@@ -57,7 +57,7 @@ export default {
     data() {
         return {
             pageNo: 1,
-            pageSize: 2,
+            pageSize: 5,
             pages: 0,
             state: 0,
             users:[],

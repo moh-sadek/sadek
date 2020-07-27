@@ -1,6 +1,31 @@
 ﻿export default {
     name: 'EditUser',    
     created() {
+
+        this.gender = [
+            {
+                id: 1,
+                name: "ذكر"
+            },
+            {
+                id: 2,
+                name: 'انتي'
+            }
+
+        ];
+
+        this.UserType = [
+            {
+                id: 1,
+                name: "مدير"
+            },
+            {
+                id: 2,
+                name: 'مستخدم'
+            }
+
+        ];
+
         this.form.FullName = this.$parent.EditUsersObj.name;
         this.form.LoginName = this.$parent.EditUsersObj.loginName;
         this.form.Phone = this.$parent.EditUsersObj.phone;
@@ -8,12 +33,15 @@
         this.form.Gender = this.$parent.EditUsersObj.gender;
         this.form.DateOfBirth = this.$parent.EditUsersObj.birthDate;
         this.form.UserId = this.$parent.EditUsersObj.userId;
+        this.form.UserType = this.$parent.EditUsersObj.userType;
+
 
 
     },
     data() {
        
         return {
+            UserType: [],
            
             pageNo: 1,
             pageSize: 10,
@@ -33,7 +61,9 @@
                 DateOfBirth: '',                
                
             },
-            ConfimPassword: ''
+            ConfimPassword: '',
+
+            gender:[],
         
         };
     },
@@ -115,7 +145,6 @@
             }
         
            
-            console.log(this.form);
             this.$http.EditUser(this.form)
                 .then(response => {
                     

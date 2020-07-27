@@ -1,0 +1,1029 @@
+﻿
+
+<div class="content" style="direction:rtl">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-rose card-header-icon">
+                    <div class="card-icon" style="float: right;">
+                        <i class="material-icons">people_alt</i>
+                    </div>
+                    <h4 class="card-title" style=" font-family: inherit;font-weight: bold;">الملف الشخصي </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class=" card-profile">
+                                <div class="card-avatar">
+                                    <a href="#pablo">
+                            <!--<img class="img" :src="'/Api/Admin/Employs/' + Employs.employeeId + '/image'" />-->
+                        </a>
+                                </div>
+                                <!--{{form}}-->
+                                <div class="card-body">
+                                    <div class="card-content">
+                                        <h3 class="category text-gray">إسم المنظمة : {{form.name}} </h3>
+                                        <h4 class="card-title">رقم إشهار المنظمة : {{form.publicityNo}} </h4>
+
+                                        <p class="card-description">
+                                           تاريخ بداية النشاط :  {{form.startDate}}
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            
+                            <div class="card-body">
+                                <el-form :model="form" ref="form" :rules="rules" label-position="top" label-width="120px" class="js-validate  col-md-12">
+
+                                    <br />
+                                    <h4 class="title mt-3 ">معلومات حول المنظمة </h4>
+                                    <br />
+
+                                    <el-row class="row text-right">
+
+                                        <div class="col-md-3">
+                                            <div class="form-group bmd-form-group">
+
+
+                                                <el-form-item prop="Name" label="اسم المنظمة" >
+
+                                                    <el-input type="name"
+                                                              placeholder="اسم المنظم"
+                                                              v-model="form.name"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+                                        </div>
+
+                                        <el-col class="col-md-3">
+                                            <div class="form-group bmd-form-group">
+
+                                                <el-form-item prop="PublicityNo" label="رقم إشهار المنظمة" label-width="0px">
+
+                                                    <el-input type="text"
+                                                              placeholder="رقم إشهار المنظمة"
+                                                              v-model="form.publicityNo"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+
+                                            </div>
+                                        </el-col>
+
+                                        <el-col class="col-md-3">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item prop="StartDate" label="تاريخ بداية النشاط" label-width="0px">
+
+
+                                                    <el-date-picker v-model="form.startDate"
+                                                                    style="width:100%"
+                                                                    type="date"
+                                                                    placeholder="تاريخ بداية النشاط">
+                                                    </el-date-picker>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-3">
+                                            <div class="form-group bmd-form-group">
+                                                <!--<el-form-item prop="CenterId" label="عنوان المنظمة" label-width="0px">
+
+        <el-select v-model="form.CenterId"
+                   style="width: 100%;"
+                   filterable placeholder="عنوان المنظمة">
+            <el-option v-for="item in centers"
+                       :key="item.id"
+                       :label="item.name"
+                       :value="item.id">
+            </el-option>
+        </el-select>
+
+
+    </el-form-item>-->
+
+                                                <el-form-item  label="عنوان المنظمة" label-width="0px">
+
+                                                    <el-input type="text"
+                                                              placeholder="عنوان المنظمة"
+                                                              v-model="form.center"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+
+                                            </div>
+
+                                        </el-col>
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+
+                                        <el-col class="col-md-4">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item prop="ManagingDirectorName" label="اسم المدير التنفيدي " label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="اسم المدير التنفيدي "
+                                                              v-model="form.managingDirectorName"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-4">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item prop="ManagingDirectorPhone" label="رقم هاتفه الرئيسي" label-width="0px">
+
+                                                    <el-input type="text"
+                                                              placeholder="رقم هاتفه الرئيسي"
+                                                              v-model="form.managingDirectorPhone"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-4">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item prop="ManagingDirectorExPhone" label="رقم هاتفه الثانوي" label-width="0px">
+
+                                                    <el-input type="text"
+                                                              placeholder="رقم هاتفه الثانوي"
+                                                              v-model="form.managingDirectorExPhone"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+
+                                        <el-col class="col-md-3">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item prop="PresidentName" label="اسم رئيس المنظمة " label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="اسم رئيس المنظمة  "
+                                                              v-model="form.presidentName"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-3">
+
+                                            <div class="form-group bmd-form-group">
+
+                                                <el-form-item prop="PresidentEmail" label="عنوان بريده الإلكتروني" label-width="0px">
+
+                                                    <el-input type="Email"
+                                                              placeholder="عنوان بريده الإلكتروني"
+                                                              v-model="form.presidentEmail"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-2">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item prop="MembersCount" label="اجمالي عدد الاعضاء " label-width="0px">
+
+                                                    <el-input type="text"
+                                                              placeholder="الاعضاء"
+                                                              v-model="form.membersCount"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-2">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item prop="MembersMCount"
+                                                              label="عدد الشباب  " label-width="0px">
+
+                                                    <el-input type="text"
+                                                              placeholder=" الشباب"
+                                                              v-model="form.membersMCount"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-2">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item prop="MembersFCount"
+                                                              label="عدد النساء " label-width="0px">
+
+                                                    <el-input type="text"
+                                                              placeholder="النساء"
+                                                              v-model="form.membersFCount"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+
+                                        <el-col class="col-md-6">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="التوزيع الجغرافي للمنظمة " label-width="0px">
+
+                                                    <el-checkbox v-model="form.dAllLibya" label="كل ليبيا" border></el-checkbox>
+                                                    <el-checkbox v-model="form.dWest" label="الغرب" border></el-checkbox>
+                                                    <el-checkbox v-model="form.dEast" label="الشرق" border></el-checkbox>
+                                                    <el-checkbox v-model="form.dSouth" label="الجنوب" border></el-checkbox>
+
+                                                </el-form-item>
+
+                                            </div>
+                                        </el-col>
+
+                                        <el-col class="col-md-6">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item prop="Advantages" label="ماهي ميزات منظمتكم مقارنة بباقي منظمات المجتمع-مدني في ليبيا" label-width="0px">
+
+                                                    <el-input type="text"
+                                                              placeholder=" ميزات منظمتكم"
+                                                              v-model="form.advantages"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+
+
+                                    </el-row>
+
+                                    <br />
+                                    <h4 class="title mt-3 ">معلومات حول الأنشطة </h4>
+                                    <br />
+
+                                    <el-row class="row text-right">
+
+
+                                        <el-col class="col-md-12">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item prop="isGeneral" label="هل أنتم منظمة عامة (تهتم بفئات و مواضيع متعددة) أو تخصصية (تستهدف فئة بعينها أو نشاطا محددا)؟" label-width="0px">
+
+                                                    <el-radio-group v-model="form.IsGeneral" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1" border>نعم </el-radio>
+                                                        <el-radio :label="2" id="2" border>لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+
+                                        <el-col class="col-md-12">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="في حالة التخصص، ماهي طبيعة تخصصكم " label-width="0px">
+
+                                                    <el-checkbox v-model="form.ages" label="عمرية (شباب، كبار، أطفال...)" border></el-checkbox>
+                                                    <el-checkbox v-model="form.quality" label="نوعية (نساء، معوّقين...)" border></el-checkbox>
+                                                    <el-checkbox v-model="form.ethnic" label="عرقية" border></el-checkbox>
+                                                    <el-checkbox v-model="form.geography" label="جغرافية" border></el-checkbox>
+                                                    <el-checkbox v-model="form.social" label="اجتماعية (معطّلين، مطلّقين...)" border></el-checkbox>
+                                                    <el-checkbox v-model="form.charitable" label="خيرية" border></el-checkbox>
+                                                    <el-checkbox v-model="form.humanRights" label="حقوقية" border></el-checkbox>
+                                                    <el-checkbox v-model="form.electoralAffairs" label="شؤون انتخابية" border></el-checkbox>
+                                                    <el-checkbox v-model="form.otherS" label="أخري" border></el-checkbox>
+                                                    <el-input type="text" v-if="form.otherS==true"
+                                                              placeholder=" أخري"
+                                                              v-model="form.otherContentS"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+                                        <el-col class="col-md-4">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item prop="ResoneSpecialization" label="ما هو الدافع لاختيار هذا التخصص ؟ " label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="الدافع لاختيار هذا التخصص ؟ "
+                                                              v-model="form.resoneSpecialization"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-4">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="ماهي رؤيتكم للتحسين و التطوير (أفكار عملية) ؟ " label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="الرؤية "
+                                                              v-model="form.vision"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-4">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item prop="HaveDatabase" label="هل لديكم قاعدة بيانات في مجال تخصصكم ؟ " label-width="0px">
+
+                                                    <el-radio-group v-model="form.haveDatabase" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1" border>نعم </el-radio>
+                                                        <el-radio :label="2" id="2" border>لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+
+                                            </div>
+                                        </el-col>
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+                                        <el-col class="col-md-6">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="ما الهدف من انشاء قاعدة البيانات في هذه التخصصات ؟ " label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="الهدف "
+                                                              v-model="form.databaseGoal"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-6">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="من المستفيد منها ؟ " label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="المستفيد "
+                                                              v-model="form.databaseBenefits"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+
+                                        <el-col class="col-md-6">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="هل تحتاجون للدعم لانجاز قاعدة البيانات ؟ " label-width="0px">
+
+                                                    <el-radio-group v-model="form.databaseSupport" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1" border>نعم </el-radio>
+                                                        <el-radio :label="2" id="2" border>لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-6">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="اي نوع من الدعم تحتاجون ؟" label-width="0px">
+
+                                                    <el-radio-group v-model="form.databaseSupportType" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1" border>فني </el-radio>
+                                                        <el-radio :label="2" id="2" border>لوجستي</el-radio>
+                                                        <el-radio :label="3" id="3" border>مالي</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                    </el-row>
+
+                                    <br />
+                                    <h4 class="title mt-3 ">معلومات حول العلاقة بالمفوضية الوطنية العليا للإنتخابات </h4>
+                                    <br />
+
+                                    <el-row class="row text-right">
+
+
+                                        <el-col class="col-md-3">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="هل سبق لك التعاون مع المفوضية ؟" label-width="0px">
+
+                                                    <el-radio-group v-model="form.cooperat" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1" border>نعم </el-radio>
+                                                        <el-radio :label="2" id="2" border>لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-6">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="في اي مجال ؟ " label-width="0px">
+
+                                                    <el-radio-group v-model="form.cooperatField" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1" border>المراقبة </el-radio>
+                                                        <el-radio :label="2" id="2" border>التوعية</el-radio>
+                                                        <el-radio :label="3" id="3" border>أخري</el-radio>
+                                                    </el-radio-group>
+                                                    <el-input type="text" v-if="form.cooperatFieldOther==3"
+                                                              placeholder=" أخري"
+                                                              v-model="form.otherContentS"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-3">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="هل سبق لكم مراقبة الإنتخابات ؟" label-width="0px">
+
+                                                    <el-radio-group v-model="form.isWatched" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1" border>نعم </el-radio>
+                                                        <el-radio :label="2" id="2" border>لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+                                        <el-col class="col-md-4">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="في حالة نعم اذكر الانتخابات التي شاركت فيها ؟" label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="الانتخابات التي شاركت فيها ؟ "
+                                                              v-model="form.participatedElections"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-6">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="اذكر اللجنة الانتخابية التي تقدمت اليها بطلب الاعتماد ؟ " label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="اللجنة الانتخابية "
+                                                              v-model="form.electoralCommission"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-2">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="كم مراقب تم اعتماده؟" label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="عدد المراقبين "
+                                                              v-model="form.observers"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+                                        <el-col class="col-md-6">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="ماهي المشاكل التي واجهتكم عند اعتمادكم في المفوضية ؟ " label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="المشاكل التي واجهتكم عند اعتمادكم في المفوضية ؟ "
+                                                              v-model="form.issues"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+
+                                            </div>
+                                        </el-col>
+
+                                        <el-col class="col-md-2">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="اين تلقيتم التدريب ؟ " label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="مكان التدريب "
+                                                              v-model="form.traningPlace"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-4">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="ماهي المشاكل التي واجهتكم في التدريب ؟ " label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="مشاكل التدريب "
+                                                              v-model="form.traningIssues"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+
+                                        <el-col class="col-md-5">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="هل سبق لكم إقامة برامج وانشطة في التوعية الانتخابية ؟" label-width="0px">
+
+                                                    <el-radio-group v-model="form.isPrograms" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1" border>نعم </el-radio>
+                                                        <el-radio :label="2" id="2" border>لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-7">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="مانوعية الانشطة التي اقمتها ؟" label-width="0px">
+
+                                                    <el-checkbox v-model="form.postersDistribution" label="توزيع بوسترات" border></el-checkbox>
+                                                    <el-checkbox v-model="form.advertising" label="دعايات" border></el-checkbox>
+                                                    <el-checkbox v-model="form.workshops" label="ورش عمل" border></el-checkbox>
+                                                    <el-checkbox v-model="form.other" label="أخري" border></el-checkbox>
+                                                    <el-input type="text" v-if="form.other==true"
+                                                              placeholder=" أخري"
+                                                              v-model="form.otherContent"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+                                        <el-col class="col-md-6">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="صف بايجاز تعاون المفوضية معكم في مجال التوعية الانتخابية ؟" label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="الانتخابات التي شاركت فيها ؟ "
+                                                              v-model="form.cooperatDescription"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+                                        </el-col>
+
+                                        <el-col class="col-md-6">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="هل سبق لكم الدخول في ائتلاف منظمات او شبكات لغرض المراقبة الانتخابية ؟" label-width="0px">
+
+                                                    <el-radio-group v-model="form.isCoalitionBefor" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1" border>نعم </el-radio>
+                                                        <el-radio :label="2" id="2" border>لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+                                        <el-col class="col-md-12">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="صف بإيجاز هذه التجربة ؟" label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="صف بإيجاز هذه التجربة  "
+                                                              v-model="form.coalitionDescription"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+                                        </el-col>
+
+                                    </el-row>
+
+                                    <br />
+                                    <h4 class="title mt-3 "> معلومات حول التجارب السابقة </h4>
+                                    <br />
+
+                                    <el-row class="row text-right">
+
+
+                                        <el-col class="col-md-6">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="هل سبق لكم إنجاز بعض المشاريع؟" label-width="0px">
+
+                                                    <el-radio-group v-model="form.isCompletedProject" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1" border>نعم </el-radio>
+                                                        <el-radio :label="2" id="2" border>لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-6">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="في حالة نعم، قدم وصفا مقتضبا لأهم ثلاثة مشاريع ؟" label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="اهم ثلاثة مشاريع  "
+                                                              v-model="form.isCompletedProjectDesc"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+                                        </el-col>
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+
+                                        <el-col class="col-md-4">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item prop="SharedProjects" label="هل شاركتم في مشاريع مع جمعيات أخرى؟" label-width="0px">
+
+                                                    <el-radio-group v-model="form.sharedProjects" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1" border>نعم </el-radio>
+                                                        <el-radio :label="2" id="2" border>لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-4">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="ماهى هذه المشاريع ؟" label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="المشاريع  "
+                                                              v-model="form.sharedProjectsName"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+                                        </el-col>
+
+                                        <el-col class="col-md-4">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="اذكر ثلاثة دروس مستخلصة من تجاربكم ؟" label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="الدروس مستخلصة من تجاربكم "
+                                                              v-model="form.experiencesLessons"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+                                        </el-col>
+
+                                    </el-row>
+
+                                    <br />
+                                    <h4 class="title mt-3 ">  معلومات حول التمويل </h4>
+                                    <br />
+
+                                    <el-row class="row text-right">
+
+
+                                        <el-col class="col-md-4">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item prop="FundsProjects" label="هل حصلتم على تمويلات لمشاريعكم؟ " label-width="0px">
+
+                                                    <el-radio-group v-model="form.fundsProjects" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1" border>نعم </el-radio>
+                                                        <el-radio :label="2" id="2" border>لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+                                        <el-col class="col-md-8">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="في حالة نعم، ماذا كانت مصادر تمويلكم؟" label-width="0px">
+
+                                                    <el-checkbox v-model="form.governmentalSources" label="مصادر حكومية" border></el-checkbox>
+                                                    <el-checkbox v-model="form.nationalBodies" label="هيئات وطنية" border></el-checkbox>
+                                                    <el-checkbox v-model="form.internationalBodies" label="هيئات دولية" border></el-checkbox>
+                                                    <el-checkbox v-model="form.anotherSource" label="مصدر اخر" border></el-checkbox>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+                                        <el-col class="col-md-12">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="ماهي الطرق المتبعة للحصول على التمويل؟" label-width="0px">
+                                                    <el-checkbox v-model="form.byRequest" label="بطلب حسب رغبتكم" border></el-checkbox>
+                                                </el-form-item>
+
+                                            </div>
+                                        </el-col>
+
+                                        <el-col class="col-md-12">
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item>
+                                                    <el-checkbox v-model="form.directOffer" label="عرض مباشر من الممول" border></el-checkbox>
+
+                                                </el-form-item>
+                                            </div>
+                                        </el-col>
+
+                                        <el-col class="col-md-12">
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item>
+                                                    <el-checkbox v-model="form.publicTender" label="شاركتم في مناقصة عامة" border></el-checkbox>
+
+                                                </el-form-item>
+                                            </div>
+                                        </el-col>
+
+                                        <el-col class="col-md-12">
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item>
+                                                    <el-checkbox v-model="form.directSponsorship" label="عبر الرعاية المباشر من جهات وشركات ومنظمات اخرى" border></el-checkbox>
+
+                                                </el-form-item>
+                                            </div>
+                                        </el-col>
+
+
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+                                        <el-col class="col-md-12">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="طرق أخرى للتمويل لم تذكر أعلاه" label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="طرق أخرى للتمويل  "
+                                                              v-model="form.otherFinancing"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+                                        </el-col>
+
+
+                                    </el-row>
+
+                                    <br />
+                                    <h4 class="title mt-3 ">  معلومات حول حاجياتكم في مجال بناء القدرات </h4>
+                                    <br />
+
+                                    <el-row class="row text-right">
+
+                                        <el-col class="col-md-12">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label=" * مجالات عامة تحتاجون لبناء قدرات فيها" label-width="0px">
+
+                                                    <el-checkbox v-model="form.administrationCapacity" label="الإدارة" border></el-checkbox>
+                                                    <el-checkbox v-model="form.communicationCapacity" label="التواصل" border></el-checkbox>
+                                                    <el-checkbox v-model="form.networksCapacity" label="الشبكات" border></el-checkbox>
+                                                    <el-checkbox v-model="form.consultingCapacity" label="الاستشارات" border></el-checkbox>
+                                                    <el-checkbox v-model="form.computersCapacity" label="الكمبيوتر والانترنت" border></el-checkbox>
+                                                    <el-checkbox v-model="form.campaignManagementCapacity" label="التوعية وادارة الحملات" border></el-checkbox>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+                                        <el-col class="col-md-12">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="مجالات أخرى لبناء القدرات لم تذكر أعلاه" label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="مجالات أخرى لبناء القدرات لم تذكر أعلاه  "
+                                                              v-model="form.capacityOtherAreas"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+                                        </el-col>
+
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+                                        <el-col class="col-md-12">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="* قدرات تحتاجون إلى بنائها في المجال الانتخابي" label-width="0px">
+
+                                                    <el-checkbox v-model="form.monitor" label="مراقبة المسار الانتخابي" border></el-checkbox>
+                                                    <el-checkbox v-model="form.legalFramework" label="الإطار القانوني" border></el-checkbox>
+                                                    <el-checkbox v-model="form.media" label="رصد وسائل الإعلام" border></el-checkbox>
+                                                    <el-checkbox v-model="form.education" label="تثقيف الناخبين" border></el-checkbox>
+                                                    <el-checkbox v-model="form.addressing" label="معالجة العنف الانتخابي" border></el-checkbox>
+                                                    <el-checkbox v-model="form.monitorCampaign" label="مراقبة تمويل الحملات الانتخابية" border></el-checkbox>
+
+                                                </el-form-item>
+                                            </div>
+
+                                        </el-col>
+
+
+                                    </el-row>
+                                    <el-row class="row text-right">
+
+                                        <el-col class="col-md-12">
+
+                                            <div class="form-group bmd-form-group">
+                                                <el-form-item label="قدرات انتخابية أخرى تحتاجونها لم تذكرأعلاه" label-width="0px">
+
+                                                    <el-input type="name"
+                                                              placeholder="قدرات انتخابية أخرى تحتاجونها لم تذكرأعلاه  "
+                                                              v-model="form.otherCapabilities"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+                                            </div>
+                                        </el-col>
+
+
+                                    </el-row>
+
+
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-group-toggle pull-left" @click.prevent="back()">رجوع</button>
+                                        </div>
+                                    </div>
+                                </el-form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

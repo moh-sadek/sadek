@@ -3,13 +3,63 @@ import moment from 'moment';
 export default {
     name: 'EditUsersProfile',    
     created() {
-        debugger
+        
         this.CheckLoginStatus();
 
     },
     data() {  
        
         return {
+
+            ruleForm: {
+
+                LoginName: '',
+
+                FullName: '',
+                UserType: 1,
+                Email: '',
+                Gender: '',
+                Phone: '',
+                DateOfBirth: '',
+                Status: 0,
+            },
+
+            rules: {
+                DateOfBirth: [
+                    { required: true, message: 'الرجاء إدخال تاريخ الميلاد', trigger: 'blur' }
+                ],
+
+
+                UserType: [
+                    { required: true, message: 'الرجاء اختيار  الصلاحيه', trigger: 'blur' }
+                ],
+                FullName: [
+                    { required: true, message: 'الرجاء إدخال الاسم التلاثي', trigger: 'blur' },
+                    { required: true, message: /^[\u0621-\u064A\u0660-\u0669 ]+$/, trigger: 'blur' }
+                ],
+                LoginName: [
+                    { required: true, message: 'الرجاء إدخال اسم الدخول', trigger: 'blur' },
+                    { required: true, pattern: /^[A-Za-z]{0,40}$/, message: 'الرجاء إدخال اسم الدخول بطريقه صحيحه', trigger: 'blur' }
+                ],
+                Phone: [
+                    { required: true, message: 'الرجاء إدخال رقم الهاتف', trigger: 'blur' },
+                    { min: 9, max: 10, message: 'الرجاء إدخال رقم الهاتف  بطريقه صحيحه', trigger: 'blur' }
+                ],
+
+
+                Email: [
+                    { required: true, message: 'الرجاء إدخال البريد الإلكتروني', trigger: 'blur' },
+                    { required: true, pattern: /\S+@\S+\.\S+/, message: 'الرجاء إدخال البريد الإلكتروني بطريقه صحيحه', trigger: 'blur' }
+                ],
+                Gender: [
+                    { required: true, message: 'الرجاء اختيار الجنس', trigger: 'change' }
+
+                ],
+
+            },
+
+
+
             form: {
                 LoginName: '',
                 Password: '',
@@ -53,15 +103,15 @@ export default {
     methods: {
         CheckLoginStatus() {
             try {
-                debugger
+                
                 this.loginDetails = this.decrypt(sessionStorage.getItem('currentUser'), sessionStorage.getItem('SECRET_KEY'));
                 if (this.loginDetails != null) {
-                    this.form.FullName = this.loginDetails.fullName;
-                    this.form.Phone = this.loginDetails.phone;
-                    this.form.LoginName = this.loginDetails.loginName;
-                    this.form.Email = this.loginDetails.email;
-                    this.form.Gender = this.loginDetails.gender;
-                    this.form.DateOfBirth = this.loginDetails.dateOfBirth;
+                    this.ruleForm.FullName = this.loginDetails.fullName;
+                    this.ruleForm.Phone = this.loginDetails.phone;
+                    this.ruleForm.LoginName = this.loginDetails.loginName;
+                    this.ruleForm.Email = this.loginDetails.email;
+                    this.ruleForm.Gender = this.loginDetails.gender;
+                    this.ruleForm.DateOfBirth = this.loginDetails.dateOfBirth;
                 } else {
                     window.location.href = '/Security/Login';
                 }
@@ -151,98 +201,47 @@ export default {
             var login = /^[a-zA-Z]{0,40}$/;
             return login.test(LoginName);
         },
-        Save() {
+        Save(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    this.$http.EditUsersProfile(this.ruleForm)
+                        .then(response => {
 
-            if (!this.form.LoginName) {
-                this.$message({
-                    type: 'error',
-                    message: 'الـرجاء إدخال اسم الدخول'
-                });
-                return;
-            } else if (!this.validLoginName(this.form.LoginName)) {
-                this.$message({
-                    type: 'error',
-                    message: 'الرجاء إدخال اسم الدخول بطريقه صحيحه '
-                });
-                return;
-            }
-            if (!this.form.Email) {
-                this.$message({
-                    type: 'error',
-                    message: 'الرجاء إدخال البريد الإلكتروني '
-                });
-                return;
-            } else if (!this.validEmail(this.form.Email)) {
-                this.$message({
-                    type: 'error',
-                    message: 'الرجاء إدخال البريد الإلكتروني بطريقه صحيحه '
-                });
-                return;
-            }
+                            this.loginDetails.email = this.ruleForm.Email;
+                            this.loginDetails.phone = this.ruleForm.Phone;
 
-            if (!this.form.Gender) {
-                this.$message({
-                    type: 'error',
-                    message: 'الرجاء إختيار الجنس '
-                });
-                return;
-            }
+                            this.loginDetails.fullName = this.ruleForm.FullName;
+                            this.loginDetails.phone = this.ruleForm.Phone;
+                            this.loginDetails.loginName = this.ruleForm.LoginName;
 
-            if (!this.form.DateOfBirth) {
-                this.$message({
-                    type: 'error',
-                    message: 'الرجاء إختيار تاريخ الميلاد '
-                });
-                return;
-            }
-            if (!this.form.Phone) {
-                this.$message({
-                    type: 'error',
-                    message: 'الرجاء رقم الهاتف '
-                });
-                return;
-            } else if (!this.validPhone(this.form.Phone)) {
-                this.$message({
-                    type: 'error',
-                    message: 'الرجاء إدخال رقم الهاتف  بطريقه صحيحه '
-                });
-                return;
-            }
+                            this.loginDetails.gender = this.ruleForm.Gender;
+                            this.loginDetails.dateOfBirth = this.ruleForm.DateOfBirth;
+                            sessionStorage.setItem('currentUser', JSON.stringify(this.loginDetails));
 
-            this.form2.Phone = this.form.Phone
-            this.form2.Email = this.form.Email;
-            this.form2.LoginName = this.form.LoginName;
-            this.form2.FullName = this.form.FullName;
-            this.form2.Gender = this.form.Gender;
-            this.form2.DateOfBirth = this.form.DateOfBirth;
-       
-            this.$http.EditUsersProfile(this.form2)
-                .then(response => {
-                    debugger
-                    this.loginDetails.email = this.form2.Email;
-                    this.loginDetails.phone = this.form2.Phone;
-                    this.loginDetails.LoginName = this.form2.LoginName;
-                    this.loginDetails.FullName = this.form2.FullName;
-                    this.loginDetails.Gender = this.form2.Gender;
-                    this.loginDetails.DateOfBirth = this.form2.DateOfBirth;
-                    //sessionStorage.setItem('currentUser', JSON.stringify(this.loginDetails));
-                    //sessionStorage.clear();
-                    sessionStorage.setItem('SECRET_KEY', sessionStorage.getItem('SECRET_KEY'));
-                    sessionStorage.setItem('currentUser', this.encrypt(this.loginDetails, sessionStorage.getItem('SECRET_KEY')));
-                    this.CheckLoginStatus();
-                   
-                    this.$message({
-                        type: 'info',
-                        message: response.data
-                    });
-                  
-                })
-                .catch((err) => {
-                    this.$message({
-                        type: 'error',
-                        message: err.response.data
-                    });
-                });
+
+
+                            this.$message({
+                                type: 'success',
+                                dangerouslyUseHTMLString: true,
+                                duration: 5000,
+                                message: '<strong>' + response.data + '</strong>'
+                            });
+                        })
+                        .catch((err) => {
+                            this.$message({
+                                type: 'error',
+                                dangerouslyUseHTMLString: true,
+                                duration: 5000,
+                                message: '<strong>' + err.response.data + '</strong>'
+                            });
+                        });
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
+
+
         },
 
     }

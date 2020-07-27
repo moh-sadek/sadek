@@ -10323,7 +10323,9 @@ button.bg-darker:focus {
   font-style: italic !important; }
 
 .text-white {
-  color: #fff !important; }
+    color: #fff !important;
+    font-family: 'DroidArabicKufiRegular' !important;
+}
 
 .text-primary {
   color: #5e72e4 !important; }
@@ -10380,7 +10382,8 @@ a.text-default:hover, a.text-default:focus {
   color: #050a12 !important; }
 
 .text-white {
-  color: #fff !important; }
+    color: #fff !important;
+}
 
 a.text-white:hover, a.text-white:focus {
   color: #d9d9d9 !important; }
@@ -16978,8 +16981,11 @@ hr {
   max-width: 100%;
   min-height: 480px; }
 
+
+
 .register-page .page-header .page-header-image {
   z-index: 1 !important; }
+
 
 .register-page .footer {
   background: #172b4d; }
@@ -19212,6 +19218,7 @@ header {
     width: 100%;
     height: 100%;
     z-index: -1; }
+     
   .page-header > .content {
     margin-top: 11%;
     text-align: center;
@@ -19281,6 +19288,8 @@ header {
   background-size: contain;
   background-position: right;
   background-repeat: no-repeat; }
+
+
 
 .header-2 .page-header-image {
   opacity: .4; }
@@ -19463,6 +19472,7 @@ header {
   .header-1 .page-header .page-header-image {
     background-size: cover;
     opacity: .1; } }
+
 
 @media screen and (max-width: 350px) {
   .header-3 .page-header {

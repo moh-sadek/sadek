@@ -50,14 +50,12 @@
     <Compile Remove="Content\element-ui\**" />
     <Compile Remove="Content\Quiz\**" />
     <Compile Remove="Content\vuetify\**" />
-    <Compile Remove="Models\backup1\**" />
     <Compile Remove="Uploads\**" />
     <Compile Remove="Views\Game\**" />
 
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Content Remove="App\**" />
     <Content Remove="Content\**" />
-    <Content Remove="Models\backup1\**" />
     <Content Remove="Uploads\**" />
     <Content Remove="Views\Game\**" />
     <EmbeddedResource Remove="App\Components\Home\NewFolder\**" />
@@ -73,7 +71,6 @@
     <EmbeddedResource Remove="Content\element-ui\**" />
     <EmbeddedResource Remove="Content\Quiz\**" />
     <EmbeddedResource Remove="Content\vuetify\**" />
-    <EmbeddedResource Remove="Models\backup1\**" />
     <EmbeddedResource Remove="Uploads\**" />
     <EmbeddedResource Remove="Views\Game\**" />
     <None Remove="App\Components\Home\NewFolder\**" />
@@ -89,7 +86,6 @@
     <None Remove="Content\element-ui\**" />
     <None Remove="Content\Quiz\**" />
     <None Remove="Content\vuetify\**" />
-    <None Remove="Models\backup1\**" />
     <None Remove="Uploads\**" />
     <None Remove="Views\Game\**" />
     <Compile Remove="Controllers\CustometsController.cs" />
@@ -97,7 +93,6 @@
     <Compile Remove="Controllers\Security.cs" />
     <Compile Remove="Controllers\SecurityController.cs" />
     <Compile Remove="Controllers\Validation.cs" />
-    <Compile Remove="Models\Users.cs" />
     <Content Remove="package-lock.json" />
    
   </ItemGroup>

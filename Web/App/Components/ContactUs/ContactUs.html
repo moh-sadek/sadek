@@ -1,0 +1,208 @@
+﻿
+
+    <div class="wrapper">
+        <div class="section-shaped my-0 skew-separator skew-mini">
+            <div class="page-header page-header-small header-filter">
+                <div class="page-header-image" style="background-image: url('/assets/img/sections/broofoac.jpg');">
+                </div>
+                <div class="container">
+                    <div class="header-body text-center mb-7">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-5 col-lg-6 col-md-8 px-5">
+                                <h1 class="text-white">يمكنك تقديم الملاحظات</h1>
+                                <p class="text-lead text-white">شكرا لك لكونك قد ساهمت في انجاح المشروع</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contactus-3">
+
+            <div class="container pt-5">
+                <div class="row">
+                    <div class="col-md-12 text-center mb-5">
+                        <h1 class="display-1">هل لديك سؤال ؟</h1>
+                        <h3 class="lead">يمكنك التواصل معنا وسوف نقوم بالرد عليك استفسارك في اقرب وقت </h3>
+                        <!--<button class="btn btn-icon btn-primary mt-3" type="button">
+                            <span class="btn-inner--icon"><i class="ni ni-chat-round"></i></span>
+                            <span class="btn-inner--text">Chat with us</span>
+                        </button>-->
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-6">
+                        <div class="info info-hover">
+                            <div class="icon icon-shape icon-shape-primary icon-lg shadow rounded-circle text-primary">
+                                <i class="ni ni-square-pin"></i>
+                            </div>
+                            <h4 class="info-title">Address</h4>
+                            <p class="description px-0">12124 First Street, nr 54</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-6">
+                        <div class="info info-hover">
+                            <div class="icon icon-shape icon-shape-primary icon-lg shadow rounded-circle text-primary">
+                                <i class="ni ni-email-83"></i>
+                            </div>
+                            <h4 class="info-title">Email</h4>
+                            <p class="description px-0">H.alsalmi@covid-19.com.ly</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-6">
+                        <div class="info info-hover">
+                            <div class="icon icon-shape icon-shape-primary icon-lg shadow rounded-circle text-primary">
+                                <i class="ni ni-mobile-button"></i>
+                            </div>
+                            <h4 class="info-title">Phone</h4>
+                            <p class="description px-0">0927294587</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-6">
+                        <div class="info info-hover">
+                            <div class="icon icon-shape icon-shape-primary icon-lg shadow rounded-circle text-primary">
+                                <i class="ni ni-circle-08"></i>
+                            </div>
+                            <h4 class="info-title">Contact</h4>
+                            <p class="description px-0">د.هيثم السالمي</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="container-fluid">
+                <div class="row mt-5 mb-4 pt-5">
+                    <div class="col-md-8 ml-auto mr-auto text-center mt-5">
+                        <!--<span class="badge badge-info">Leave a message</span>-->
+                        <h1 class="title">نحن في حاجة لبعض البيانات  <b>عنك </b>لنتمكن من الرد</h1>
+                        <h4 class="desc">الرجاء تعبئة النمودج التالي </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mx-auto ">
+
+                        <el-form :model="form" ref="form" label-position="top" label-width="120px" class="card bg-secondary p-3 text-right" id="contact-form" dir="rtl">
+
+                            <el-row class="row text-right">
+
+
+                                <el-col class="col-md-6">
+
+
+                                    <el-form-item prop="FName" label="الإسم الأول"
+                                                  label-width="0px"
+                                                  :rules="[{required: true, message: ' الرجاء إدخال الإسم الأول'} ]">
+
+                                        <el-input type="name"
+                                                  placeholder="الإسم الأول"
+                                                  v-model="form.FName"
+                                                  autocomplete="off">
+
+                                        </el-input>
+
+                                    </el-form-item>
+
+
+                                </el-col>
+
+                                <el-col class="col-md-6">
+
+
+                                    <el-form-item prop="SName" label="اللقب"
+                                                  label-width="0px"
+                                                  :rules="[{required: true, message: ' الرجاء إدخال اللقب'} ]">
+
+                                        <el-input type="SName"
+                                                  placeholder="اللقب"
+                                                  v-model="form.SName"
+                                                  autocomplete="off">
+                                        </el-input>
+
+                                    </el-form-item>
+
+
+                                </el-col>
+
+
+
+                            </el-row>
+
+
+
+                            <el-row class="row">
+
+
+                                <el-col class="col-md-12">
+
+
+                                    <el-form-item prop="Email" label="البريد الإلكتروني"
+                                                  label-width="0px"
+                                                  :rules="[{required: true, message: ' الرجاء إدخال البريد الإلكتروني'} ]">
+
+                                        <el-input type="Email"
+                                                  placeholder="البريد الإلكتروني"
+                                                  v-model="form.Email"
+                                                  autocomplete="off">
+                                        </el-input>
+
+                                    </el-form-item>
+
+
+                                </el-col>
+
+
+                            </el-row>
+
+
+                            <el-row class="row">
+
+
+                                <el-col class="col-md-12">
+
+                                    <el-form-item prop="OtherSymptoms"
+                                                  label="يمكنك إضافة بعض الملاحظات التي يمكن أن تساعد في تطوير المشروع "
+                                                  label-width="0px"
+                                                  :rules="[{required: true, message: ' الرجاء إدخال  الملاحظة'} ]">
+
+                                        <el-input type="textarea"
+                                                  placeholder="الملاحظة "
+                                                  v-model="form.OtherSymptoms"
+                                                  :rows="5"
+                                                  autocomplete="off">
+                                        </el-input>
+
+                                    </el-form-item>
+
+
+
+                                </el-col>
+
+
+
+                            </el-row>
+                            <div class="row">
+                                <div class="col-md-12 ml-auto">
+                                    <button type="submit" class="btn btn-primary pull-left"  @click.prevent="submitForm('form')">
+                                إرسال الملاحظة  
+                                    </button>
+                                </div>
+                            </div>
+
+                        </el-form>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+    </div>
+
+
+

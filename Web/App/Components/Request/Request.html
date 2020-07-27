@@ -1,0 +1,458 @@
+﻿
+
+    <div class="wrapper">
+        <div class="section-shaped my-0 skew-separator skew-mini">
+            <div class="page-header page-header-small header-filter">
+                <div class="page-header-image" style="background-image: url('/assets/img/pages/photo-15.jpg');">
+                </div>
+                <div class="container">
+                    <div class="header-body text-center mb-7">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-5 col-lg-6 col-md-8 px-5">
+                                <h1 class="text-white">الرجاء تعبئة النمودج أدناه  </h1>
+                                <br />
+                                <p class="text-lead text-white">شكرا لإهتمامك قد تكون ساهمت في حماية نفسك والمقربين منك بهذه الخطوات البسيطة   </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upper">
+            <div class="container">
+                <div class="row">
+                   
+                    <div class="col-lg-12">
+                        <div class="card" >
+                            <div class="row text-right" style="direction:rtl">
+                                <div class="col-md-12" style="padding: 46px;">
+
+                                    <h3 class="title mt-3 text-right">البيانات الشخصية </h3>
+                                    <br />
+
+                                    <el-form :model="form" ref="form" label-position="top" label-width="120px" class="js-validate text-right">
+                                        <!--Email / Gender / DateOfBirth-->
+
+                                        <el-row class="row text-right">
+
+
+                                            <el-col class="col-md-4">
+
+
+                                                <el-form-item prop="FName" label="الإسم الأول"
+                                                              label-width="0px"
+                                                              :rules="[{required: true, message: ' الرجاء إدخال الإسم الأول'} ]">
+
+                                                    <el-input type="name"
+                                                              placeholder="الإسم الأول"
+                                                              v-model="form.FName"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+
+
+                                            </el-col>
+
+                                            <el-col class="col-md-4">
+
+
+                                                <el-form-item prop="SName" label="إسم الأب"
+                                                              label-width="0px"
+                                                              :rules="[{required: true, message: ' الرجاء إدخال إسم الأب'} ]">
+
+                                                    <el-input type="SName"
+                                                              placeholder="إسم الأب"
+                                                              v-model="form.SName"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+
+
+                                            </el-col>
+
+                                            <el-col class="col-md-4">
+
+
+                                                <el-form-item prop="LName" label="اللقب"
+                                                              label-width="0px"
+                                                              :rules="[{required: true, message: ' الرجاء إدخال اللقب'} ]">
+
+                                                    <el-input type="name"
+                                                              placeholder="اللقب"
+                                                              v-model="form.LName"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+
+
+                                            </el-col>
+
+
+                                        </el-row>
+
+
+                                        <el-row class="row">
+
+                                            <el-col class="col-md-3">
+
+                                                <el-form-item prop="Gender" label="الجنس"
+                                                              label-width="0px"
+                                                              :rules="[{ required: true, message: 'الرجاء إختيار الجنس '} ]">
+
+                                                    <el-select v-model="form.Gender"
+                                                               style="width: 100%;"
+                                                               filterable placeholder="الجنس">
+                                                        <el-option v-for="item in [{id:1,Gender:'ذكـر'},{id:2,Gender:'انـثي'}]"
+                                                                   :key="item.id"
+                                                                   :label="item.Gender"
+                                                                   :value="item.id">
+                                                        </el-option>
+                                                    </el-select>
+
+
+                                                </el-form-item>
+
+
+
+                                            </el-col>
+
+                                            <el-col class="col-md-3">
+
+
+                                                <el-form-item prop="BirthDate" label="تاريخ الميلاد"
+                                                              label-width="0px"
+                                                              :rules="[{required: true, message: ' الرجاء إدخال  تاريخ الميلاد'} ]">
+
+
+                                                    <el-date-picker v-model="form.BirthDate"
+                                                                    style="width:100%"
+                                                                    type="date"
+                                                                    placeholder="تاريخ الميلاد">
+                                                    </el-date-picker>
+
+                                                </el-form-item>
+
+
+                                            </el-col>
+
+                                            <el-col class="col-md-3">
+
+
+                                                <el-form-item prop="Phone" label="رقم الهاتف"
+                                                              label-width="0px"
+                                                              :rules="[{required: true, message: ' الرجاء إدخال  رقم الهاتف'} ]">
+
+                                                    <el-input type="Phone"
+                                                              placeholder="رقم الهاتف"
+                                                              v-model="form.Phone"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+
+
+                                            </el-col>
+
+                                            <el-col class="col-md-3">
+
+
+                                                <el-form-item label="البريد الإلكتروني">
+
+                                                    <el-input type="Email"
+                                                              placeholder="البريد الإلكتروني"
+                                                              v-model="form.Email"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+
+
+                                            </el-col>
+
+                                        </el-row>
+
+
+                                        <el-row class="row">
+
+
+
+                                            <el-col class="col-md-6">
+
+
+                                                <el-form-item prop="locationId" label="البلدية"
+                                                              label-width="0px"
+                                                              :rules="[{ required: true, message: 'الرجاء إختيار البلدية '} ]">
+                                                    <el-select v-model="form.locationId"
+                                                               style="width:100%"
+                                                               @change="GetMunicipalitys()"
+                                                               filterable placeholder="البلدية ">
+
+                                                        <el-option v-for="item in Locations"
+                                                                   :key="item.id"
+                                                                   :label="item.name"
+                                                                   :value="item.id">
+                                                        </el-option>
+
+                                                    </el-select>
+
+                                                </el-form-item>
+
+
+
+                                            </el-col>
+
+                                            <el-col class="col-md-6">
+
+                                                <el-form-item prop="MunicipalitysId" label="المنطقة"
+                                                              label-width="0px"
+                                                              :rules="[{ required: true, message: 'الرجاء إختيار المنطقة '} ]">
+
+                                                    <el-select v-model="form.MunicipalitysId"
+                                                               style="width:100%"
+                                                               filterable placeholder="المنطقة ">
+
+                                                        <el-option v-for="item in Municipalitys"
+                                                                   :key="item.id"
+                                                                   :label="item.name"
+                                                                   :value="item.id">
+                                                        </el-option>
+
+                                                    </el-select>
+
+
+                                                </el-form-item>
+
+
+
+                                            </el-col>
+
+                                        </el-row>
+
+                                        <br />
+                                        <h3 class="title mt-3 text-right">نمودج الكشف عن  فايروس كورونا </h3>
+                                        <br />
+
+                                        <el-row class="row">
+
+                                            <el-col class="col-md-6">
+
+                                                <el-form-item prop="HighFever" label="هل تعاني من إرتفاع في الحرارة ؟"
+                                                              label-width="0px"
+                                                              :rules="[{required: true, message: ' الرجاء الإجابة عن السؤال'} ]">
+
+                                                    <el-radio-group v-model="form.HighFever" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1">  نعم</el-radio>
+                                                        <el-radio :label="2" id="2">  لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+
+                                            </el-col>
+
+                                            <el-col class="col-md-6">
+
+
+                                                <el-form-item label="إدا قمت بقياس درجة الحرارة الرجاء إدخالها  ">
+
+                                                    <el-input type="name"
+                                                              placeholder="درجة الحرارة بالنسبة المئوية"
+                                                              v-model="form.Temperature"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+
+
+                                            </el-col>
+
+                                        </el-row>
+
+                                        <br />
+
+                                        <el-row class="row">
+
+                                            <el-col class="col-md-3">
+
+                                                <el-form-item prop="Cough" label="هل تعاني من السعال ؟"
+                                                              label-width="0px"
+                                                              :rules="[{required: true, message: ' الرجاء الإجابة عن السؤال'} ]">
+
+                                                    <el-radio-group v-model="form.Cough" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1">  نعم</el-radio>
+                                                        <el-radio :label="2" id="2">  لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+
+                                            </el-col>
+
+                                            <el-col class="col-md-3">
+
+                                                <el-form-item prop="CoughDry" label="هل السعال جاف ام يحتوي علي بلغم ؟ "
+                                                              label-width="0px"
+                                                              :rules="[{required: true, message: ' الرجاء الإجابة عن السؤال'} ]">
+
+                                                    <el-radio-group v-model="form.CoughDry" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1">  نعم</el-radio>
+                                                        <el-radio :label="2" id="2">  لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+
+                                            </el-col>
+
+                                            <el-col class="col-md-3">
+
+                                                <el-form-item prop="SoreThroat" label="هل تعاني من إلتهاب في الحلق ؟"
+                                                              label-width="0px"
+                                                              :rules="[{required: true, message: ' الرجاء الإجابة عن السؤال'} ]">
+
+                                                    <el-radio-group v-model="form.SoreThroat" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1">  نعم</el-radio>
+                                                        <el-radio :label="2" id="2">  لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+
+                                            </el-col>
+
+                                            <el-col class="col-md-3">
+
+                                                <el-form-item prop="Breathing" label="هل تواجه صعوبة في التنفس ؟"
+                                                              label-width="0px"
+                                                              :rules="[{required: true, message: ' الرجاء الإجابة عن السؤال'} ]">
+
+                                                    <el-radio-group v-model="form.Breathing" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1">  نعم</el-radio>
+                                                        <el-radio :label="2" id="2">  لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+
+                                            </el-col>
+
+                                        </el-row>
+
+                                        <br />
+
+                                        <el-row class="row">
+
+                                            <el-col class="col-md-3">
+
+                                                <el-form-item prop="Shivering" label="هل لديك إرتعاش في اعضاء الجسم ؟"
+                                                              label-width="0px"
+                                                              :rules="[{required: true, message: ' الرجاء الإجابة عن السؤال'} ]">
+
+                                                    <el-radio-group v-model="form.Shivering" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1">  نعم</el-radio>
+                                                        <el-radio :label="2" id="2">  لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+
+                                            </el-col>
+
+                                            <el-col class="col-md-3">
+
+                                                <el-form-item prop="Diarrhea" label="هل تعاني من الإسهال ؟"
+                                                              label-width="0px"
+                                                              :rules="[{required: true, message: ' الرجاء الإجابة عن السؤال'} ]">
+
+                                                    <el-radio-group v-model="form.Diarrhea" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1">  نعم</el-radio>
+                                                        <el-radio :label="2" id="2">  لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+
+                                            </el-col>
+
+                                            <el-col class="col-md-3">
+
+                                                <el-form-item prop="Country" label="هل سافرت في أخر 14 يوم ؟"
+                                                              label-width="0px"
+                                                              :rules="[{required: true, message: ' الرجاء الإجابة عن السؤال'} ]">
+
+                                                    <el-radio-group v-model="form.Country" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1">  نعم</el-radio>
+                                                        <el-radio :label="2" id="2">  لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+
+                                            </el-col>
+
+                                            <el-col class="col-md-3">
+
+                                                <el-form-item prop="NearInfected" label="هل تواصلت مع شخص مصاب ؟ "
+                                                              label-width="0px"
+                                                              :rules="[{required: true, message: ' الرجاء الإجابة عن السؤال'} ]">
+
+                                                    <el-radio-group v-model="form.NearInfected" style="margin-top:10px">
+                                                        <el-radio :label="1" id="1">  نعم</el-radio>
+                                                        <el-radio :label="2" id="2">  لا</el-radio>
+                                                    </el-radio-group>
+
+                                                </el-form-item>
+
+                                            </el-col>
+
+                                        </el-row>
+
+                                        <br />
+
+                                        <el-row class="row">
+
+
+                                            <el-col class="col-md-12">
+
+                                                <el-form-item label="يمكنك إضافة بعض الملاحظات التي يمكن أن تساعد الأطباء "
+                                                              label-width="0px">
+
+                                                    <el-input type="textarea"
+                                                              placeholder="ملاحظة "
+                                                              v-model="form.OtherSymptoms"
+                                                              :rows="5"
+                                                              autocomplete="off">
+                                                    </el-input>
+
+                                                </el-form-item>
+
+
+
+                                            </el-col>
+
+
+
+                                        </el-row>
+
+                                        <el-row class="row">
+
+
+
+                                        </el-row>
+
+                                    </el-form>
+
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-md-2">
+                                            <el-button class="btn btn-info btn-fill pull-right"
+                                                       type="primary"
+                                                       @click.prevent="submitForm('form')">
+                                                إرسال البيانات 
+
+                                            </el-button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

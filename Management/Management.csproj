@@ -48,7 +48,6 @@
     <Compile Remove="App\SharedComponents\**" />
     <Compile Remove="Content\assetsp\**" />
     <Compile Remove="Content\assetsv1\**" />
-    <Compile Remove="Content\css\**" />
     <Compile Remove="Content\element-ui\**" />
     <Compile Remove="Content\Quiz\**" />
     <Compile Remove="Content\vuetify\**" />
@@ -71,7 +70,6 @@
     <EmbeddedResource Remove="App\SharedComponents\**" />
     <EmbeddedResource Remove="Content\assetsp\**" />
     <EmbeddedResource Remove="Content\assetsv1\**" />
-    <EmbeddedResource Remove="Content\css\**" />
     <EmbeddedResource Remove="Content\element-ui\**" />
     <EmbeddedResource Remove="Content\Quiz\**" />
     <EmbeddedResource Remove="Content\vuetify\**" />
@@ -88,7 +86,6 @@
     <None Remove="App\SharedComponents\**" />
     <None Remove="Content\assetsp\**" />
     <None Remove="Content\assetsv1\**" />
-    <None Remove="Content\css\**" />
     <None Remove="Content\element-ui\**" />
     <None Remove="Content\Quiz\**" />
     <None Remove="Content\vuetify\**" />

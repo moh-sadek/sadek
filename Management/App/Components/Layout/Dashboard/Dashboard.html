@@ -5,12 +5,14 @@
         Tip 2: you can also add an image using data-image tag
     -->
     <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-            CT
+        <a href="#" class="simple-text logo-mini">
+            CP
         </a>
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-            Creative Tim
+        <a href="#" class="simple-text logo-normal">
+            HNEC | Libya | CSOR
         </a>
+
+        
     </div>
     <div class="sidebar-wrapper">
         <div class="user">
@@ -21,43 +23,44 @@
             <div class="user-info">
                 <a data-toggle="collapse" href="#collapseExample" class="username">
                     <span>
-                        Tania Andrew
+                        {{loginDetails.fullName.slice(0,20)}}
                         <b class="caret"></b>
                     </span>
                 </a>
-                <div class="collapse" id="collapseExample" style="left: 68px;">    <!--width: 100%;-->
+                <div class="collapse" id="collapseExample">
+                    <!--width: 100%;style="left: 68px;"-->
                     <ul class="nav">
                         <li class="nav-item">
                             <a class="nav-link" href="#" @click.prevent="href('/EditUsersProfile')">
-                                <span class="sidebar-mini" > MP </span>
-                                <span class="sidebar-normal"> My Profile </span>
+                                <span class="sidebar-mini"> PU </span>
+                                <span class="sidebar-normal"> الصفحة الشخصية </span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span class="sidebar-mini"> EP </span>
+                            <a class="nav-link" href="#" @click.prevent="href('/ChangePassword')">
+                                <span class="sidebar-mini"> RP </span>
                                 <span class="sidebar-normal"> تغير كلمة المرور </span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span class="sidebar-mini"> S </span>
-                                <span class="sidebar-normal"> Settings </span>
-                            </a>
-                        </li>
+                        <!--<li class="nav-item">
+            <a class="nav-link" href="#">
+                <span class="sidebar-mini"> S </span>
+                <span class="sidebar-normal"> Settings </span>
+            </a>
+        </li>-->
                     </ul>
                 </div>
             </div>
         </div>
         <ul class="nav">
             <li @click="active= 1" :class="{'active':1 == active}">
-                <a class="nav-link" href="/">
+                <a class="nav-link" href="#" @click.prevent="href('/')">
                     <i class="material-icons" style="color:white">dashboard</i>
                     <p style="color:white"> Dashboard </p>
                 </a>
 
             </li>
-            <li class="nav-item ">
+            <!--<li class="nav-item ">
                 <a class="nav-link" data-toggle="collapse" href="#pagesExamples">
                     <i class="material-icons">image</i>
                     <p>
@@ -191,76 +194,72 @@
                         </li>
                     </ul>
                 </div>
-            </li>
-            <li class="nav-item ">
+            </li>-->
+
+            <li :class="{'active':4 == active}">
                 <a class="nav-link" data-toggle="collapse" href="#formsExamples">
                     <i class="material-icons">content_paste</i>
                     <p>
-                        Forms
+                        إدارة المنظمات
                         <b class="caret"></b>
                     </p>
                 </a>
                 <div class="collapse" id="formsExamples">
                     <ul class="nav">
-                        <li class="nav-item ">
-                            <a class="nav-link" href="../examples/forms/regular.html">
-                                <span class="sidebar-mini"> RF </span>
-                                <span class="sidebar-normal"> Regular Forms </span>
+                        <li @click="active = 4" :class="{'active':4 == active}">
+                            <a class="nav-link" href="#" @click.prevent="href('/Repusets')">
+                                <span class="sidebar-mini"> RA </span>
+                                <span class="sidebar-normal"> الطلبات المتاحة </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="../examples/forms/extended.html">
+                        <li @click="active = 5" :class="{'active':5 == active}">
+                            <a class="nav-link" href="#" @click.prevent="href('/Orginizations')">
                                 <span class="sidebar-mini"> EF </span>
-                                <span class="sidebar-normal"> Extended Forms </span>
+                                <span class="sidebar-normal"> المنظمات </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="../examples/forms/validation.html">
-                                <span class="sidebar-mini"> VF </span>
-                                <span class="sidebar-normal"> Validation Forms </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="../examples/forms/wizard.html">
-                                <span class="sidebar-mini"> W </span>
-                                <span class="sidebar-normal"> Wizard </span>
-                            </a>
-                        </li>
+                        
                     </ul>
                 </div>
             </li>
-            <li class="nav-item ">
+            <!--<li :class="{'active':6 == active}">
                 <a class="nav-link" data-toggle="collapse" href="#tablesExamples">
                     <i class="material-icons">grid_on</i>
                     <p>
-                        Tables
+                        إدارة الدكاترة
                         <b class="caret"></b>
                     </p>
                 </a>
                 <div class="collapse" id="tablesExamples">
                     <ul class="nav">
                         <li class="nav-item ">
-                            <a class="nav-link" href="../examples/tables/regular.html">
-                                <span class="sidebar-mini"> RT </span>
-                                <span class="sidebar-normal"> Regular Tables </span>
+                    <a class="nav-link" href="../examples/tables/regular.html">
+                        <span class="sidebar-mini"> RT </span>
+                        <span class="sidebar-normal"> Regular Tables </span>
+                    </a>
+                </li>
+                        <li @click="active = 6" :class="{'active':6 == active}">
+                            <a class="nav-link" href="#" @click.prevent="href('/Doctors')">
+                                <span class="sidebar-mini"> VD </span>
+                                <span class="sidebar-normal"> عرض بيانات الدكاترة </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="../examples/tables/extended.html">
-                                <span class="sidebar-mini"> ET </span>
-                                <span class="sidebar-normal"> Extended Tables </span>
+                        <li @click="active = 7" :class="{'active':7 == active}">
+                            <a class="nav-link" href="#" @click.prevent="href('/AddDoctors')">
+                                <span class="sidebar-mini"> AD </span>
+                                <span class="sidebar-normal"> إضافة دكتور </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="../examples/tables/datatables.net.html">
-                                <span class="sidebar-mini"> DT </span>
-                                <span class="sidebar-normal"> DataTables.net </span>
+                        <li @click="active = 8" :class="{'active':8 == active}">
+                            <a class="nav-link" href="#" @click.prevent="href('/Request')">
+                                <span class="sidebar-mini"> AD </span>
+                                <span class="sidebar-normal"> عرض الطلبات </span>
                             </a>
                         </li>
                     </ul>
                 </div>
-            </li>
-            <li :class="{'active':4 == active}">
+            </li>-->
+            <li :class="{'active':9 == active}">
                 <a class="nav-link" data-toggle="collapse" href="#mapsExamples">
                     <i class="material-icons">people_alt</i>
                     <p>
@@ -270,48 +269,44 @@
                 </a>
                 <div class="collapse" id="mapsExamples">
                     <ul class="nav">
-                        <li @click="active = 4" :class="{'active':4 == active}">
+                        <li @click="active = 9" :class="{'active':9 == active}">
                             <a class="nav-link" href="#" @click.prevent="href('/Users')">
                                 <span class="sidebar-mini"> VU </span>
                                 <span class="sidebar-normal" style="text-align:right"> عرض بيانات المستخدمين </span>
                             </a>
                         </li>
-                        <li @click="active = 5" :class="{'active':5 == active}">
+                        <li @click="active = 10" :class="{'active':10 == active}">
                             <a class="nav-link" href="#" @click.prevent="href('/AddUsers')">
                                 <span class="sidebar-mini"> AU </span>
                                 <span class="sidebar-normal" style="text-align:right"> إضافة مستخدم </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="../examples/maps/vector.html">
-                                <span class="sidebar-mini"> LP </span>
-                                <span class="sidebar-normal"> متابعة مستخدم </span>
-                            </a>
-                        </li>
+
                     </ul>
                 </div>
             </li>
 
-            <li class="nav-item ">
-                <a class="nav-link" href="../examples/widgets.html">
-                    <i class="material-icons">widgets</i>
-                    <p> Widgets </p>
-                </a>
-            </li>
-            <li class="nav-item ">
+
+            <!--<li class="nav-item ">
                 <a class="nav-link" href="../examples/charts.html">
                     <i class="material-icons">timeline</i>
-                    <p> Charts </p>
+                    <p> إدارة البلديات </p>
                 </a>
             </li>
             <li class="nav-item ">
                 <a class="nav-link" href="../examples/calendar.html">
                     <i class="material-icons">date_range</i>
-                    <p> Calendar </p>
+                    <p> إدارة المناطق </p>
+                </a>
+            </li>-->
+            <li  @click="active = 2" :class="{'active':2 == active}">
+                <a class="nav-link" href="#" @click.prevent="href('/ConactUs')">
+                    <i class="material-icons">widgets</i>
+                    <p> التقارير</p>
                 </a>
             </li>
 
-            
+
 
         </ul>
     </div>

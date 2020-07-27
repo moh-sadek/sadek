@@ -1,0 +1,139 @@
+﻿
+
+    <div class="content" style="direction:rtl">
+        <Info v-if="state==2"></Info>
+        <div class="row" v-if="state==0">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-rose card-header-icon">
+                        <div class="card-icon" style="float: right;">
+                            <i class="material-icons">people_alt</i>
+                        </div>
+                        <h4 class="card-title" style=" font-family: inherit;font-weight: bold;">الطلبات المتاحة </h4>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row" v-if="loginDetails.userType==1">
+                            <div class="col-md-4">
+                                <div class="form-group bmd-form-group">
+                                    <label>المركز الإنتخابي </label>
+                                    <el-select v-model="CenterId"
+                                               style="width: 100%;"
+                                               filterable placeholder="المركز الإنتخابي"
+                                               @change="getRequest()">
+                                        <el-option v-for="item in Centers"
+                                                   :key="item.id"
+                                                   :label="item.name"
+                                                   :value="item.id">
+                                        </el-option>
+                                    </el-select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" v-if="Requests==0">
+
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <br /><br />
+                                    <el-alert style="font-size: 35px;" title="عفــوا! لاتوجد بيانات للطلبات"
+                                              type="info">
+                                    </el-alert>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <div class="table-responsive" v-if="Requests!=0">
+                            <table class="table table-shopping">
+                                <thead>
+                                    <tr class="text-primary">
+                                        <th style="font-size: 1.063rem;">إسم المنظمة</th>
+                                        <th style="font-size: 1.063rem;">رقم إشهار المنظمة </th>
+                                        <th style="font-size: 1.063rem;">عنوان المنظمة</th>
+                                        <th style="font-size: 1.063rem;">اسم المدير التنفيدي</th>
+                                        <th style="font-size: 1.063rem;">رقم هاتفه الرئيسي</th>
+                                        <th style="font-size: 1.063rem;">اسم رئيس المنظمة</th>
+                                        <th class="text-center" style="font-size: 1.063rem;">الإعدادات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="item,index in Requests">
+                                        <td>
+                                            {{item.name}}
+                                        </td>
+                                        <td>
+                                            {{item.publicityNo}}
+                                        </td>
+                                        <td>
+                                            {{item.centerName}}
+                                        </td>
+
+                                        <td>
+                                            {{item.managingDirectorName}}
+                                        </td>
+                                        <td>
+                                            {{item.managingDirectorPhone}}
+                                        </td>
+                                        <td>
+                                            {{item.presidentName}}
+                                        </td>
+
+                                        <td class="td-actions text-center">
+                                            <!--<button type="button" rel="tooltip" class="btn btn-info btn-link" data-original-title="إيقاف المستخدم" title="إيقاف المستخدم">
+                            <i class="material-icons">lock</i>
+                            <div class="ripple-container"></div>
+                        </button>-->
+                                            <button type="button" rel="tooltip" @click.prevent="ViewOrginzation(item.id)" class="btn btn-danger btn-link" data-original-title="عرض بيانات المنظمة" title="عرض بيانات المنظمة">
+                                                <i class="material-icons">library_books</i>
+                                            </button>
+
+
+                                            <button type="button" rel="tooltip" @click.prevent="addOrignization(item.id)" class="btn btn-success btn-link" data-original-title="إضافة المنظمة" title="إضافة المنظمة">
+                                                <i class="material-icons">note_add</i>
+                                            </button>
+
+                                            <button type="button" rel="tooltip" @click.prevent="delteOrginzation(item.id)" class="btn btn-danger btn-link" data-original-title="حدف بيانات المنظمة" title="حدف بيانات المنظمة">
+                                                <i class="material-icons">close</i>
+                                            </button>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr />
+
+                        <div class="row" v-if="Requests!=0">
+                            <div class="col-sm-12 col-md-7">
+                                <div class="disabled-sorting"
+                                     id="datatable_info"
+                                     aria-live="polite"
+                                     role="status">
+
+                                    <el-pagination background
+                                                   layout="prev, pager, next"
+                                                   :current-page="pageNo"
+                                                   :page-size="pageSize"
+                                                   :total="pages"
+                                                   aria-controls="datatables"
+                                                   @current-change="getRequest($event)">
+                                    </el-pagination>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-5" style="text-align: left;">
+                                <div class="dataTables_info" id="datatables_info" role="status" aria-live="polite">Showing {{pageNo}} to {{pageSize}} of {{pages}} entries</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

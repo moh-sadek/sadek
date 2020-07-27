@@ -1,26 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Common;
+using Managegment.Controllers;
+using Management.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Net;
-using System.Net.Http;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
-using System.Security.Principal;
-using Common;
-using Management.Models;
 using System.Net.Mail;
-using Managegment.Controllers;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Web.Controllers;
 
 namespace Management.Controllers
@@ -30,9 +23,9 @@ namespace Management.Controllers
         [TempData]
         public string ErrorMessage { get; set; }
         private Helper help;
-        private readonly SmartEducationContext db;
+        private readonly CSORContext db;
         private IConfiguration Configuration { get; }
-        public SecurityController(SmartEducationContext context, IConfiguration configuration)
+        public SecurityController(CSORContext context, IConfiguration configuration)
         {
             this.db = context;
             help = new Helper();
@@ -158,7 +151,7 @@ namespace Management.Controllers
                     db.SaveChanges();
                     return NotFound("الرجاء التاكد من البريد الالكتروني وكلمة المرور");
                 }
-               
+
 
                 cUser.LoginTryAttempts = 0;
                 cUser.LastLoginOn = DateTime.Now;
@@ -166,7 +159,7 @@ namespace Management.Controllers
 
                 var userInfo = new
                 {
-                    userId = cUser.UserId,
+                    userId = cUser.Id,
                     fullName = cUser.Name,
                     LoginName = cUser.LoginName,
                     DateOfBirth = cUser.BirthDate,
@@ -174,7 +167,7 @@ namespace Management.Controllers
                     Gender = cUser.Gender,
                     State = cUser.State,
                     Phone = cUser.Phone,
-                    UserType=cUser.UserType,
+                    UserType = cUser.UserType,
                     SecretKey = Guid.NewGuid()
                     //OfficeState=cUser.Office.State        
                 };
@@ -182,10 +175,10 @@ namespace Management.Controllers
                 //const string Issuer = "http://www.nid.ly";
                 const string Issuer = "http://localhost:4810";
                 var claims = new List<Claim>();
-                claims.Add(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/id", cUser.UserId.ToString(), ClaimValueTypes.Integer64, Issuer));
+                claims.Add(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/id", cUser.Id.ToString(), ClaimValueTypes.Integer64, Issuer));
                 claims.Add(new Claim(ClaimTypes.Name, cUser.Name, ClaimValueTypes.String, Issuer));
-               //  claims.Add(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/OfficeId", cUser.OfficeId.ToString(), ClaimValueTypes.Integer64, Issuer));
-               //claims.Add(new Claim("userType", cUser.UserType.ToString(), ClaimValueTypes.Integer32, Issuer));
+                //  claims.Add(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/OfficeId", cUser.OfficeId.ToString(), ClaimValueTypes.Integer64, Issuer));
+                //claims.Add(new Claim("userType", cUser.UserType.ToString(), ClaimValueTypes.Integer32, Issuer));
                 var userIdentity = new ClaimsIdentity("thisisasecreteforauth");
                 userIdentity.AddClaims(claims);
                 var userPrincipal = new ClaimsPrincipal(userIdentity);
@@ -235,7 +228,7 @@ namespace Management.Controllers
                 if (loginUser.Password != null)
                 {
                     var User = (from p in db.Users
-                                where p.UserId == userId && p.State != 9
+                                where p.Id == userId && p.State != 9
                                 select p).SingleOrDefault();
 
                     if (Security.VerifyHash(loginUser.Password, User.Password, HashAlgorithms.SHA512))
@@ -261,7 +254,7 @@ namespace Management.Controllers
                 else
                 {
                     var User = (from p in db.Users
-                                where p.UserId == loginUser.UserId && p.State != 9
+                                where p.Id == loginUser.UserId && p.State != 9
                                 select p).SingleOrDefault();
                     if (User == null)
                     {
@@ -286,7 +279,7 @@ namespace Management.Controllers
         public IActionResult GetUserImage(long userId)
         {
             var userimage = (from p in db.Users
-                             where p.UserId == userId
+                             where p.Id == userId
                              select p.Image).SingleOrDefault();
 
             return File(userimage, "image/jpg");
@@ -351,11 +344,11 @@ namespace Management.Controllers
 
                 mail.To.Add(email);
 
-                string confirm = Security.ComputeHash(user.UserId.ToString() + "@cra.gov.ly", HashAlgorithms.SHA512, null);
+                string confirm = Security.ComputeHash(user.Id.ToString() + "@cra.gov.ly", HashAlgorithms.SHA512, null);
 
                 mail.Subject = "مصلحة الاحوال المدنية - إعادة تعيين كلمة المرور";
 
-                mail.Body = GetResetPasswordHTML(user.Name, "/security/AccountActivate?confirm=" + user.UserId.ToString() + "&account=" + Security.EncryptBase64(confirm));
+                mail.Body = GetResetPasswordHTML(user.Name, "/security/AccountActivate?confirm=" + user.Id.ToString() + "&account=" + Security.EncryptBase64(confirm));
 
                 mail.IsBodyHtml = true;
 
@@ -397,7 +390,7 @@ namespace Management.Controllers
                 }
 
                 var user = (from u in db.Users
-                            where u.UserId == userActivate.confirm
+                            where u.Id == userActivate.confirm
                             select u).SingleOrDefault();
 
                 if (user == null)

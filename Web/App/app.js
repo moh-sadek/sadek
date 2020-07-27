@@ -7,16 +7,9 @@ import locale from 'element-ui/lib/locale/lang/en'
 import BlockUIService from './Shared/BlockUIService.js';
 import Layout from './Components/Layout/Layout.vue';
 import Home from './Components/Home/Home.vue';
-/*import Students from './Components/Students/Students.vue';
-import Companies from './Components/Companies/Companies.vue';
-import Packages from './Components/Packages/Packages.vue';
-import SuperPackages from './Components/Packages/SuperPackages/SuperPackages.vue';
-import SubPackages from './Components/Packages/SubPackages/SubPackages.vue';
-import SubPackagesMain from './Components/SubPackages/SubPackages.vue';
-import Courses from './Components/Packages/Courses/Courses.vue';
-import CoursesMain from './Components/Courses/Courses.vue';
-import SubPackageCourses from './Components/Packages/SubPackages/Courses/Courses.vue'
-import CourseFiles from './Components/CourseFiles/CourseFiles.vue'; */
+import Request from './Components/Request/Request.vue';
+import Regester from './Components/Regester/Regester.vue';
+import ContactUs from './Components/ContactUs/ContactUs.vue';
 
 import DataService from './Shared/DataService';
 import messages from './i18n';
@@ -47,6 +40,9 @@ const router = new VueRouter({
     linkActiveClass: 'active',
     routes: [
         { path: '/', component: Home }, 
+        { path: '/Request', component: Request }, 
+        { path: '/Regester', component: Regester }, 
+        { path: '/ContactUs', component: ContactUs }, 
         ]
 
 });

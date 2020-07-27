@@ -5,14 +5,19 @@ Scaffold-DbContext "server=DESKTOP-PTGVLQG;Database=MailSystem;Trusted_Connectio
 
 Scaffold-DbContext "server=LAPTOP-DVJT5BST;database=StudentTracker;uid=Ahmed;pwd=**********;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Force
 
- public SmartEducationContext(DbContextOptions<SmartEducationContext> options) : base(options) { }
+ public CSORContext(DbContextOptions<CSORContext> options) : base(options) { }
 
 
 Abdala PC : 
-Scaffold-DbContext "server=LAPTOP-DVJT5BST;database=Credits_db;uid=AhmedTareck;pwd=35087124567Ahmed;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+Scaffold-DbContext "server=DESKTOP-RNT1C11;database=CSOR;uid=Ahmed;pwd=35087124567Ahmed;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models 
 
-Scaffold-DbContext "server=LAPTOP-DVJT5BST;database=SmartEducation;uid=Ahmed;pwd=35087124567Ahmed;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Force
+Scaffold-DbContext "server=DESKTOP-RNT1C11;database=CSOR;uid=Ahmed;pwd=35087124567Ahmed;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models 
+ -Force
 -----------------------------------------
+
+Scaffold-DbContext "server=DESKTOP-RNT1C11;database=CSOR;uid=Ahmed;pwd=35087124567Ahmed;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models 
+
+
 
 Code-First Approach
 

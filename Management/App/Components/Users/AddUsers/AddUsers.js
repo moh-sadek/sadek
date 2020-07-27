@@ -2,6 +2,8 @@
     name: 'AddUser',
     created() {
 
+        this.GetCenter();
+
         this.UserType = [
             {
                 id: 1,
@@ -9,8 +11,9 @@
             },
             {
                 id: 2,
-                name: 'مستخدم'
+                name: 'مدير مكتب انتخابي'
             }
+
         ];
          
     },
@@ -21,41 +24,36 @@
             pages: 0,
 
             UserType: [],
+            Centers: [],
 
             form: {
                 LoginName: '',
                 Password: null,
                 FullName: '',
                 UserType: '',
-                NationalId: '',
-                PersonId: '',
                 Email: '',
                 Gender: '',
                 Phone: '',
                 DateOfBirth: '',
                 Status: 0,
-                OfficeId: '',
-                SearchByRegistryNumber: false,
-                SearchByNationalId: false,
-                SearchByName: false,
-                SearchByMotherName: false,
-                SearchDeathsQouta: 0,
-                SearchQouta: 0,
-                DeathInfoPrivilege: false,
-                DeathEntryPrivilege: false,
-                HospitalId: '',
+                CenterId: '',
+               
             },
-            AllData: this.$parent.AllData,
             ConfimPassword: '',
-            NID: this.$parent.NID,
-            PermissionLable: this.$parent.persmissonLable,
-            Hospital: []
         };
     },
     methods: {
-        Back() {
-            this.$parent.state = 0;
-            this.$parent.getUser();
+
+        resetform() {
+            this.form.LoginName = '';
+            this.form.Password = null;
+            this.form.FullName = '';
+            this.form.UserType = '';
+            this.form.Email = '';
+            this.form.Gender = '';
+            this.form.Phone = '';
+            this.form.DateOfBirth = '';
+            this.ConfimPassword = '';
         },
 
 
@@ -83,6 +81,19 @@
             var mobileRegex = /^09[1|2|3|4|5][0-9]{7}$/i;
 
             return mobileRegex.test(Phone);
+        },
+
+        GetCenter() {
+            this.$blockUI.Start();
+            this.$http.GetCenter()
+                .then(response => {
+                    this.$blockUI.Stop();
+                    this.Centers = response.data.centers;
+                })
+                .catch((err) => {
+                    this.$blockUI.Stop();
+                    console.error(err);
+                });
         },
 
 
@@ -216,15 +227,25 @@
                 return;
             }
 
+            if (this.form.UserType == 2) {
+                if (!this.form.CenterId) {
+                    this.$blockUI.Stop();
+                    this.$message({
+                        type: 'error',
+                        message: 'الرجاء إختيار المركز الإنتخابي '
+                    });
+                    return;
+                }
+            }
+
             
             this.$http.AddUser(this.form)
                 .then(response => {
-                    this.$parent.state = 0;
                     this.$message({
                         type: 'info',
                         message: response.data
                     });
-                    this.$parent.getUser();
+                    this.resetform();
                     this.$blockUI.Stop();
                 })
                 .catch((err) => {

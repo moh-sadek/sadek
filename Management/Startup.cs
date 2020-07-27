@@ -1,28 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MySql.Data.EntityFrameworkCore;
-using MySql.Data.EntityFrameworkCore.Extensions;
+﻿using Management;
+using Management.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.SpaServices.Webpack;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.FileProviders;
-using System.IO;
 //using Managegment.Models;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Authorization;
-using Management.Models;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Management;
+using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Text;
 
 namespace Managegment
 {
@@ -37,7 +30,7 @@ namespace Managegment
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<SmartEducationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SmartEducation"), builder => builder.UseRowNumberForPaging()));
+            services.AddDbContext<CSORContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CSOR"), builder => builder.UseRowNumberForPaging()));
             //services.AddDbContext<Models.AppointmentsContext>(options => options.UseMySQL(Configuration.GetConnectionString("Appointment")));
             services.Configure<Settings>(Configuration.GetSection("Settings"));
 
@@ -47,15 +40,15 @@ namespace Managegment
                 options.AddPolicy("CorsPolicy",
                     builder => builder.AllowAnyOrigin()
                     .AllowAnyMethod()
-                    
+
                     .AllowAnyHeader()
                     .AllowCredentials());
             });
 
             var policy = new AuthorizationPolicyBuilder()
-                 //.RequireClaim("")
+              //.RequireClaim("")
               .RequireAuthenticatedUser()
-             
+
               .Build();
 
             services.AddMvc(opt =>
@@ -87,12 +80,13 @@ namespace Managegment
                     ClockSkew = TimeSpan.FromDays(60)
                 };
             });
-            
+
 
 
 
             //Handle XSRF Name for Header
-            services.AddAntiforgery(options => {
+            services.AddAntiforgery(options =>
+            {
                 options.HeaderName = "X-XSRF-TOKEN";
             });
         }

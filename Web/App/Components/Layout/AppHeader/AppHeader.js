@@ -11,6 +11,11 @@
     },
   
     methods: {
+
+        href(url) {
+            this.$router.push(url);
+        },
+
         OpenDropDown() {
             var root = document.getElementById("DropDown");
             if (root.getAttribute('class') == 'dropdown') {

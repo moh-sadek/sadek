@@ -1,7 +1,6 @@
 ﻿
-    <div>
+    <!--<div>
 
-        <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top text-white">
             <div class="container">
                 <div class="navbar-wrapper">
@@ -39,10 +38,8 @@
                 </div>
             </div>
         </nav>
-        <!-- End Navbar -->
         <div class="wrapper wrapper-full-page">
             <div class="page-header login-page header-filter" filter-color="black" style="background-image: url('../../assets/img/login.jpg'); background-size: cover; background-position: top center;">
-                <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
@@ -50,7 +47,6 @@
                             <el-form :model="form" :rules="rules" ref="ruleForm" label-position="top" label-width="120px" class="demo-ruleForm">
 
                                 <div class="card card-login animated fadeInDown delay-1s">
-                                <!--<div :class=ClassContenar>-->
 
                                     <div class="card-header card-header-rose text-center">
                                         <h4 class="card-title">Login</h4>
@@ -78,16 +74,7 @@
                                                 <input type="text" class="form-control" v-on:keyup.enter="Save()" v-model="form.Email" placeholder="First Name...">
                                             </div>
                                         </span>
-                                        <!--<span class="bmd-form-group">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">
-                            <i class="material-icons">email</i>
-                        </span>
-                    </div>
-                    <input type="text" class="form-control" v-on:keyup.enter="login()" v-model="form.Email" placeholder="First Name...">
-                </div>
-            </span>-->
+                                       
                                         <span class="bmd-form-group">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
@@ -110,13 +97,205 @@
                 </div>
                 <footer class="footer">
                     <div class="container">
-                        <!--<div class="copyright float-right">
-
-
-                    <a href="https://www.linkedin.com/in/ahmed-bensuliman-6aa004131/" target="_blank">&copy; Made by AhmedTareck</a>
-                </div>-->
+                       
                     </div>
                 </footer>
             </div>
         </div>
+        </div>-->
+
+
+    <div class="off-canvas-sidebar" >
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top text-white">
+            <div class="container">
+                <div class="navbar-wrapper">
+                    <a class="navbar-brand" href="#pablo">HNEC - Libya</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="https://covid19.traneem.ly/" class="nav-link">
+                                <i class="material-icons">dashboard</i> Main Page
+                            </a>
+                        </li>
+                        <li class="nav-item  active ">
+                            <a href="https://covid19.traneem.ly/Regester" class="nav-link">
+                                <i class="material-icons">person_add</i> Add Organization
+                            </a>
+                        </li>
+                        <!--<li class="nav-item ">
+                            <a href="https://covid19.traneem.ly/Request" class="nav-link">
+                                <i class="material-icons">fingerprint</i> Patient detection
+                            </a>
+                        </li>-->
+                        <!--<li class="nav-item ">
+                            <a href="../pages/lock.html" class="nav-link">
+                                <i class="material-icons">lock_open</i> Lock
+                            </a>
+                        </li>-->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+        <div class="wrapper wrapper-full-page ">
+            <div class="page-header register-page header-filter" filter-color="black" style="background-image: url('../../assets/img/register.jpg')">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 ml-auto mr-auto">
+                            <div class="card card-signup animated fadeInDown delay-1s" style="margin-top:50px">
+                                <h2 class="card-title text-center">Management of civil society organizations</h2>
+                                <br />
+                                <br />
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-5 ml-auto">
+                                            <div class="info info-horizontal">
+                                                <div class="icon icon-rose">
+                                                    <i class="material-icons">timeline</i>
+                                                </div>
+                                                <div class="description">
+                                                    <h4 class="info-title">Monitor organizations</h4>
+                                                    <p class="description">
+                                                        We've created the marketing campaign of the website. It was a very interesting collaboration.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="info info-horizontal">
+                                                <div class="icon icon-info">
+                                                    <i class="material-icons">group</i>
+                                                </div>
+                                                <div class="description">
+                                                    <h4 class="info-title">System administration</h4>
+                                                    <p class="description">
+                                                        There is also a Fully Customizable CMS Admin Dashboard for this product.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <!--<div class="info info-horizontal">
+                                                <div class="icon icon-primary">
+                                                    <i class="material-icons">code</i>
+                                                </div>
+                                                <div class="description">
+                                                    <h4 class="info-title">Fully Coded in HTML5</h4>
+                                                    <p class="description">
+                                                        We've developed the website with HTML5 and CSS3. The client has access to the code using GitHub.
+                                                    </p>
+                                                </div>
+                                            </div>-->
+
+                                        </div>
+                                        <div class="col-md-5 mr-auto">
+                                            <div class="social text-center">
+                                                <button class="btn btn-just-icon btn-round btn-twitter">
+                                                    <i class="fa fa-twitter"></i>
+                                                </button>
+                                                <button class="btn btn-just-icon btn-round btn-dribbble">
+                                                    <i class="fa fa-dribbble"></i>
+                                                </button>
+                                                <button class="btn btn-just-icon btn-round btn-facebook">
+                                                    <i class="fa fa-facebook"> </i>
+                                                </button>
+                                                <h4 class="mt-3"> or be classical </h4>
+                                            </div>
+                                            <el-form :model="form" :rules="rules" ref="ruleForm" label-position="top" label-width="120px" class="demo-ruleForm">
+                                                <div class="form-group has-default bmd-form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="material-icons">face</i>
+                                                            </span>
+                                                        </div>
+                                                        <input style="padding: 10px;" type="text" class="form-control" v-on:keyup.enter="Save()" v-model="form.Email" placeholder="First Name...">
+                                                    </div>
+                                                </div>
+                                                <!--<div class="form-group has-default bmd-form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="material-icons">mail</i>
+                                                            </span>
+                                                        </div>
+                                                        <input style="padding: 10px;" type="text" class="form-control" placeholder="Email...">
+                                                    </div>
+                                                </div>-->
+                                                <div class="form-group has-default bmd-form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">
+                                                                <i class="material-icons">lock_outline</i>
+                                                            </span>
+                                                        </div>
+                                                        <input style="padding: 10px;" type="password" v-on:keyup.enter="Save()" placeholder="Password..." v-model="form.Password" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <!--<div class="form-check">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" value="" checked="">
+                                                        <span class="form-check-sign">
+                                                            <span class="check"></span>
+                                                        </span>
+                                                        Rember Me
+                                                        <a href="#something">terms and conditions</a>.
+                                                    </label>
+                                                </div>-->
+                                                <div class="text-center">
+                                                    <a href="#"  @click.prevent="Save()" class="btn btn-primary btn-round mt-4">Get Started</a>
+                                                </div>
+                                            </el-form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="footer" style="    bottom: 80px;">
+                    <div class="container">
+                        <!--<nav class="float-left">
+                            <ul>
+                                <li>
+                                    <a href="https://www.creative-tim.com">
+                                        Creative Tim
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://creative-tim.com/presentation">
+                                        About Us
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://blog.creative-tim.com">
+                                        Blog
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.creative-tim.com/license">
+                                        Licenses
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>-->
+                        <div class="copyright float-right">
+                            ©
+                            <!--<script>
+              document.write(new Date().getFullYear())
+                            </script>-->
+                            2020, made with <i class="material-icons">security</i> by
+                            <a href="https://www.linkedin.com/in/ahmed-bensuliman-6aa004131/" target="_blank">AhmedTareck</a> for a better web.
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
+        
+
+
+    </div>
